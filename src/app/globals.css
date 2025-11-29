@@ -1,24 +1,47 @@
 @import "tailwindcss";
 
+@theme {
+  --color-main: #ffe36a;
+  --color-black: #111;
+  --color-gray: #1a1a1a;
+
+  --font-permanent-marker: var(--font-permanent-marker);
+}
+
+/* 기본 라이트 모드 */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fff;
+  --foreground: var(--color-black);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-}
-
-@media (prefers-color-scheme: dark) {
+/* 다크 모드 전환 */
+/* @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--color-black);
+    --foreground: #fff;
   }
+} */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
 }
 
 body {
+  line-height: 1.5;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-song-myung), var(--font-permanent-marker), sans-serif;
+  font-family: var(--font-song-myung), sans-serif;
 }
