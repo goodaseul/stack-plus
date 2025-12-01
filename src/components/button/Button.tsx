@@ -5,11 +5,11 @@ type ButtonProps = {
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const baseStyles =
-  "flex  mx-auto mt-5 transition-all border-2 cursor-pointer  border-main";
+  "flex  mx-auto mt-5 transition-all border-2 cursor-pointer  border-main hover:bg-main";
 
 const variants = {
-  default: "px-8 py-3 rounded-2xl  hover:bg-main",
-  small: "px-4 py-2 text-sm rounded-xl mr-0 hover:bg-white bg-main",
+  default: "px-8 py-3 rounded-2xl  ",
+  small: "px-4 py-2 text-sm rounded-xl mr-0 ",
 };
 
 export default function Button({
