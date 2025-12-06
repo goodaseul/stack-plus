@@ -1,20 +1,14 @@
 @import "tailwindcss";
 
-@theme {
-  --color-primary: #0a0a0a;
-  --color-secondary: #ffffff;
-  --color-text-strong: #111111;
-  --color-text-muted: #6b7280;
-  --color-border: #e5e7eb;
+@custom-variant dark (&:is(.dark *));
 
+@theme {
+  --color-blue: #6e88b0;
+  --color-cream: #fffcef;
   --font-permanent-marker: var(--font-permanent-marker);
 }
 
 /* 기본 라이트 모드 */
-:root {
-  --background: #fff;
-  --foreground: var(--color-black);
-}
 
 /* 다크 모드 전환 */
 /* @media (prefers-color-scheme: dark) {
@@ -43,7 +37,32 @@ html {
 
 body {
   line-height: 1.5;
-  background: var(--background);
-  color: var(--foreground);
   font-family: var(--font-song-myung), sans-serif;
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Animation utility classes */
+.animate-marquee-right {
+  animation: marquee-right 45s linear infinite;
+}
+
+.animate-marquee-left {
+  animation: marquee-left 45s linear infinite;
 }
