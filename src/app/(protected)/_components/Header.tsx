@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Logo from "@/components/layout/header/logo";
 import Buttons from "@/components/layout/header/buttons";
 
-export default function PublicHeader() {
+export default function Header() {
   // 상태관리
   const [isScrolled, setIsScrolled] = useState(false);
 
