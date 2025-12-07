@@ -11,15 +11,15 @@ export default function ProtectedLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
-  const { isLoggedIn, loading } = useAuth();
+  const { isLoggedIn, isLoading } = useAuth();
 
   useEffect(() => {
-    if (!loading && !isLoggedIn) {
+    if (!isLoading && !isLoggedIn) {
       router.replace("/");
     }
-  }, [loading, isLoggedIn, router]);
+  }, [isLoading, isLoggedIn, router]);
 
-  if (loading) return null;
+  if (isLoading) return null;
   if (!isLoggedIn) return null;
 
   return (

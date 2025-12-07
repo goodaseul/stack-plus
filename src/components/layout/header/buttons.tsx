@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { GrLogin, GrLogout } from "react-icons/gr";
+import { FaSignOutAlt, FaUser } from "react-icons/fa";
 export default function Buttons({ isScrolled }: { isScrolled: boolean }) {
   const { isLoggedIn } = useAuth();
   const router = useRouter();
@@ -12,6 +13,8 @@ export default function Buttons({ isScrolled }: { isScrolled: boolean }) {
     // 필요하면 redirect
     router.push("/");
   };
+
+  console.log("로그인 여부:", isLoggedIn);
 
   return (
     <div className="flex items-center gap-5">
@@ -25,27 +28,16 @@ export default function Buttons({ isScrolled }: { isScrolled: boolean }) {
           `}
         />
       </button>
-
       {isLoggedIn ? (
-        // 로그인 상태 → 로그아웃 아이콘
         <button onClick={onLogout}>
-          <GrLogout
-            className={`
-                   cursor-pointer
-              w-5 h-5 transition-all 
-              ${isScrolled ? "text-white" : "text-blue"}
-            `}
+          <FaSignOutAlt
+            className={`w-5 h-5 ${isScrolled ? "text-white" : "text-blue"}`}
           />
         </button>
       ) : (
-        // 비로그인 → 로그인 페이지 이동
         <Link href="/login">
-          <GrLogin
-            className={`
-                cursor-pointer
-              w-5 h-5 transition-all 
-              ${isScrolled ? "text-white" : "text-blue"}
-            `}
+          <FaUser
+            className={`w-5 h-5 ${isScrolled ? "text-white" : "text-blue"}`}
           />
         </Link>
       )}

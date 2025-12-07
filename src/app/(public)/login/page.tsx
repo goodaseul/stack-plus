@@ -31,9 +31,7 @@ export default function LoginPage() {
     try {
       await signIn(form.email, form.password);
 
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 50);
+      router.push("/dashboard");
     } catch {
       setErrors((prev) => ({
         ...prev,
