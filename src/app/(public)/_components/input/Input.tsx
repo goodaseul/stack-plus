@@ -1,9 +1,12 @@
+import ErrorState from "@/components/error-state/ErrorState";
+
 type InputProps = {
   value: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
   placeholder?: string;
   className?: string;
+  errors: string;
 };
 
 const InputStyles = `w-full border border-gray-300 rounded-lg px-4 py-3 text-sm
@@ -13,14 +16,18 @@ export default function Input({
   placeholder,
   value,
   onChange,
+  errors,
 }: InputProps) {
   return (
-    <input
-      type={type}
-      value={value}
-      placeholder={placeholder}
-      className={InputStyles}
-      onChange={onChange}
-    />
+    <div>
+      <input
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        className={InputStyles}
+        onChange={onChange}
+      />
+      {errors && <ErrorState>{errors}</ErrorState>}
+    </div>
   );
 }

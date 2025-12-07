@@ -3,19 +3,16 @@ const FEATURES = [
     id: 1,
     title: "표현 저장",
     desc: "내가 직접 만든 예문과 함께 표현을 저장할 수 있어요.",
-    imgSrc: "/images/landing-feature-01.png",
   },
   {
     id: 2,
     title: "학습 시각화",
     desc: "누적 학습량을 그래프로 확인하고 성장 흐름을 알 수 있어요.",
-    imgSrc: "/images/landing-feature-02.png",
   },
   {
     id: 3,
     title: "퀴즈 학습",
     desc: "내가 저장한 표현들로 게임처럼 학습할 수 있어요.",
-    imgSrc: "/images/landing-feature-03.png",
   },
 ];
 
@@ -34,7 +31,7 @@ export default function FeaturePage() {
         {/* Right */}
         <ul className="space-y-10">
           {FEATURES.map((feature) => (
-            <li key={feature.id} className="bg-blue/ rounded-xl px-10 py-20">
+            <li key={feature.id} className="bg-blue/ rounded-xl py-20">
               <h3 className="text-2xl font-semibold flex items-center">
                 <strong className="font-permanent-marker text-6xl block mb-4 text-blue pr-5">
                   {feature.id}.
@@ -44,7 +41,6 @@ export default function FeaturePage() {
               <p className="text-xl break-keep mt-2 leading-relaxed">
                 {feature.desc}
               </p>
-              <img src={feature.imgSrc} alt={`feature img ${feature.id}`} />
             </li>
           ))}
         </ul>

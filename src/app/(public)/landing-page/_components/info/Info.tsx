@@ -6,7 +6,20 @@ export default function InfoPage() {
   return (
     <section className="mx-auto pt-28 pb-20 h-screen text-center flex flex-col justify-center relative w-full">
       <Marquee
+        direction="left"
+        speed={45}
+        color="text-blue"
+        className="items-start text-9xl"
+      />
+      <Marquee
         direction="right"
+        speed={80}
+        color="text-blue"
+        className="text-9xl"
+      />
+
+      <Marquee
+        direction="left"
         speed={60}
         color="text-blue"
         className="items-end text-9xl"
