@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Logo from "@/components/layout/header/logo";
 import Buttons from "@/components/layout/header/buttons";
+import Menu from "./menu";
 
 export default function Header() {
   // 상태관리
@@ -25,6 +26,7 @@ export default function Header() {
     >
       <div className="flex items-center justify-between max-w-7xl mx-auto px-6">
         <Logo isScrolled={isScrolled} />
+        <Menu />
         <Buttons isScrolled={isScrolled} />
       </div>
     </header>

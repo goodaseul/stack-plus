@@ -29,7 +29,13 @@ export async function signIn(email: string, password: string) {
     email,
     password,
   });
+
   if (error) throw error;
+
+  if (!data.session) {
+    throw new Error("로그인 세션 생성 실패");
+  }
+
   return data;
 }
 
@@ -37,10 +43,8 @@ export async function signOut() {
   await supabase.auth.signOut();
 }
 
-// // 로그인 후 닉네임 가져오기
-// const { data: { user } } = await supabase.auth.getUser();
-// const nickname = user?.user_metadata?.display_name;
-
-// // 또는
-// const { data: { session } } = await supabase.auth.getSession();
-// const nickname = session?.user?.user_metadata?.display_name;
+export async function getCurrentUser() {
+  const { data, error } = await supabase.auth.getUser();
+  if (error) return null;
+  return data.user;
+}

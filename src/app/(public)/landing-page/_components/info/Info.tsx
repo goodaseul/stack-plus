@@ -12,6 +12,11 @@ export default function InfoPage() {
         className="items-start text-9xl"
       />
       <Marquee
+        text="Start small
+        Then grow steadily,
+        Applying what you learn,
+        Connecting every expression,
+        Keeping English in your life."
         direction="right"
         speed={80}
         color="text-blue"

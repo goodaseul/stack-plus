@@ -3,6 +3,7 @@ import { motion, useAnimationFrame } from "framer-motion";
 import { useRef } from "react";
 
 type MarqueeProps = {
+  text?: string;
   speed?: number;
   direction?: "left" | "right";
   className?: string;
@@ -10,12 +11,12 @@ type MarqueeProps = {
 };
 
 export default function Marquee({
+  text = " stack+ ",
   speed = 50,
   direction = "left",
   className = "",
   color = "text-white",
 }: MarqueeProps) {
-  const baseText = " Stack+ ";
   const containerRef = useRef<HTMLDivElement>(null);
   const x = useRef(0);
 
@@ -39,8 +40,8 @@ export default function Marquee({
         className={`flex whitespace-nowrap opacity-[0.07] font-black font-permanent-marker items-center h-full ${color} ${className}`}
         style={{ willChange: "transform" }}
       >
-        <span>{baseText.repeat(6)}</span>
-        <span>{baseText.repeat(6)}</span>
+        <span>{text.repeat(6)}</span>
+        <span>{text.repeat(6)}</span>
       </motion.div>
     </div>
   );

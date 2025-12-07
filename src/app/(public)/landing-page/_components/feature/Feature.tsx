@@ -21,10 +21,10 @@ export default function FeaturePage() {
     <section className="p-10 ">
       <div className="relative grid-cols-1 grid md:grid-cols-2 gap-10">
         {/* Left */}
-        <div className="static md:sticky top-50 self-start">
-          <h2 className="text-6xl font-permanent-marker text-blue">
-            Speak <br />
-            what you save.
+        <div className="static md:sticky top-1/2 -translate-y-1/2 self-start">
+          <h2 className="mt-10 text-4xl text-center font-permanent-marker text-blue">
+            Stack <br />
+            Your Language Journey
           </h2>
         </div>
 
