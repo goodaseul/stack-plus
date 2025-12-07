@@ -29,13 +29,13 @@ export default function Buttons({ isScrolled }: { isScrolled: boolean }) {
         />
       </button>
       {isLoggedIn ? (
-        <button onClick={onLogout}>
+        <button className="cursor-pointer" onClick={onLogout}>
           <FaSignOutAlt
             className={`w-5 h-5 ${isScrolled ? "text-white" : "text-blue"}`}
           />
         </button>
       ) : (
-        <Link href="/login">
+        <Link href="/login" className="cursor-pointer">
           <FaUser
             className={`w-5 h-5 ${isScrolled ? "text-white" : "text-blue"}`}
           />
