@@ -32,10 +32,10 @@ export default function RootLayout({
       <body
         className={`${SongMyung.variable} ${PermanentMarker.variable} antialiased`}
       >
-        <Provider>
-          {children}
-          <Footer />
-        </Provider>
+        {/* <Provider> */}
+        {children}
+        <Footer />
+        {/* </Provider> */}
       </body>
     </html>
   );
