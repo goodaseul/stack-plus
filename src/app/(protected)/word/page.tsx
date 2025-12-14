@@ -5,7 +5,7 @@ import { ListType } from "@/types/list";
 import WordForm from "./_components/WordForm";
 import WordList from "./_components/WordList";
 
-export default function MainPage() {
+export default function WordPopup() {
   const [lists, setLists] = useState<ListType[]>([]);
 
   const handleAdd = (item: ListType) => {

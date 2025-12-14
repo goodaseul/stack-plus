@@ -1,6 +1,6 @@
-const PATTERN_TEXT = Array.from({ length: 30 }, () => "?");
+const PATTERN_TEXT = Array.from({ length: 30 }, () => "!");
 
-export function QuizBannerPattern() {
+export function MemoBannerPattern() {
   return (
     <div className="pointer-events-none absolute inset-0">
       <div className="absolute -left-10 top-1/2 w-[120%] -translate-y-1/2 rotate-12 font-permanent-marker">

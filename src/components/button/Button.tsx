@@ -15,7 +15,7 @@ type ButtonProps =
     });
 
 const baseStyles = `inline-flex items-center justify-center cursor-pointer font-bold transition-all focus:outline-none rounded-md`;
-const roundStyles = `gap-1 bg-white px-4 py-2 text-sm text-green shadow-md hover:-translate-y-0.5 hover:shadow-md`;
+const roundStyles = `gap-1 bg-white px-4 py-2 text-sm text-green shadow-md hover:-translate-y-0.5 hover:shadow-md w-auto md:w-48 `;
 const variants: Record<ButtonVariant, string> = {
   default: `${roundStyles}`,
   outline: `${roundStyles} border border-green hover:bg-green/15`,

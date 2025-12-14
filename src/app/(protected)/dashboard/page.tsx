@@ -1,9 +1,10 @@
 import { AllWordsBanner } from "./_components/AllWordsBanner";
-import { QuizBanner } from "./_components/quiz/QuizBanner";
+import { MemoBanner } from "./_components/memo/MemoBanner";
+import { RecentMemos } from "./_components/RecentMemos";
 import { RecentWords } from "./_components/RecentWords";
 import { RecordStudy } from "./_components/record/RecordStudy";
 
-const mockWords = [
+export const mockWords = [
   {
     id: 1,
     word: "book bookbookbookbook",
@@ -38,12 +39,15 @@ const mockWords = [
 
 export default function DashboardPage() {
   return (
-    <div className="w-full p-15">
-      <div className="grid grid-cols-2 items-end gap-4 mb-10">
+    <div className="w-full p-5 md:p-15">
+      <div className="grid grid-cols-1 md:grid-cols-2 items-end gap-4 mb-10">
         <RecentWords mockWords={mockWords} />
         <AllWordsBanner />
       </div>
-      <QuizBanner />
+      <div className="grid grid-cols-1 md:grid-cols-2 items-end gap-4 mb-10">
+        <MemoBanner />
+        <RecentMemos />
+      </div>
       <RecordStudy />
     </div>
   );

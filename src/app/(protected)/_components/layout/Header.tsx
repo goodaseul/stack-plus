@@ -31,7 +31,12 @@ export default function Header() {
           </h1>
 
           <div className="flex items-center text-gray-strong">
-            <p className="mr-2">다슬기님 반갑습니다!</p>
+            <p className="mr-2">
+              <Link href="/mypage" className="underline">
+                다슬기
+              </Link>
+              님<span className="hidden md:visible">반갑습니다!</span>
+            </p>
 
             <Button type="button" variant="text">
               <RiLogoutBoxRLine />

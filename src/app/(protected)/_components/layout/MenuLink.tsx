@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 const menuLinks = [
   { url: "/dashboard", link: "Home" },
   { url: "/record", link: "Record" },
-  { url: "/quiz", link: "Quiz" },
+  //   { url: "/quiz", link: "Quiz" },
 ];
 
 export default function MenuLink({ isMenuOpen }: { isMenuOpen: boolean }) {
@@ -26,17 +26,17 @@ export default function MenuLink({ isMenuOpen }: { isMenuOpen: boolean }) {
             <li
               key={menuLink.link}
               className={`
-                group transition-all text-gray
+                group transition-all text-gray px-2 
                 ${isActive ? "text-green" : "hover:text-green"}
               `}
             >
-              <Link href={menuLink.url} className="flex items-center">
+              <Link href={menuLink.url} className="flex items-center relative ">
                 {menuLink.link}
                 <span
                   className={`
-                    ml-2  ${
-                      isActive ? "visible" : "invisible group-hover:visible"
-                    }`}
+                  absolute -right-3 -top-1  ${
+                    isActive ? "visible" : "invisible group-hover:visible"
+                  }`}
                 >
                   <sup>+</sup>
                 </span>

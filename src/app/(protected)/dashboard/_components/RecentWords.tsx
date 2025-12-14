@@ -17,7 +17,7 @@ export function RecentWords({ mockWords }: { mockWords: WordType[] }) {
           단어 추가하기 <CiCirclePlus className="text-lg ml-1" />
         </Button>
       </Title>
-      <List mockWords={mockWords} />
+      <List words={mockWords} className="border-green bg-cream h-48" />
     </div>
   );
 }
