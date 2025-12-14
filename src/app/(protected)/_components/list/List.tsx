@@ -5,7 +5,6 @@ import { TfiWrite } from "react-icons/tfi";
 import Button from "@/components/button/Button";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
-import { useState } from "react";
 
 export function List({
   words,
@@ -33,7 +32,11 @@ export function List({
               className="flex px-2 py-1 mt-3 first:mt-0 items-center justify-between text-gray transition-all hover:text-black hover:bg-gray/10 rounded-sm"
             >
               {word.memo ? (
-                <Link href={`/words/${word.id}`} className={contentStyles}>
+                <Link
+                  href={`/mypage?tab=memo&wordId=${123}
+`}
+                  className={contentStyles}
+                >
                   {Content}
                 </Link>
               ) : (
@@ -50,6 +53,7 @@ export function List({
                   <FaRegBookmark className="text-green" />
                   {/* <FaBookmark className="text-green" /> */}
                 </Button>
+                {/* Todo - 케밥 누를 시 드롭다운 박스 다른 곳 누르거나, 다른 투두의 케밥을 누를 시 없어지기 */}
                 <Button type="button" variant="text">
                   <BsThreeDots />
                 </Button>
