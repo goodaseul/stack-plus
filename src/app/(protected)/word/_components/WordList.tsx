@@ -1,7 +1,7 @@
 "use client";
 
 import { ListType } from "@/types/list";
-import WordListItem from "./WordListItem";
+import { WordListItem } from "./WordListItem";
 import EmptyState from "@/components/empty-state/EmptyState";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
   onDelete: (id: number) => void;
 };
 
-export default function WordList({ lists, onDelete }: Props) {
+export function WordList({ lists, onDelete }: Props) {
   if (lists.length === 0) {
     return (
       <EmptyState className="mt-10">아직 저장된 단어가 없습니다 🐾</EmptyState>

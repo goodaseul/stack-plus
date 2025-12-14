@@ -25,7 +25,7 @@ const monthlyData = [
   { label: "8월", count: 62 },
 ];
 
-export default function RecordLineChart() {
+export function RecordLineChart() {
   const [period, setPeriod] = useState<"daily" | "monthly">("daily");
 
   const data = period === "daily" ? dailyData : monthlyData;

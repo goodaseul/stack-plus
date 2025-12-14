@@ -1,17 +1,19 @@
 "use client";
-import { useState } from "react";
 import Button from "@/components/button/Button";
-import { ListType } from "@/types/list";
 import ErrorState from "@/components/error-state/ErrorState";
+import { ListType } from "@/types/list";
+import { useState } from "react";
+
 type WordFormProps = {
   onAdd: (item: ListType) => void;
 };
 
-export function WordForm({ onAdd }: WordFormProps) {
+export default function WordModal({ onAdd }: WordFormProps) {
   const [word, setWord] = useState("");
   const [meaning, setMeaning] = useState("");
   const [sentence, setSentence] = useState("");
   const [usage, setUsage] = useState("일상생활");
+  const [memo, setMemo] = useState("");
 
   const [errors, setErrors] = useState({
     word: false,
@@ -36,6 +38,7 @@ export function WordForm({ onAdd }: WordFormProps) {
       meaning,
       sentence,
       usage,
+      memo,
     });
 
     setWord("");
@@ -45,16 +48,17 @@ export function WordForm({ onAdd }: WordFormProps) {
 
     setErrors({ word: false, meaning: false });
   };
-  const LabelStyles = `font-semibold text-lg text-gray-700 flex items-center gap-2`;
-  const InputStyles = `pl-2 w-full border-b-2 border-yellow-300 py-2 text-gray-700 focus:outline-none focus:border-yellow-500 transition-colors`;
+  const LabelStyles = `font-semibold text-lg text-gray flex items-center gap-2`;
+  const InputStyles = `pl-2 w-full border-b-2 border-green py-2 text-gray focus:outline-none focus:border-green transition-colors`;
+
   return (
     <form onSubmit={onSubmit}>
       <div className="mx-auto max-w-[680px] px-6 py-8">
-        <div className="rounded-3xl bg-white shadow-[0_4px_20px_rgba(0,0,0,0.05)] p-10 space-y-10 border border-yellow-300">
-          {/* 단어 / 문장 */}
+        <div className="rounded-3xl bg-white shadow-[0_4px_20px_rgba(0,0,0,0.05)] p-10 space-y-10 border border-green">
+          {/* 단어 */}
           <div className="space-y-2">
             <label htmlFor="word" className={LabelStyles}>
-              <span>🐾</span> 단어 또는 문장을 입력해주세요
+              단어를 입력해주세요
             </label>
 
             <input
@@ -68,18 +72,16 @@ export function WordForm({ onAdd }: WordFormProps) {
                   setErrors((prev) => ({ ...prev, word: false }));
                 }
               }}
-              placeholder="book / I want to read a book."
+              placeholder="book"
               className={InputStyles}
             />
-            {errors.word && (
-              <ErrorState>단어 Or 문장을 꼭 적어주세요!</ErrorState>
-            )}
+            {errors.word && <ErrorState>단어를 꼭 적어주세요!</ErrorState>}
           </div>
 
           {/* 뜻 */}
           <div className="space-y-2">
             <label htmlFor="meaning" className={LabelStyles}>
-              <span>🐾</span> 뜻을 입력해주세요!
+              뜻을 입력해주세요!
             </label>
 
             <input
@@ -102,7 +104,7 @@ export function WordForm({ onAdd }: WordFormProps) {
           {/* 작문 */}
           <div className="space-y-2">
             <label htmlFor="sentence" className={LabelStyles}>
-              <span>🐾</span> 작문을 해주실 수 있나요?
+              작문을 해주실 수 있나요?
             </label>
 
             <input
@@ -119,7 +121,7 @@ export function WordForm({ onAdd }: WordFormProps) {
           {/* 사용 위치 */}
           <div className="space-y-2">
             <label htmlFor="usage" className={LabelStyles}>
-              <span>🐾</span> 어디서 주로 사용하나요?
+              어디서 주로 사용하나요?
             </label>
 
             <select
@@ -135,8 +137,29 @@ export function WordForm({ onAdd }: WordFormProps) {
             </select>
           </div>
 
+          {/* 메모 */}
+          <div className="space-y-2">
+            <label htmlFor="memo" className={LabelStyles}>
+              메모할것이 있나요?
+            </label>
+
+            <textarea
+              name="memo"
+              id="memo"
+              value={memo}
+              onChange={(e) => setMemo(e.target.value)}
+              placeholder="나올 때마다 헷갈리는 단어 ! 제대로 알고가자"
+              className={`${InputStyles} resize-none`}
+            />
+          </div>
+
           {/* 버튼 */}
-          <Button type="submit">저장하기 🐾</Button>
+          <div className="flex items-center justify-center gap-2">
+            <Button variant="outline" type="button">
+              취소하기
+            </Button>
+            <Button type="submit">저장하기 </Button>
+          </div>
         </div>
       </div>
     </form>

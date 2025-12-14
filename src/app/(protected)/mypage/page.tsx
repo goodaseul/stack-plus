@@ -3,8 +3,8 @@
 import { useSearchParams } from "next/navigation";
 import { Filter } from "../_components/filter/Filter";
 import { Title } from "../dashboard/_components/common/Title";
-import MemoList from "./memo/MemoList";
-import BookmarkList from "./bookmark/BookmarkList";
+import { MemoList } from "./memo/MemoList";
+import { BookmarkList } from "./bookmark/BookmarkList";
 
 // /mypage
 // /mypage?tab=memo

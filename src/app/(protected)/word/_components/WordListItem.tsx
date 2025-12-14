@@ -8,11 +8,11 @@ type Props = {
   onDelete: (id: number) => void;
 };
 
-export default function WordListItem({ item, onDelete }: Props) {
+export function WordListItem({ item, onDelete }: Props) {
   return (
     <>
-      <Button variant="small" onClick={() => onDelete(item.id)}>
-        삭제{" "}
+      <Button onClick={() => onDelete(item.id)}>
+        삭제
         <span className="inline-block group-hover:rotate-6 transition-transform">
           🐾
         </span>

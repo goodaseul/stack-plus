@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import MemoRow from "./MemoRow";
+import { MemoRow } from "./MemoRow";
 
 const MOCK_MEMOS = [
   {
@@ -18,7 +18,7 @@ const MOCK_MEMOS = [
   },
 ];
 
-export default function MemoList() {
+export function MemoList() {
   const searchParams = useSearchParams();
   const selectedWordId = Number(searchParams.get("wordId"));
 

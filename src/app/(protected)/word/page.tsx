@@ -2,8 +2,8 @@
 import { useState } from "react";
 
 import { ListType } from "@/types/list";
-import WordForm from "./_components/WordForm";
-import WordList from "./_components/WordList";
+import { WordForm } from "./_components/WordForm";
+import { WordList } from "./_components/WordList";
 
 export default function WordPopup() {
   const [lists, setLists] = useState<ListType[]>([]);

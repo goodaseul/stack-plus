@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function MemoRow({
+export function MemoRow({
   wordId,
   word,
   memo,

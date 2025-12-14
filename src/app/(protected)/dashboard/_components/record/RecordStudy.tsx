@@ -1,5 +1,5 @@
 import { Title } from "../common/Title";
-import RecordLineChart from "./RecordLineChart";
+import { RecordLineChart } from "./RecordLineChart";
 
 export function RecordStudy() {
   return (

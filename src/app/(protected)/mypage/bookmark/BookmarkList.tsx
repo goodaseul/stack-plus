@@ -5,7 +5,7 @@ const bookmarks = [
   { id: 2, word: "yesterday", meaning: "어제" },
 ];
 
-export default function BookmarkList() {
+export function BookmarkList() {
   return (
     <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
       {bookmarks.map((item) => (
