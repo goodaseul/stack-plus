@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import { Banner } from "../common/banner/Banner";
 import { BannerTitle } from "../common/banner/BannerTitle";
+import Button from "@/components/button/Button";
 
 const dailyData = [
   { label: "09-01", count: 5 },
@@ -45,8 +46,9 @@ export function RecordLineChart() {
         <h3 className="font-semibold"></h3>
 
         <div className="flex gap-2">
-          <button onClick={() => setPeriod("daily")}>일간</button>
-          <button onClick={() => setPeriod("monthly")}>월간</button>
+          {/* Todo- active 시 */}
+          <Button onClick={() => setPeriod("daily")}>일간</Button>
+          <Button onClick={() => setPeriod("monthly")}>월간</Button>
         </div>
       </div>
 

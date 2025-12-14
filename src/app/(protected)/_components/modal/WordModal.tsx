@@ -51,6 +51,7 @@ export default function WordModal({ onAdd }: WordFormProps) {
   const LabelStyles = `font-semibold text-lg text-gray flex items-center gap-2`;
   const InputStyles = `pl-2 w-full border-b-2 border-green py-2 text-gray focus:outline-none focus:border-green transition-colors`;
 
+  //   Todo- 확인 모달 만들기!
   return (
     <form onSubmit={onSubmit}>
       <div className="mx-auto max-w-[680px] px-6 py-8">

@@ -50,8 +50,11 @@ export function List({
                   </p>
                 )}
                 <Button type="button" variant="text">
-                  <FaRegBookmark className="text-green" />
-                  {/* <FaBookmark className="text-green" /> */}
+                  {word.bookmarked ? (
+                    <FaRegBookmark className="text-green" />
+                  ) : (
+                    <FaBookmark className="text-green" />
+                  )}
                 </Button>
                 {/* Todo - 케밥 누를 시 드롭다운 박스 다른 곳 누르거나, 다른 투두의 케밥을 누를 시 없어지기 */}
                 <Button type="button" variant="text">
