@@ -1,7 +1,9 @@
 export type WordType = {
   id: number;
-  word: string;
+  expression: string;
   meaning: string;
   bookmarked: boolean;
+  useage: string;
   memo?: string;
+  created_at: number;
 };

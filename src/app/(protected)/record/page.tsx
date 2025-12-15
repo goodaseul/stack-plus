@@ -1,20 +1,39 @@
 "use client";
 import { List } from "../_components/list/List";
 import { Title } from "../dashboard/_components/common/Title";
-import { mockWords } from "../dashboard/page";
 import { Filter } from "../_components/filter/Filter";
 import { FilterCount } from "./_components/FilterCount";
 import Button from "@/components/button/Button";
 import { CiCirclePlus } from "react-icons/ci";
 import Modal from "../_components/modal/Modal";
 import WordModal from "../_components/modal/WordModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+import { WordType } from "../_components/list/type";
 
 export default function RecordPage() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const handleModal = () => {
     setIsOpenModal(true);
   };
+
+  const [words, setWords] = useState<WordType[]>([]);
+
+  useEffect(() => {
+    const fetchWords = async () => {
+      const { data, error } = await supabase.from("words").select("*");
+
+      if (error) {
+        console.error("에러:", error);
+      } else {
+        setWords(data ?? []);
+      }
+    };
+
+    fetchWords();
+  }, []);
+  console.log(words?.length);
+
   //  /words
   //  /words?filter=hasMemo
   //  /words?filter=noMemo
@@ -45,7 +64,7 @@ export default function RecordPage() {
       <FilterCount />
 
       {/* Todo -  빈 상태 ux */}
-      <List words={mockWords} className="h-180 border-green bg-white" />
+      <List words={words} className="h-180 border-green bg-white" />
     </div>
   );
 }

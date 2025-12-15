@@ -21,7 +21,7 @@ export function List({
         {words.map((word) => {
           const Content = (
             <>
-              <p className="w-1/2 truncate mr-[5%]">{word.word}</p>
+              <p className="w-1/2 truncate mr-[5%]">{word.expression}</p>
               <p className="w-1/2 text-gray-600 truncate">{word.meaning}</p>
             </>
           );
