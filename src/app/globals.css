@@ -1,25 +1,26 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:is(.dark *));
+/* =========================
+   Theme Tokens
+========================= */
 
 @theme {
-  --color-green: #b7c276;
-  --color-cream: #f8f8f8;
-  --color-gray: #6b7280;
-  --color-gray-strong: #5f665a;
-  --color-black: #1a1a1a;
+  /* Brand */
+
+  /* Base */
+  --color-bg: #ffffff;
+  --color-bg-muted: #f8f8f8;
+
+  /* Text */
+  --color-text-primary: #1a1a1a;
+
+  /* Font */
   --font-permanent-marker: var(--font-permanent-marker);
 }
 
-@layer utilities {
-  .hover-letter {
-    @apply tracking-normal opacity-70 transition-all duration-300 ease-out;
-  }
-
-  .hover-letter:hover {
-    @apply tracking-wider opacity-100;
-  }
-}
+/* =========================
+   Base Reset
+========================= */
 
 *,
 *::before,
@@ -39,21 +40,23 @@ html {
 }
 
 body {
-  line-height: 1.5;
   font-family: var(--font-song-myung), sans-serif;
+  line-height: 1.5;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
 }
+
+/* =========================
+   Scrollbar
+========================= */
 
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.25);
   border-radius: 9999px;
 }
 
@@ -61,34 +64,38 @@ body {
   background-color: rgba(0, 0, 0, 0.35);
 }
 
-/* ===== Firefox ===== */
 * {
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
 }
 
-@keyframes marquee-right {
-  0% {
-    transform: translateX(-50%);
+/* =========================
+   Utilities
+========================= */
+
+@layer utilities {
+  .hover-letter {
+    @apply transition-all duration-300 ease-out;
   }
-  100% {
+
+  .hover-letter:hover {
+    @apply tracking-wider opacity-100;
+  }
+}
+
+/* =========================
+   Animations
+========================= */
+
+@keyframes marquee {
+  0% {
     transform: translateX(0%);
   }
-}
-
-@keyframes marquee-left {
-  0% {
-    transform: translateX(0%);
-  }
   100% {
     transform: translateX(-50%);
   }
 }
 
-.animate-marquee-right {
-  animation: marquee-right 45s linear infinite;
-}
-
-.animate-marquee-left {
-  animation: marquee-left 45s linear infinite;
+.animate-marquee {
+  animation: marquee 45s linear infinite;
 }

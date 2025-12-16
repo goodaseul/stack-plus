@@ -1,6 +1,11 @@
-export function Title({ children }: { children: React.ReactNode }) {
+type TitleProps = {
+  children: React.ReactNode;
+  className?: string;
+};
+
+export function Title({ children, className = "" }: TitleProps) {
   return (
-    <h2 className=" flex justify-between items-center px-2 text-xl mb-4">
+    <h2 className={`text-lg font-semibold text-gray-900 ${className}`}>
       {children}
     </h2>
   );

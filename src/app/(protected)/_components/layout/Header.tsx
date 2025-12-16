@@ -11,39 +11,38 @@ import MenuLink from "./MenuLink";
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
-
   return (
     <>
-      <header
-        className="
-          sticky top-0 left-0 w-full z-50
-          backdrop-blur-md py-4
-        "
-      >
-        <div className="mx-auto flex items-center justify-between px-6">
-          <h1 className="font-permanent-marker text-3xl text-green hover-letter">
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+        <div className="mx-auto flex h-14 items-center justify-between px-6">
+          {/* Logo */}
+          <h1 className="font-permanent-marker text-2xl text-gray-900">
             <Link href="/dashboard">
-              STACK <sup>+</sup>
+              STACK<sup className="text-xs ml-0.5">+</sup>
             </Link>
           </h1>
 
-          <div className="flex items-center text-gray-strong">
-            <p className="mr-2">
-              <Link href="./mypage" className="underline">
-                다슬기
-              </Link>
-              님<span className="hidden md:visible">반갑습니다!</span>
-            </p>
+          {/* User actions */}
+          <div className="flex items-center gap-3 text-gray-600">
+            <Link href="/mypage" className="text-sm hover:underline">
+              다슬기
+            </Link>
 
-            <Button type="button" variant="text">
-              <RiLogoutBoxRLine />
+            <Button type="button" variant="text" className="p-1">
+              <RiLogoutBoxRLine className="text-lg" />
             </Button>
 
-            <Button type="button" variant="text" onClick={toggleMenu}>
-              {isMenuOpen ? <IoClose /> : <GiHamburgerMenu />}
+            <Button
+              type="button"
+              variant="text"
+              className="p-1"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? (
+                <IoClose className="text-xl" />
+              ) : (
+                <GiHamburgerMenu className="text-xl" />
+              )}
             </Button>
           </div>
         </div>

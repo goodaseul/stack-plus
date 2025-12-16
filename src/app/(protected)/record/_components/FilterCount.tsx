@@ -1,10 +1,26 @@
+type FilterCountItem = {
+  label: string;
+  count: number;
+};
+
 export function FilterCount() {
+  const items: FilterCountItem[] = [
+    { label: "단어", count: 12 },
+    { label: "메모", count: 5 },
+    { label: "북마크", count: 3 },
+  ];
+
   return (
-    <p className="text-right mb-5">
-      {/* Todo - filter 클릭시 ex. 메모 있음일 시 => · 메모  <span className="text-lg">5개</span>   */}
-      · 단어<span className="text-lg">12개</span>· 메모
-      <span className="text-lg">5개</span>· 북마크
-      <span className="text-lg">3개</span>
-    </p>
+    <div className="mb-4 flex justify-end">
+      <ul className="flex items-center gap-3 text-sm text-gray-600">
+        {items.map(({ label, count }, index) => (
+          <li key={label} className="flex items-center gap-1">
+            {index !== 0 && <span className="text-gray-400">·</span>}
+            <span>{label}</span>
+            <span className="font-medium text-gray-900">{count}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

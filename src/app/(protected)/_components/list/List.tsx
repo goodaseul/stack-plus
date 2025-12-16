@@ -1,6 +1,7 @@
 "use client";
+
 import Link from "next/link";
-import { WordType } from "./type";
+import { WordType } from "@/types/word";
 import { TfiWrite } from "react-icons/tfi";
 import Button from "@/components/button/Button";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
@@ -13,58 +14,62 @@ export function List({
   words: WordType[];
   className?: string;
 }) {
-  const contentStyles = `flex items-center w-[90%] md:w-[80%]`;
-
   return (
-    <>
-      <ul className={`border rounded-lg p-4 overflow-y-auto ${className}`}>
-        {words.map((word) => {
-          const Content = (
-            <>
-              <p className="w-1/2 truncate mr-[5%]">{word.expression}</p>
-              <p className="w-1/2 text-gray-600 truncate">{word.meaning}</p>
-            </>
-          );
+    <ul
+      className={`border border-gray-200 rounded-lg p-2 overflow-y-auto overflow-x-hidden ${className}`}
+    >
+      {words.map((word) => {
+        const Content = (
+          <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-6 w-full min-w-0">
+            {/* 영어 */}
+            <p className="text-sm font-medium text-gray-900 truncate md:w-1/2">
+              {word.expression}
+            </p>
 
-          return (
-            <li
-              key={word.id}
-              className="flex px-2 py-1 mt-3 first:mt-0 items-center justify-between text-gray transition-all hover:text-black hover:bg-gray/10 rounded-sm"
-            >
-              {word.memo ? (
-                <Link
-                  href={`/mypage?tab=memo&wordId=${123}
-`}
-                  className={contentStyles}
-                >
-                  {Content}
-                </Link>
-              ) : (
-                <div className={contentStyles}>{Content}</div>
+            {/* 한국어 */}
+            <p className="text-sm text-gray-600 truncate md:w-1/2 break-keep">
+              {word.meaning}
+            </p>
+          </div>
+        );
+
+        return (
+          <li
+            key={word.id}
+            className="group flex items-start md:items-center justify-between gap-3 px-3 py-2 rounded-md hover:bg-gray-50 transition-colors"
+          >
+            {word.memo ? (
+              <Link
+                href={`/mypage?tab=memo&wordId=${word.id}`}
+                className="flex-1 min-w-0"
+              >
+                {Content}
+              </Link>
+            ) : (
+              <div className="flex-1 min-w-0">{Content}</div>
+            )}
+
+            {/* 액션 영역 */}
+            <div className="flex items-center gap-2 shrink-0 opacity-60 group-hover:opacity-100 transition-opacity">
+              {word.memo && (
+                <TfiWrite className="hidden md:block text-gray-500" />
               )}
 
-              <div className="flex w-[10%] items-center gap-3 justify-end">
-                {word.memo && (
-                  <p className="hidden md:block">
-                    <TfiWrite />
-                  </p>
+              <Button type="button" variant="text" className="p-1">
+                {word.bookmarked ? (
+                  <FaBookmark className="text-gray-700" />
+                ) : (
+                  <FaRegBookmark className="text-gray-500" />
                 )}
-                <Button type="button" variant="text">
-                  {word.bookmarked ? (
-                    <FaRegBookmark className="text-green" />
-                  ) : (
-                    <FaBookmark className="text-green" />
-                  )}
-                </Button>
-                {/* Todo - 케밥 누를 시 드롭다운 박스 다른 곳 누르거나, 다른 투두의 케밥을 누를 시 없어지기 */}
-                <Button type="button" variant="text">
-                  <BsThreeDots />
-                </Button>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-    </>
+              </Button>
+
+              <Button type="button" variant="text" className="p-1">
+                <BsThreeDots className="text-gray-500" />
+              </Button>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
   );
 }

@@ -1,22 +1,26 @@
 "use client";
+
 import Button from "@/components/button/Button";
 import ErrorState from "@/components/error-state/ErrorState";
-import { ListType } from "@/types/word";
+import { PopupAddType } from "@/types/word";
 import { useState } from "react";
+import { FiChevronDown } from "react-icons/fi";
+import { IoClose } from "react-icons/io5";
 
 type WordFormProps = {
-  onAdd: (item: ListType) => void;
+  onAdd: (item: PopupAddType) => void;
+  onClose: () => void;
 };
 
-export default function WordModal({ onAdd }: WordFormProps) {
-  const [word, setWord] = useState("");
+export default function WordModal({ onAdd, onClose }: WordFormProps) {
+  const [expression, setExpression] = useState("");
   const [meaning, setMeaning] = useState("");
   const [sentence, setSentence] = useState("");
   const [usage, setUsage] = useState("일상생활");
   const [memo, setMemo] = useState("");
 
   const [errors, setErrors] = useState({
-    word: false,
+    expression: false,
     meaning: false,
   });
 
@@ -24,143 +28,156 @@ export default function WordModal({ onAdd }: WordFormProps) {
     e.preventDefault();
 
     const newErrors = {
-      word: !word.trim(),
+      expression: !expression.trim(),
       meaning: !meaning.trim(),
     };
 
     setErrors(newErrors);
-
-    if (newErrors.word || newErrors.meaning) return;
+    if (newErrors.expression || newErrors.meaning) return;
 
     onAdd({
       id: Date.now(),
-      word,
+      expression,
       meaning,
       sentence,
       usage,
       memo,
     });
 
-    setWord("");
-    setMeaning("");
-    setSentence("");
-    setUsage("일상생활");
-
-    setErrors({ word: false, meaning: false });
+    onClose();
   };
-  const LabelStyles = `font-semibold text-lg text-gray flex items-center gap-2`;
-  const InputStyles = `pl-2 w-full border-b-2 border-green py-2 text-gray focus:outline-none focus:border-green transition-colors`;
 
-  //   Todo- 확인 모달 만들기!
+  const LabelStyles = "text-sm font-medium text-gray-700";
+  const InputStyles =
+    "w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition";
+  const SelectStyles =
+    "w-full appearance-none rounded-md border border-gray-300 px-3 py-2 pr-10 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition";
+
   return (
     <form onSubmit={onSubmit}>
-      <div className="mx-auto max-w-[680px] px-6 py-8">
-        <div className="rounded-3xl bg-white shadow-[0_4px_20px_rgba(0,0,0,0.05)] p-10 space-y-10 border border-green">
-          {/* 단어 */}
-          <div className="space-y-2">
-            <label htmlFor="word" className={LabelStyles}>
-              단어를 입력해주세요
-            </label>
+      <div className="relative mx-auto max-w-[640px] rounded-2xl bg-white p-8 space-y-8">
+        {/* X 버튼 */}
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute right-4 top-4 rounded-md p-1 text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition"
+          aria-label="닫기"
+        >
+          <IoClose className="text-xl" />
+        </button>
 
-            <input
-              name="word"
-              id="word"
-              type="text"
-              value={word}
-              onChange={(e) => {
-                setWord(e.target.value);
-                if (errors.word && e.target.value.trim().length > 0) {
-                  setErrors((prev) => ({ ...prev, word: false }));
-                }
-              }}
-              placeholder="book"
-              className={InputStyles}
-            />
-            {errors.word && <ErrorState>단어를 꼭 적어주세요!</ErrorState>}
-          </div>
+        {/* 헤더 */}
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900">단어 추가</h2>
+          <p className="mt-1 text-sm text-gray-600">
+            단어와 의미만 입력해도 충분해요
+          </p>
+        </div>
 
-          {/* 뜻 */}
-          <div className="space-y-2">
-            <label htmlFor="meaning" className={LabelStyles}>
-              뜻을 입력해주세요!
-            </label>
+        {/* 단어 */}
+        <div className="space-y-1">
+          <label htmlFor="word" className={LabelStyles}>
+            단어 *
+          </label>
+          <input
+            id="word"
+            type="text"
+            value={expression}
+            onChange={(e) => {
+              setExpression(e.target.value);
+              if (errors.expression && e.target.value.trim()) {
+                setErrors((prev) => ({ ...prev, expression: false }));
+              }
+            }}
+            placeholder="book"
+            className={InputStyles}
+          />
+          {errors.expression && <ErrorState>단어를 입력해주세요</ErrorState>}
+        </div>
 
-            <input
-              name="meaning"
-              id="meaning"
-              type="text"
-              value={meaning}
-              onChange={(e) => {
-                setMeaning(e.target.value);
-                if (errors.meaning && e.target.value.trim().length > 0) {
-                  setErrors((prev) => ({ ...prev, meaning: false }));
-                }
-              }}
-              placeholder="책 / 나는 책을 읽고싶어."
-              className={InputStyles}
-            />
-            {errors.meaning && <ErrorState>뜻을 꼭 적어주세요!</ErrorState>}
-          </div>
+        {/* 뜻 */}
+        <div className="space-y-1">
+          <label htmlFor="meaning" className={LabelStyles}>
+            뜻 *
+          </label>
+          <input
+            id="meaning"
+            type="text"
+            value={meaning}
+            onChange={(e) => {
+              setMeaning(e.target.value);
+              if (errors.meaning && e.target.value.trim()) {
+                setErrors((prev) => ({ ...prev, meaning: false }));
+              }
+            }}
+            placeholder="책"
+            className={InputStyles}
+          />
+          {errors.meaning && <ErrorState>뜻을 입력해주세요</ErrorState>}
+        </div>
 
-          {/* 작문 */}
-          <div className="space-y-2">
-            <label htmlFor="sentence" className={LabelStyles}>
-              작문을 해주실 수 있나요?
-            </label>
+        {/* 작문 */}
+        <div className="space-y-1">
+          <label htmlFor="sentence" className={LabelStyles}>
+            예문
+          </label>
+          <input
+            id="sentence"
+            type="text"
+            value={sentence}
+            onChange={(e) => setSentence(e.target.value)}
+            placeholder="I bought a book yesterday."
+            className={InputStyles}
+          />
+        </div>
 
-            <input
-              name="sentence"
-              id="sentence"
-              type="text"
-              value={sentence}
-              onChange={(e) => setSentence(e.target.value)}
-              placeholder="Actually, I bought books yesterday."
-              className={InputStyles}
-            />
-          </div>
-
-          {/* 사용 위치 */}
-          <div className="space-y-2">
-            <label htmlFor="usage" className={LabelStyles}>
-              어디서 주로 사용하나요?
-            </label>
-
+        {/* 사용 위치 */}
+        <div className="space-y-1 relative ">
+          <label htmlFor="usage" className={LabelStyles}>
+            사용 장소
+          </label>
+          <div className="flex items-center">
             <select
-              name="usage"
               id="usage"
               value={usage}
               onChange={(e) => setUsage(e.target.value)}
-              className={InputStyles}
+              className={SelectStyles}
             >
               <option value="일상생활">일상생활</option>
               <option value="회사">회사</option>
               <option value="학교">학교</option>
             </select>
-          </div>
-
-          {/* 메모 */}
-          <div className="space-y-2">
-            <label htmlFor="memo" className={LabelStyles}>
-              메모할것이 있나요?
-            </label>
-
-            <textarea
-              name="memo"
-              id="memo"
-              value={memo}
-              onChange={(e) => setMemo(e.target.value)}
-              placeholder="나올 때마다 헷갈리는 단어 ! 제대로 알고가자"
-              className={`${InputStyles} resize-none`}
+            <FiChevronDown
+              className="
+                pointer-events-none
+                absolute right-3
+                text-gray-400
+                "
+              size={18}
             />
           </div>
+        </div>
 
-          {/* 버튼 */}
-          <div className="flex items-center justify-center gap-2">
-            <Button variant="outline" type="button">
-              취소하기
-            </Button>
-            <Button type="submit">저장하기 </Button>
-          </div>
+        {/* 메모 */}
+        <div className="space-y-1">
+          <label htmlFor="memo" className={LabelStyles}>
+            메모
+          </label>
+          <textarea
+            id="memo"
+            value={memo}
+            onChange={(e) => setMemo(e.target.value)}
+            placeholder="헷갈렸던 포인트 정리"
+            className={`${InputStyles} min-h-[90px] resize-none`}
+          />
+        </div>
+
+        {/* 버튼 */}
+        <div className="flex justify-end gap-2 pt-4">
+          <Button type="button" variant="outline" onClick={onClose}>
+            취소
+          </Button>
+          <Button type="submit">저장</Button>
         </div>
       </div>
     </form>

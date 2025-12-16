@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import Link from "next/link";
 
 type ButtonVariant = "default" | "outline" | "text";
@@ -14,17 +15,21 @@ type ButtonProps =
       href: string;
     });
 
-const baseStyles = `inline-flex items-center justify-center cursor-pointer font-bold transition-all focus:outline-none rounded-md`;
-const roundStyles = `gap-1 bg-white px-4 py-2 text-sm text-green shadow-md hover:-translate-y-0.5 hover:shadow-md w-auto md:w-48 `;
-const variants: Record<ButtonVariant, string> = {
-  default: `${roundStyles}`,
-  outline: `${roundStyles} border border-green hover:bg-green/15`,
-  text: `p-1.5 hover:font-bold text-md`,
-};
+const baseStyles =
+  "transition-all inline-flex items-center justify-center gap-1 rounded-md text-sm font-medium transition-colors focus:outline-none cursor-pointer";
 
+/* 2️⃣ variant별 역할 분리 */
+const variantStyles: Record<ButtonVariant, string> = {
+  default: "bg-slate-600 text-white px-4 py-2 hover:bg-slate-700",
+
+  outline:
+    "border border-slate-300 text-slate-600 bg-white px-4 py-2 hover:bg-slate-50",
+
+  text: "text-slate-600 p-1 hover:underline",
+};
 export default function Button(props: ButtonProps) {
   const { children, variant = "default", className = "" } = props;
-  const styles = `${baseStyles} ${variants[variant]} ${className}`;
+  const styles = clsx(baseStyles, variantStyles[variant], className);
 
   if ("href" in props) {
     return (

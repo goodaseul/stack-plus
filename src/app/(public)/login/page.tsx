@@ -6,7 +6,6 @@ import { signIn } from "@/api/auth";
 import Title from "../_components/title/Title";
 import Input from "../_components/input/Input";
 import Button from "@/components/button/Button";
-import LinkButton from "@/components/link-button/LinkButton";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
@@ -30,7 +29,6 @@ export default function LoginPage() {
 
     try {
       await signIn(form.email, form.password);
-
       router.push("/dashboard");
     } catch {
       setErrors((prev) => ({
@@ -41,19 +39,19 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="px-6 min-h-screen flex items-center justify-center">
-      <div className="w-full max-w-md text-center">
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-6">
+      <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-sm">
         <Title
           title="로그인"
           desc="Stack+를 계속 사용하려면 로그인 해주세요."
         />
 
-        <form className="grid gap-5" onSubmit={onSubmit}>
+        <form className="mt-8 grid gap-5" onSubmit={onSubmit}>
           <Input
             value={form.email}
             onChange={(e) => updateField("email", e.target.value)}
             type="email"
-            placeholder="이메일을 적어주세요"
+            placeholder="이메일을 입력하세요"
             errors={errors.email}
           />
 
@@ -61,19 +59,21 @@ export default function LoginPage() {
             value={form.password}
             onChange={(e) => updateField("password", e.target.value)}
             type="password"
-            placeholder="비밀번호를 적어주세요"
+            placeholder="비밀번호를 입력하세요"
             errors={errors.password}
           />
 
-          <Button type="submit">로그인</Button>
+          <Button type="submit" className="mt-2">
+            로그인
+          </Button>
         </form>
 
-        <p className="text-sm text-gray-500 mt-6">
+        <div className="mt-6 text-center text-sm text-gray-500">
           아직 계정이 없으신가요?
-          <LinkButton variant="text" href="/join">
+          <Button variant="text" href="/join" className="ml-1">
             회원가입
-          </LinkButton>
-        </p>
+          </Button>
+        </div>
       </div>
     </div>
   );

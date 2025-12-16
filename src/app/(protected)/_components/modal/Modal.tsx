@@ -1,10 +1,25 @@
-export default function Modal({
-  children,
-  onClose,
-}: {
+"use client";
+
+import { useEffect } from "react";
+
+type ModalProps = {
   children: React.ReactNode;
   onClose: () => void;
-}) {
+};
+
+export default function Modal({ children, onClose }: ModalProps) {
+  // ESC 키로 닫기
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
   return (
     <div
       className="
@@ -17,7 +32,8 @@ export default function Modal({
     >
       <div
         className="
-          max-h-auto w-full max-w-3xl
+          w-full max-w-2xl
+          max-h-[90vh]
           overflow-y-auto
         "
         onClick={(e) => e.stopPropagation()}

@@ -32,38 +32,72 @@ export function RecordLineChart() {
   const data = period === "daily" ? dailyData : monthlyData;
 
   return (
-    <Banner className="h-auto border border-green/30 hover:bg-cream/15">
+    <Banner>
+      {/* 제목 */}
       <BannerTitle
         title={period === "daily" ? "일일 기록" : "월간 기록"}
-        description={
-          <>
-            지금까지의<span className="font-semibold">기록</span>을 확인해보세요
-          </>
-        }
+        description="지금까지의 기록을 확인해보세요"
       />
 
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="font-semibold"></h3>
+      {/* 토글 */}
+      <div className="mb-4 flex items-center gap-4 border-b border-gray-200">
+        <button
+          onClick={() => setPeriod("daily")}
+          className={`
+      relative pb-2 text-sm
+      ${
+        period === "daily"
+          ? "font-medium text-gray-900 after:absolute after:left-0 after:bottom-[-1px] after:h-[2px] after:w-full after:bg-gray-900"
+          : "text-gray-500 hover:text-gray-900"
+      }
+    `}
+        >
+          일간
+        </button>
 
-        <div className="flex gap-2">
-          {/* Todo- active 시 */}
-          <Button onClick={() => setPeriod("daily")}>일간</Button>
-          <Button onClick={() => setPeriod("monthly")}>월간</Button>
-        </div>
+        <button
+          onClick={() => setPeriod("monthly")}
+          className={`
+      relative pb-2 text-sm
+      ${
+        period === "monthly"
+          ? "font-medium text-gray-900 after:absolute after:left-0 after:bottom-[-1px] after:h-[2px] after:w-full after:bg-gray-900"
+          : "text-gray-500 hover:text-gray-900"
+      }
+    `}
+        >
+          월간
+        </button>
       </div>
 
       {/* 차트 */}
       <div className="h-56">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart key={period} data={data}>
-            <XAxis dataKey="label" />
-            <YAxis />
-            <Tooltip />
+            <XAxis
+              dataKey="label"
+              tick={{ fontSize: 12, fill: "#6B7280" }}
+              axisLine={false}
+              tickLine={false}
+            />
+            <YAxis
+              tick={{ fontSize: 12, fill: "#6B7280" }}
+              axisLine={false}
+              tickLine={false}
+            />
+            <Tooltip
+              contentStyle={{
+                fontSize: "12px",
+                borderRadius: "8px",
+                borderColor: "#E5E7EB",
+              }}
+            />
             <Line
               type="monotone"
               dataKey="count"
-              stroke="#b7c276"
+              stroke="#374151"
               strokeWidth={2}
+              dot={false}
             />
           </LineChart>
         </ResponsiveContainer>

@@ -23,14 +23,16 @@ export function MemoList() {
   const selectedWordId = Number(searchParams.get("wordId"));
 
   return (
-    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-      {MOCK_MEMOS.map((item) => (
-        <MemoRow
-          key={item.wordId}
-          {...item}
-          selected={item.wordId === selectedWordId}
-        />
-      ))}
-    </ul>
+    <section>
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {MOCK_MEMOS.map((item) => (
+          <MemoRow
+            key={item.wordId}
+            {...item}
+            selected={item.wordId === selectedWordId}
+          />
+        ))}
+      </ul>
+    </section>
   );
 }

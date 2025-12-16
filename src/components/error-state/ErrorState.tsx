@@ -1,7 +1,16 @@
-export default function ErrorState({
-  children,
-}: Readonly<{
+type ErrorStateProps = {
   children: React.ReactNode;
-}>) {
-  return <p className="text-red-600 text-base p-2 text-left">{children}</p>;
+};
+export default function ErrorState({ children }: ErrorStateProps) {
+  return (
+    <p
+      role="alert"
+      className="
+        mt-1 text-xs text-red-600
+        leading-relaxed
+      "
+    >
+      {children}
+    </p>
+  );
 }

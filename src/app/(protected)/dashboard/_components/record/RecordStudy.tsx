@@ -3,9 +3,12 @@ import { RecordLineChart } from "./RecordLineChart";
 
 export function RecordStudy() {
   return (
-    <div>
-      <Title>공부 기록</Title>
+    <section>
+      <div className="mb-3 flex items-center justify-between">
+        <Title>공부 기록</Title>
+      </div>
+
       <RecordLineChart />
-    </div>
+    </section>
   );
 }

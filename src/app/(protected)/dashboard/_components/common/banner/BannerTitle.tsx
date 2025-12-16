@@ -5,13 +5,9 @@ type BannerTitleProps = {
 
 export function BannerTitle({ title, description }: BannerTitleProps) {
   return (
-    <>
-      <h3 className="mb-1 text-lg font-semibold text-gray-strong/80 group-hover:text-gray-strong">
-        {title}
-      </h3>
-      <p className="mb-4 text-sm text-gray-strong/60 group-hover:text-gray-strong/80">
-        {description}
-      </p>
-    </>
+    <div className="space-y-2 pb-3">
+      <h3 className="text-base font-semibold text-gray-900">{title}</h3>
+      <p className="text-sm text-gray-600 leading-relaxed">{description}</p>
+    </div>
   );
 }

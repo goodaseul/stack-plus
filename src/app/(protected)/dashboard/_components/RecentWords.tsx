@@ -1,38 +1,50 @@
 "use client";
+
 import Button from "@/components/button/Button";
 import { CiCirclePlus } from "react-icons/ci";
-import { WordType } from "../../_components/list/type";
 import { List } from "../../_components/list/List";
 import { Title } from "./common/Title";
 import { useState } from "react";
 import WordModal from "../../_components/modal/WordModal";
 import Modal from "../../_components/modal/Modal";
+import { WordType } from "@/types/word";
 
 export function RecentWords({ mockWords }: { mockWords: WordType[] }) {
+  // Todo -  상태관리로 하면 좋을듯?
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const handleModal = () => {
-    setIsOpenModal(true);
-  };
+
   return (
-    <div>
-      <Title>
-        최근 등록한 단어
+    <section className="rounded-xl border border-gray-200 bg-white p-4">
+      {/* 헤더 */}
+      <div className="mb-3 flex items-center justify-between">
+        <Title className="mb-0 text-base font-semibold">최근 등록한 단어</Title>
+
         <Button
           type="button"
           variant="text"
-          className="text-sm text-gray-strong"
-          onClick={handleModal}
+          onClick={() => setIsOpenModal(true)}
+          className="text-sm text-gray-600 hover:text-gray-900"
         >
-          단어 추가하기 <CiCirclePlus className="text-lg ml-1" />
+          추가
+          <CiCirclePlus className="ml-1 text-base" />
         </Button>
-      </Title>
-      <List words={mockWords} className="border-green bg-cream h-48" />
+      </div>
 
+      {/* 리스트 */}
+      <List
+        words={mockWords}
+        className="h-48 border border-gray-200 rounded-md"
+      />
+
+      {/* 모달 */}
       {isOpenModal && (
         <Modal onClose={() => setIsOpenModal(false)}>
-          <WordModal onAdd={() => console.log("?")} />
+          <WordModal
+            onAdd={() => console.log("add")}
+            onClose={() => setIsOpenModal(false)}
+          />
         </Modal>
       )}
-    </div>
+    </section>
   );
 }
