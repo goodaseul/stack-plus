@@ -8,8 +8,8 @@ import { CiCirclePlus } from "react-icons/ci";
 import Modal from "../_components/modal/Modal";
 import WordModal from "../_components/modal/WordModal";
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
-import { WordType } from "../_components/list/type";
+import { supabase } from "@/lib/supabase/supabase";
+import { WordType } from "@/types/word";
 
 export default function RecordPage() {
   const [isOpenModal, setIsOpenModal] = useState(false);

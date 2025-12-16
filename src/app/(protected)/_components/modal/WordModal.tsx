@@ -1,7 +1,7 @@
 "use client";
 import Button from "@/components/button/Button";
 import ErrorState from "@/components/error-state/ErrorState";
-import { ListType } from "@/types/list";
+import { ListType } from "@/types/word";
 import { useState } from "react";
 
 type WordFormProps = {

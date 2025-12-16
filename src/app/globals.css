@@ -4,9 +4,10 @@
 
 @theme {
   --color-green: #b7c276;
-  --color-cream: #fdfcea;
-  --color-gray: #929f9a;
+  --color-cream: #f8f8f8;
+  --color-gray: #6b7280;
   --color-gray-strong: #5f665a;
+  --color-black: #1a1a1a;
   --font-permanent-marker: var(--font-permanent-marker);
 }
 

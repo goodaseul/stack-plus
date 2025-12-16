@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Permanent_Marker, Song_Myung } from "next/font/google";
 import "./globals.css";
-import Provider from "./provider";
 import Footer from "@/components/layout/Footer";
+import QueryProvider from "@/providers/QueryProvider";
 
 const SongMyung = Song_Myung({
   weight: "400",
@@ -32,10 +32,10 @@ export default function RootLayout({
       <body
         className={`${SongMyung.variable} ${PermanentMarker.variable} antialiased`}
       >
-        {/* <Provider> */}
-        {children}
-        <Footer />
-        {/* </Provider> */}
+        <QueryProvider>
+          {children}
+          <Footer />
+        </QueryProvider>
       </body>
     </html>
   );
