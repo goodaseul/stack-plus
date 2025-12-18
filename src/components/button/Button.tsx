@@ -18,7 +18,6 @@ type ButtonProps =
 const baseStyles =
   "transition-all inline-flex items-center justify-center gap-1 rounded-md text-sm font-medium transition-colors focus:outline-none cursor-pointer";
 
-/* 2️⃣ variant별 역할 분리 */
 const variantStyles: Record<ButtonVariant, string> = {
   default: "bg-slate-600 text-white px-4 py-2 hover:bg-slate-700",
 

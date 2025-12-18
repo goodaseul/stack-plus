@@ -1,26 +1,17 @@
+import { FilterValue } from "@/constants/filters";
+
 type FilterCountItem = {
-  label: string;
-  count: number;
+  total: number;
+  filter: FilterValue;
 };
 
-export function FilterCount() {
-  const items: FilterCountItem[] = [
-    { label: "단어", count: 12 },
-    { label: "메모", count: 5 },
-    { label: "북마크", count: 3 },
-  ];
-
+export function FilterCount({ total, filter }: FilterCountItem) {
   return (
-    <div className="mb-4 flex justify-end">
-      <ul className="flex items-center gap-3 text-sm text-gray-600">
-        {items.map(({ label, count }, index) => (
-          <li key={label} className="flex items-center gap-1">
-            {index !== 0 && <span className="text-gray-400">·</span>}
-            <span>{label}</span>
-            <span className="font-medium text-gray-900">{count}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <p className="text-sm text-gray-500">
+      {filter === null && `전체 ${total}개`}
+      {filter === "hasMemo" && `메모 있음 ${total}개`}
+      {filter === "noMemo" && `메모 없음 ${total}개`}
+      {filter === "bookmarked" && `북마크 ${total}개`}
+    </p>
   );
 }
