@@ -1,17 +1,14 @@
-import { FilterValue } from "@/constants/filters";
+import { FILTER_LABELS, FilterKey } from "@/constants/filter";
 
 type FilterCountItem = {
   total: number;
-  filter: FilterValue;
+  filterKey: FilterKey;
 };
 
-export function FilterCount({ total, filter }: FilterCountItem) {
+export function FilterCount({ total, filterKey }: FilterCountItem) {
   return (
     <p className="text-sm text-gray-500">
-      {filter === null && `전체 ${total}개`}
-      {filter === "hasMemo" && `메모 있음 ${total}개`}
-      {filter === "noMemo" && `메모 없음 ${total}개`}
-      {filter === "bookmarked" && `북마크 ${total}개`}
+      {FILTER_LABELS[filterKey]} {total}개
     </p>
   );
 }

@@ -7,7 +7,6 @@ import { Title } from "./common/Title";
 import { useState } from "react";
 import WordModal from "../../_components/modal/WordModal";
 import Modal from "../../_components/modal/Modal";
-import { WordType } from "@/types/word";
 
 export function RecentWords({ mockWords }: { mockWords: WordType[] }) {
   // Todo -  상태관리로 하면 좋을듯?

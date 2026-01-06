@@ -2,7 +2,6 @@
 
 import Button from "@/components/button/Button";
 import ErrorState from "@/components/error-state/ErrorState";
-import { PopupAddType } from "@/types/word";
 import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";

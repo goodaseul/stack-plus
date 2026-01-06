@@ -1,6 +1,6 @@
 import { fetcher } from "@/lib/fetcher/fetcher";
 import { WordsApi } from "./types/words";
-import { FilterValue } from "@/constants/filters";
+import { FilterValue } from "@/constants/filter";
 
 export async function getWords({
   filter,

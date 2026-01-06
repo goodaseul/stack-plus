@@ -1,29 +1,24 @@
 import Button from "@/components/button/Button";
-import { FILTER_MAP, FilterValue } from "@/constants/filters";
+import { FilterKey } from "@/constants/filter";
 
 export type FilterProps = {
-  filterMenus: string[];
-  onClick: (value: FilterValue) => void;
-  activeFilter: FilterValue;
+  filterMenus: Record<FilterKey, string>;
+  activeFilter: FilterKey | null;
+  onClick: (key: FilterKey) => void;
 };
 
-export function Filter({ filterMenus, onClick, activeFilter }: FilterProps) {
+export function Filter({ filterMenus, activeFilter, onClick }: FilterProps) {
   return (
     <div className="my-5 flex justify-center gap-2">
-      {filterMenus.map((filterMenu) => {
-        const value = FILTER_MAP[filterMenu as keyof typeof FILTER_MAP];
-        const isActive = value === activeFilter;
-        return (
-          <Button
-            variant={isActive ? "default" : "outline"}
-            className=" text-xs sm:text-sm md:text-md w-25% lg:w-48"
-            key={filterMenu}
-            onClick={() => onClick(value)}
-          >
-            {filterMenu}
-          </Button>
-        );
-      })}
+      {(Object.keys(filterMenus) as FilterKey[]).map((key) => (
+        <Button
+          key={key}
+          onClick={() => onClick(key)}
+          className={activeFilter === key ? "active" : ""}
+        >
+          {filterMenus[key]}
+        </Button>
+      ))}
     </div>
   );
 }

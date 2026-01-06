@@ -1,4 +1,4 @@
-export type WordType = {
+type WordType = {
   id: number;
   expression: string;
   meaning: string;
@@ -9,7 +9,7 @@ export type WordType = {
   //   created_at?: number;
 };
 
-export type PopupAddType = {
+type PopupAddType = {
   id: number;
   expression: string;
   meaning: string;

@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { getWords } from "@/api/words";
-import { FilterValue } from "@/constants/filters";
+import { FilterValue } from "@/constants/filter";
+import wordsQueryKeys from "./querykey";
 
 export function useWordsQuery(filter: FilterValue) {
   return useQuery({
-    queryKey: ["words", filter],
+    queryKey: [wordsQueryKeys, filter],
     queryFn: () => getWords({ filter }),
   });
 }
