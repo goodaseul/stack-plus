@@ -26,7 +26,7 @@ export default function MenuLink({ isMenuOpen }: { isMenuOpen: boolean }) {
               <Link
                 href={url}
                 className={`
-                  relative font-permanent-marker text-lg
+                  relative text-lg
                   transition-colors
                   ${
                     isActive

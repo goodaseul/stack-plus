@@ -10,7 +10,12 @@ type ListActionsProps = {
 export default function ListActions({ memo, bookmarked }: ListActionsProps) {
   return (
     <>
-      <div className="flex items-center gap-2 shrink-0 opacity-60 group-hover:opacity-100 transition-opacity">
+      <div
+        className="flex items-center gap-2 
+      opacity-60 group-hover:opacity-100 transition-opacity
+      justify-end
+      "
+      >
         {memo && <TfiWrite className="hidden md:block text-gray-500" />}
 
         <Button type="button" variant="text" className="p-1">

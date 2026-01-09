@@ -37,7 +37,7 @@ export default function Marquee({
     <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
       <motion.div
         ref={containerRef}
-        className={`flex whitespace-nowrap opacity-[0.07] font-black font-permanent-marker items-center h-full ${color} ${className}`}
+        className={`flex whitespace-nowrap opacity-[0.07] font-black items-center h-full ${color} ${className}`}
         style={{ willChange: "transform" }}
       >
         <span>{text.repeat(6)}</span>

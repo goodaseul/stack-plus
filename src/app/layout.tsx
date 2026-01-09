@@ -1,21 +1,27 @@
 import type { Metadata } from "next";
-import { Permanent_Marker, Song_Myung } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/layout/Footer";
 import QueryProvider from "@/providers/QueryProvider";
+import localFont from "next/font/local";
 
-const SongMyung = Song_Myung({
-  weight: "400",
-  variable: "--font-song-myung",
+const pretendard = localFont({
+  src: "../../public/fonts/pretendard/PretendardVariable.woff2",
+  display: "swap",
+  weight: "100 900",
+  variable: "--font-pretendard",
+});
+
+export const sekuya = localFont({
+  src: [
+    {
+      path: "../../public/fonts/sekuya/Sekuya-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-sekuya",
   display: "swap",
 });
-
-const PermanentMarker = Permanent_Marker({
-  variable: "--font-permanent-marker",
-  subsets: ["latin"],
-  weight: "400",
-});
-
 export const metadata: Metadata = {
   title: "Stack+",
   description:
@@ -30,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${SongMyung.variable} ${PermanentMarker.variable} antialiased`}
+        className={`${sekuya.variable} ${pretendard.variable}  antialiased`}
       >
         <QueryProvider>
           {children}

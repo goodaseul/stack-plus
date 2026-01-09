@@ -4,7 +4,7 @@ export default function PublicHeader() {
   return (
     <header className="fixed top-0 left-0 z-20 w-full bg-transparent px-6 py-4">
       <div className="mx-auto flex max-w-6xl items-center justify-between">
-        <Link href="/" className="font-permanent-marker text-xl text-gray-900">
+        <Link href="/" className="text-xl text-gray-900">
           Stack+
         </Link>
 

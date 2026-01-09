@@ -22,7 +22,7 @@ export default function FeaturePage() {
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-24 md:grid-cols-2">
         {/* Left */}
         <div className="md:sticky md:top-40 self-start">
-          <h2 className="font-permanent-marker text-4xl text-gray-900">
+          <h2 className="text-4xl text-gray-900">
             Stack
             <br />
             Your Language
@@ -38,8 +38,7 @@ export default function FeaturePage() {
               {/* 번호 */}
               <div className="mb-4 flex items-center gap-6">
                 <span
-                  className="
-                    text-5xl font-permanent-marker text-gray-300
+                  className="text-5xl  text-gray-300
                     transition-all duration-300
                     group-hover:text-gray-900
                   "

@@ -32,6 +32,7 @@ export function Record() {
 
   const emptyMessage =
     currentFilter === null ? "아직 단어가 없어요" : "조건에 맞는 단어가 없어요";
+
   return (
     <>
       <RecordHeader />
@@ -47,7 +48,7 @@ export function Record() {
       {words.length === 0 ? (
         <EmptyState>{emptyMessage}</EmptyState>
       ) : (
-        <List words={words} className="h-180 border-gray-200  bg-white" />
+        <List words={words} />
       )}
     </>
   );

@@ -1,26 +1,12 @@
 @import "tailwindcss";
-
-/* =========================
-   Theme Tokens
-========================= */
-
 @theme {
-  /* Brand */
-
   /* Base */
   --color-bg: #ffffff;
   --color-bg-muted: #f8f8f8;
 
   /* Text */
   --color-text-primary: #1a1a1a;
-
-  /* Font */
-  --font-permanent-marker: var(--font-permanent-marker);
 }
-
-/* =========================
-   Base Reset
-========================= */
 
 *,
 *::before,
@@ -40,15 +26,11 @@ html {
 }
 
 body {
-  font-family: var(--font-song-myung), sans-serif;
+  font-family: var(--font-sekuya), var(--font-pretendard), sans-serif;
   line-height: 1.5;
   background-color: var(--color-bg);
   color: var(--color-text-primary);
 }
-
-/* =========================
-   Scrollbar
-========================= */
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -69,10 +51,6 @@ body {
   scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
 }
 
-/* =========================
-   Utilities
-========================= */
-
 @layer utilities {
   .hover-letter {
     @apply transition-all duration-300 ease-out;
@@ -82,10 +60,6 @@ body {
     @apply tracking-wider opacity-100;
   }
 }
-
-/* =========================
-   Animations
-========================= */
 
 @keyframes marquee {
   0% {

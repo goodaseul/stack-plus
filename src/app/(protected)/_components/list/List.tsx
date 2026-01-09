@@ -13,26 +13,29 @@ export function List({
 }) {
   return (
     <ul
-      className={`border border-gray-200 rounded-lg p-2 overflow-y-auto overflow-x-hidden ${className}`}
+      className={`p-2
+        grid grid-cols-1 sm:grid-cols-2
+        gap-4
+        ${className}`}
     >
       {words.map((word) => {
         return (
           <li
             key={word.id}
-            className="group flex items-start md:items-center justify-between gap-3 px-3 py-2 rounded-md hover:bg-gray-50 transition-colors"
+            className="
+            border border-gray-200 rounded-lg 
+            group 
+            gap-3 p-5 hover:bg-gray-50 transition-colors"
           >
             {word.memo ? (
-              <Link
-                href={`/mypage?tab=memo&wordId=${word.id}`}
-                className="flex-1 min-w-0"
-              >
+              <Link href={`/mypage?tab=memo&wordId=${word.id}`} className="">
                 <ListContent
                   expression={word.expression}
                   meaning={word.meaning}
                 />
               </Link>
             ) : (
-              <div className="flex-1 min-w-0">
+              <div className="">
                 <ListContent
                   expression={word.expression}
                   meaning={word.meaning}
