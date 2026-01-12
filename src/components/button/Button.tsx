@@ -16,15 +16,12 @@ type ButtonProps =
     });
 
 const baseStyles =
-  "transition-all inline-flex items-center justify-center gap-1 rounded-md text-sm font-medium transition-colors focus:outline-none cursor-pointer";
+  "transition-all inline-flex items-center justify-center gap-1 rounded-full text-sm text-black font-medium focus:outline-none cursor-pointer hover:-translate-y-1";
 
 const variantStyles: Record<ButtonVariant, string> = {
-  default: "bg-slate-600 text-white px-4 py-2 hover:bg-slate-700",
-
-  outline:
-    "border border-slate-300 text-slate-600 bg-white px-4 py-2 hover:bg-slate-50",
-
-  text: "text-slate-600 p-1 hover:underline",
+  default: "bg-point px-4 py-3.5",
+  outline: "border border-point bg-white px-4 py-3.5 hover:bg-point",
+  text: "p-1 hover:translate-y-0 relative after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full",
 };
 export default function Button(props: ButtonProps) {
   const { children, variant = "default", className = "" } = props;

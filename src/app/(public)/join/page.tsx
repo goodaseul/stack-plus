@@ -51,15 +51,18 @@ export default function JoinPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-6">
-      <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-sm">
-        <Title title="회원가입" desc="Stack+와 함께 영어 표현을 쌓아가세요." />
+      <div className="w-full max-w-lg rounded-2xl bg-white p-10 shadow-sm">
+        <Title
+          title="Join Us!"
+          desc="Stack plus와 함께 영어 표현을 쌓아가세요."
+        />
 
-        <form className="mt-8 grid gap-4" onSubmit={onSubmit}>
+        <form className="mt-8 grid gap-5" onSubmit={onSubmit}>
           <Input
             value={form.email}
             onChange={(e) => updateField("email", e.target.value)}
             type="email"
-            placeholder="이메일을 입력하세요"
+            placeholder="이메일을 입력하세요."
             errors={errors.email}
           />
 
@@ -67,7 +70,7 @@ export default function JoinPage() {
             value={form.nickname}
             onChange={(e) => updateField("nickname", e.target.value)}
             type="text"
-            placeholder="별명을 입력하세요"
+            placeholder="별명을 입력하세요."
             errors={errors.nickname}
           />
 
@@ -75,7 +78,7 @@ export default function JoinPage() {
             value={form.password}
             onChange={(e) => updateField("password", e.target.value)}
             type="password"
-            placeholder="비밀번호를 입력하세요"
+            placeholder="비밀번호를 입력하세요."
             errors={errors.password}
           />
 
@@ -83,7 +86,7 @@ export default function JoinPage() {
             value={form.confirmPassword}
             onChange={(e) => updateField("confirmPassword", e.target.value)}
             type="password"
-            placeholder="비밀번호를 다시 입력하세요"
+            placeholder="비밀번호를 다시 입력하세요."
             errors={errors.confirmPassword}
           />
 

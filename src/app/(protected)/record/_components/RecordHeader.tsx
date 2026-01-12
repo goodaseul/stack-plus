@@ -17,7 +17,7 @@ export function RecordHeader() {
         <Button
           type="button"
           variant="text"
-          className="ml-auto text-sm text-gray-700 hover:text-gray-900"
+          className="ml-auto text-sm text-gray-700 hover:text-black"
           onClick={handleModal}
         >
           단어 추가하기 <CiCirclePlus className="text-base ml-1" />

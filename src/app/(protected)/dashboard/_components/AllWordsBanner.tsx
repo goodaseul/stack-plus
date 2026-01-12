@@ -13,7 +13,7 @@ export function AllWordsBanner() {
       <Button
         href="/record"
         variant="text"
-        className="self-start text-sm text-gray-600 hover:text-gray-900"
+        className="self-start text-sm text-gray-600 hover:text-black"
       >
         보러가기 →
       </Button>

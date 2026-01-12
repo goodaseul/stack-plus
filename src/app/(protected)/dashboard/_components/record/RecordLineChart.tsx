@@ -47,8 +47,8 @@ export function RecordLineChart() {
       relative pb-2 text-sm
       ${
         period === "daily"
-          ? "font-medium text-gray-900 after:absolute after:left-0 after:bottom-[-1px] after:h-[2px] after:w-full after:bg-gray-900"
-          : "text-gray-500 hover:text-gray-900"
+          ? "font-medium text-black after:absolute after:left-0 after:bottom-[-1px] after:h-[2px] after:w-full after:bg-gray-900"
+          : "text-gray-500 hover:text-black"
       }
     `}
         >
@@ -61,8 +61,8 @@ export function RecordLineChart() {
       relative pb-2 text-sm
       ${
         period === "monthly"
-          ? "font-medium text-gray-900 after:absolute after:left-0 after:bottom-[-1px] after:h-[2px] after:w-full after:bg-gray-900"
-          : "text-gray-500 hover:text-gray-900"
+          ? "font-medium text-black after:absolute after:left-0 after:bottom-[-1px] after:h-[2px] after:w-full after:bg-gray-900"
+          : "text-gray-500 hover:text-black"
       }
     `}
         >

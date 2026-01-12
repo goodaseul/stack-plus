@@ -15,7 +15,7 @@ export default function BannerPage() {
           className="mx-auto inline-flex items-center gap-2 rounded-full
                      border border-white/30 px-6 py-3
                      text-sm font-medium text-white
-                     hover:bg-white hover:text-gray-900
+                     hover:bg-white hover:text-black
                      transition-colors"
         >
           지금 시작하기

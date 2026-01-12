@@ -13,7 +13,7 @@ export function RecentMemos() {
       <Button
         variant="text"
         href="/record?filter=noMemo"
-        className="self-start text-sm text-gray-600 hover:text-gray-900"
+        className="self-start text-sm text-gray-600 hover:text-black"
       >
         메모 전체 보기 →
       </Button>

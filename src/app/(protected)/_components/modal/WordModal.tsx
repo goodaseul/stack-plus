@@ -48,9 +48,9 @@ export default function WordModal({ onAdd, onClose }: WordFormProps) {
 
   const LabelStyles = "text-sm font-medium text-gray-700";
   const InputStyles =
-    "w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition";
+    "w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition";
   const SelectStyles =
-    "w-full appearance-none rounded-md border border-gray-300 px-3 py-2 pr-10 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition";
+    "w-full appearance-none rounded-md border border-gray-300 px-3 py-2 pr-10 text-sm text-black bg-white focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition";
 
   return (
     <form onSubmit={onSubmit}>
@@ -59,7 +59,7 @@ export default function WordModal({ onAdd, onClose }: WordFormProps) {
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-4 top-4 rounded-md p-1 text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition"
+          className="absolute right-4 top-4 rounded-md p-1 text-gray-500 hover:text-black hover:bg-gray-100 transition"
           aria-label="닫기"
         >
           <IoClose className="text-xl" />
@@ -67,7 +67,7 @@ export default function WordModal({ onAdd, onClose }: WordFormProps) {
 
         {/* 헤더 */}
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">단어 추가</h2>
+          <h2 className="text-xl font-semibold text-black">단어 추가</h2>
           <p className="mt-1 text-sm text-gray-600">
             단어와 의미만 입력해도 충분해요
           </p>

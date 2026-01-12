@@ -7,7 +7,7 @@ export default function ListContent({ expression, meaning }: ListContentProps) {
   return (
     <>
       <div className="gap-1 md:gap-6 w-full">
-        <p className="text-md font-medium mb-5 text-gray-900 truncate">
+        <p className="text-md font-medium mb-5 text-black truncate">
           {expression}
         </p>
 

@@ -28,11 +28,7 @@ export default function MenuLink({ isMenuOpen }: { isMenuOpen: boolean }) {
                 className={`
                   relative text-lg
                   transition-colors
-                  ${
-                    isActive
-                      ? "text-gray-900"
-                      : "text-gray-600 hover:text-gray-900"
-                  }
+                  ${isActive ? "text-black" : "text-gray-600 hover:text-black"}
                 `}
               >
                 {link}

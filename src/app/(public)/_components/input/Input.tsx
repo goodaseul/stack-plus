@@ -26,10 +26,10 @@ export default function Input({
         placeholder={placeholder}
         onChange={onChange}
         className={clsx(
-          "w-full rounded-lg px-4 py-3 text-sm transition focus:outline-none",
+          "w-full rounded-full px-5 py-3.5 text-sm transition focus:outline-none",
           errors
             ? "border border-red-500 focus:ring-2 focus:ring-red-500"
-            : "border border-gray-300 focus:ring-2 focus:ring-gray-900",
+            : "border border-gray-100 focus:ring-2 shadow-md focus:ring-gray-900",
           className
         )}
       />

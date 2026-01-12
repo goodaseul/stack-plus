@@ -23,7 +23,7 @@ export default function InfoPage() {
 
       {/* Content */}
       <div className="relative z-10 mx-auto flex min-h-screen max-w-4xl flex-col justify-center px-6">
-        <h2 className="mb-8 break-keep text-4xl font-bold leading-tight text-gray-900 sm:text-5xl">
+        <h2 className="mb-8 break-keep text-4xl font-bold leading-tight text-black sm:text-5xl">
           기억하고 싶은 영어 표현을
           <br />
           <span className="inline-block mt-2">Stack+에 쌓아두세요</span>

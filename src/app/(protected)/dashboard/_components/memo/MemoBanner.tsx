@@ -15,7 +15,7 @@ export function MemoBanner() {
         <Button
           href="/record?filter=noMemo"
           variant="text"
-          className="self-start text-sm text-gray-600 hover:text-gray-900"
+          className="self-start text-sm text-gray-600 hover:text-black"
         >
           메모 하러 가기 →
         </Button>

@@ -27,7 +27,7 @@ export function MemoRow({
     >
       {/* 헤더 */}
       <div className="mb-2 flex items-center justify-between">
-        <strong className="text-sm font-medium text-gray-900">{word}</strong>
+        <strong className="text-sm font-medium text-black">{word}</strong>
         <span className="text-xs text-gray-500">{updatedAt}</span>
       </div>
 
@@ -47,9 +47,9 @@ export function MemoRow({
           />
 
           <div className="mt-3 flex gap-3">
-            <button className="text-xs font-medium text-gray-900">저장</button>
+            <button className="text-xs font-medium text-black">저장</button>
             <button
-              className="text-xs text-gray-500 hover:text-gray-900"
+              className="text-xs text-gray-500 hover:text-black"
               onClick={() => {
                 setValue(memo);
                 setEditing(false);
@@ -67,7 +67,7 @@ export function MemoRow({
 
           <button
             onClick={() => setEditing(true)}
-            className="mt-3 text-xs text-gray-500 hover:text-gray-900"
+            className="mt-3 text-xs text-gray-500 hover:text-black"
           >
             메모 수정
           </button>

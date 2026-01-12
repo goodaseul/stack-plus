@@ -16,7 +16,7 @@ export default function Header() {
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
         <div className="mx-auto flex h-14 items-center justify-between px-6">
           {/* Logo */}
-          <h1 className="font- text-2xl text-gray-900">
+          <h1 className="font- text-2xl text-black">
             <Link href="/dashboard">
               STACK<sup className="text-xs ml-0.5">+</sup>
             </Link>

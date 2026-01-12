@@ -22,7 +22,7 @@ export default function FeaturePage() {
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-24 md:grid-cols-2">
         {/* Left */}
         <div className="md:sticky md:top-40 self-start">
-          <h2 className="text-4xl text-gray-900">
+          <h2 className="text-4xl text-black">
             Stack
             <br />
             Your Language
@@ -40,7 +40,7 @@ export default function FeaturePage() {
                 <span
                   className="text-5xl  text-gray-300
                     transition-all duration-300
-                    group-hover:text-gray-900
+                    group-hover:text-black
                   "
                 >
                   {feature.id}
@@ -50,7 +50,7 @@ export default function FeaturePage() {
               </div>
 
               {/* 텍스트 */}
-              <h3 className="mb-2 text-xl font-semibold text-gray-900">
+              <h3 className="mb-2 text-xl font-semibold text-black">
                 {feature.title}
               </h3>
 

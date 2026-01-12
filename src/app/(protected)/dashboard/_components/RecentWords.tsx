@@ -22,7 +22,7 @@ export function RecentWords({ mockWords }: { mockWords: WordType[] }) {
           type="button"
           variant="text"
           onClick={() => setIsOpenModal(true)}
-          className="text-sm text-gray-600 hover:text-gray-900"
+          className="text-sm text-gray-600 hover:text-black"
         >
           추가
           <CiCirclePlus className="ml-1 text-base" />

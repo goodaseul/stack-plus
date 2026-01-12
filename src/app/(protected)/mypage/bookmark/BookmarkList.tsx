@@ -21,7 +21,7 @@ export function BookmarkList() {
         >
           {/* 텍스트 */}
           <div className="min-w-0">
-            <p className="truncate text-sm font-medium text-gray-900">
+            <p className="truncate text-sm font-medium text-black">
               {item.word}
             </p>
             <p className="mt-0.5 text-xs text-gray-600">{item.meaning}</p>
