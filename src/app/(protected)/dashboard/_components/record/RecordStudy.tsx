@@ -1,5 +1,5 @@
 import { Title } from "../common/Title";
-import { RecordLineChart } from "./RecordLineChart";
+import { RecordChart } from "./RecordChart";
 
 export function RecordStudy() {
   return (
@@ -8,7 +8,7 @@ export function RecordStudy() {
         <Title>공부 기록</Title>
       </div>
 
-      <RecordLineChart />
+      <RecordChart />
     </section>
   );
 }

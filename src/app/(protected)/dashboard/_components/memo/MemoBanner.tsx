@@ -1,3 +1,4 @@
+import { TiArrowRight } from "react-icons/ti";
 import { Banner } from "../common/banner/Banner";
 import { BannerTitle } from "../common/banner/BannerTitle";
 import Button from "@/components/button/Button";
@@ -17,7 +18,7 @@ export function MemoBanner() {
           variant="text_underline"
           className="self-start text-sm text-gray-600 hover:text-black"
         >
-          메모 하러 가기 →
+          메모 하러 가기 <TiArrowRight />
         </Button>
       </Banner>
     </div>

@@ -1,6 +1,7 @@
 import Button from "@/components/button/Button";
 import { Banner } from "./common/banner/Banner";
 import { BannerTitle } from "./common/banner/BannerTitle";
+import { TiArrowRight } from "react-icons/ti";
 
 export function RecentMemos() {
   return (
@@ -12,10 +13,10 @@ export function RecentMemos() {
 
       <Button
         variant="text_underline"
-        href="/record?filter=noMemo"
+        href="/record?filter=hasMemo"
         className="self-start text-sm text-gray-600 hover:text-black"
       >
-        메모 전체 보기 →
+        메모 전체 보기 <TiArrowRight />
       </Button>
     </Banner>
   );
