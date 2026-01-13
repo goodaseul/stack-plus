@@ -3,6 +3,7 @@ import "./globals.css";
 import Footer from "@/components/layout/Footer";
 import QueryProvider from "@/providers/QueryProvider";
 import localFont from "next/font/local";
+import AuthProvider from "@/providers/AuthProvider";
 
 const pretendard = localFont({
   src: "../../public/fonts/pretendard/PretendardVariable.woff2",
@@ -39,8 +40,10 @@ export default function RootLayout({
         className={`${sekuya.variable} ${pretendard.variable}  antialiased`}
       >
         <QueryProvider>
-          {children}
-          <Footer />
+          <AuthProvider>
+            {children}
+            <Footer />
+          </AuthProvider>
         </QueryProvider>
       </body>
     </html>

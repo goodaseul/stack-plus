@@ -9,8 +9,10 @@ import { IoClose } from "react-icons/io5";
 import MenuLink from "./MenuLink";
 import { signOut } from "@/lib/auth";
 import { useRouter } from "next/navigation";
+import { useUserStore } from "@/store/useUserStore";
 
 export default function Header() {
+  const { id, nickname } = useUserStore();
   const router = useRouter();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,7 +41,7 @@ export default function Header() {
 
           <div className="flex items-center gap-3 text-gray-600">
             <Button variant="text_underline" href="/mypage">
-              다슬기
+              {id && `${nickname}`}
             </Button>
 
             <Button

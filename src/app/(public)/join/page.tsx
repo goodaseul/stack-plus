@@ -1,6 +1,6 @@
 "use client";
 import { signUp } from "@/lib/auth";
-import { useFormFields } from "@/hooks/useFormFields";
+import { useFormFields } from "@/hooks/auth/useFormFields";
 import {
   validateEmail,
   validatePassword,
