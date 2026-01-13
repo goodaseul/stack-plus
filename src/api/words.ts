@@ -5,7 +5,7 @@ import { FilterValue } from "@/constants/filter";
 export async function getWords({
   filter,
 }: {
-  filter: FilterValue;
+  filter?: FilterValue;
 }): Promise<WordsApi[]> {
   return fetcher("/api/words", {
     params: filter ? { filter } : undefined,

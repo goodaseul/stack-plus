@@ -7,13 +7,16 @@ import { Title } from "./common/Title";
 import { useState } from "react";
 import WordModal from "../../_components/modal/WordModal";
 import Modal from "../../_components/modal/Modal";
+import { useWordsQuery } from "@/hooks/queries/words";
 
-export function RecentWords({ mockWords }: { mockWords: WordType[] }) {
+export function RecentWords() {
   // Todo -  상태관리로 하면 좋을듯?
   const [isOpenModal, setIsOpenModal] = useState(false);
 
+  const { data } = useWordsQuery();
+  const words = data.slice(0, 6);
   return (
-    <section className="rounded-xl border border-gray-200 bg-white p-4">
+    <div>
       {/* 헤더 */}
       <div className="mb-3 flex items-center justify-between">
         <Title className="mb-0 text-base font-semibold">최근 등록한 단어</Title>
@@ -30,10 +33,7 @@ export function RecentWords({ mockWords }: { mockWords: WordType[] }) {
       </div>
 
       {/* 리스트 */}
-      <List
-        words={mockWords}
-        className="h-48 border border-gray-200 rounded-md"
-      />
+      <List words={words} />
 
       {/* 모달 */}
       {isOpenModal && (
@@ -44,6 +44,6 @@ export function RecentWords({ mockWords }: { mockWords: WordType[] }) {
           />
         </Modal>
       )}
-    </section>
+    </div>
   );
 }

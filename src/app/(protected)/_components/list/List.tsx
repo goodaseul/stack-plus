@@ -13,7 +13,7 @@ export function List({
 }) {
   return (
     <ul
-      className={`p-2
+      className={`
         grid grid-cols-1 sm:grid-cols-2
         gap-4
         ${className}`}
@@ -35,7 +35,7 @@ export function List({
                 />
               </Link>
             ) : (
-              <div className="">
+              <div>
                 <ListContent
                   expression={word.expression}
                   meaning={word.meaning}
