@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function PublicHeader() {
   return (
-    <header className="fixed top-0 left-0 z-20 w-full bg-transparent p-6">
+    <header className="sticky top-0 left-0 z-20 w-full bg-transparent p-6">
       <div className="mx-auto flex max-w-6xl items-center justify-between">
         <Link
           href="/"
@@ -16,10 +16,10 @@ export default function PublicHeader() {
         </Link>
 
         <nav className="flex items-center gap-4">
-          <Button type="button" variant="text" href="/login">
+          <Button type="button" variant="text_underline" href="/login">
             로그인
           </Button>
-          <Button type="button" variant="text" href="/join">
+          <Button type="button" variant="text_underline" href="/join">
             회원가입
           </Button>
         </nav>

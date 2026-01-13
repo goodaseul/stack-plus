@@ -16,7 +16,7 @@ export function RecordHeader() {
         모든 단어들
         <Button
           type="button"
-          variant="text"
+          variant="text_underline"
           className="ml-auto text-sm text-gray-700 hover:text-black"
           onClick={handleModal}
         >

@@ -11,7 +11,7 @@ export function RecentMemos() {
       />
 
       <Button
-        variant="text"
+        variant="text_underline"
         href="/record?filter=noMemo"
         className="self-start text-sm text-gray-600 hover:text-black"
       >

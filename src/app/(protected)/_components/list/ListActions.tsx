@@ -18,7 +18,7 @@ export default function ListActions({ memo, bookmarked }: ListActionsProps) {
       >
         {memo && <TfiWrite className="hidden md:block text-gray-500" />}
 
-        <Button type="button" variant="text" className="p-1">
+        <Button type="button" variant="text_underline" className="p-1">
           {bookmarked ? (
             <FaBookmark className="text-gray-700" />
           ) : (
@@ -26,7 +26,7 @@ export default function ListActions({ memo, bookmarked }: ListActionsProps) {
           )}
         </Button>
 
-        <Button type="button" variant="text" className="p-1">
+        <Button type="button" variant="text_underline" className="p-1">
           <BsThreeDots className="text-gray-500" />
         </Button>
       </div>

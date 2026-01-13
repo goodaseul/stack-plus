@@ -12,7 +12,7 @@ export function AllWordsBanner() {
 
       <Button
         href="/record"
-        variant="text"
+        variant="text_underline"
         className="self-start text-sm text-gray-600 hover:text-black"
       >
         보러가기 →

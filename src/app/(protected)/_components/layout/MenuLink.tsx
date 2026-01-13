@@ -14,7 +14,7 @@ export default function MenuLink({ isMenuOpen }: { isMenuOpen: boolean }) {
       className={`
         fixed top-16 right-0 z-40
         transition-transform duration-300 ease-out
-        ${isMenuOpen ? "translate-x-0" : "translate-x-full"}
+        ${isMenuOpen ? "translate-x-0" : "translate-x-100"}
       `}
     >
       <ul className="flex items-center gap-6 rounded-xl bg-white px-5 py-3 border border-gray-200 shadow-sm">
@@ -28,14 +28,10 @@ export default function MenuLink({ isMenuOpen }: { isMenuOpen: boolean }) {
                 className={`
                   relative text-lg
                   transition-colors
-                  ${isActive ? "text-black" : "text-gray-600 hover:text-black"}
+                  ${isActive ? "text-point" : "text-gray-600 hover:text-point"}
                 `}
               >
                 {link}
-
-                {isActive && (
-                  <sup className="absolute -right-3 -top-1 text-xs">+</sup>
-                )}
               </Link>
             </li>
           );

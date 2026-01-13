@@ -2,11 +2,11 @@
 
 import { useFormFields } from "@/hooks/useFormFields";
 import { validateEmail, validatePassword } from "@/utils/validator";
-import { signIn } from "@/api/auth";
 import Title from "../_components/title/Title";
 import Input from "../_components/input/Input";
 import Button from "@/components/button/Button";
 import { useRouter } from "next/navigation";
+import { signIn } from "@/lib/auth";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function LoginPage() {
     password: "",
   });
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const newErrors = {
@@ -46,7 +46,10 @@ export default function LoginPage() {
           desc="stack plus를 이용하기 위해서 로그인을 해주세요."
         />
 
-        <form className="mt-8 grid gap-5" onSubmit={onSubmit}>
+        <form
+          className="mt-8 grid gap-5 font-pretendard"
+          onSubmit={handleLogin}
+        >
           <Input
             value={form.email}
             onChange={(e) => updateField("email", e.target.value)}
@@ -70,7 +73,7 @@ export default function LoginPage() {
 
         <div className="mt-6 text-center text-sm text-gray-500">
           아직 계정이 없으신가요?
-          <Button variant="text" href="/join" className="ml-1">
+          <Button variant="text_underline" href="/join" className="ml-1">
             회원가입
           </Button>
         </div>

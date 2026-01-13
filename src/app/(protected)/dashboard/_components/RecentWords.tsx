@@ -20,7 +20,7 @@ export function RecentWords({ mockWords }: { mockWords: WordType[] }) {
 
         <Button
           type="button"
-          variant="text"
+          variant="text_underline"
           onClick={() => setIsOpenModal(true)}
           className="text-sm text-gray-600 hover:text-black"
         >

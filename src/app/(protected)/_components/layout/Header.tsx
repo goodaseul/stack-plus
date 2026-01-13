@@ -7,28 +7,47 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { IoClose } from "react-icons/io5";
 import MenuLink from "./MenuLink";
+import { signOut } from "@/lib/auth";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
+  const router = useRouter();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      router.push("/login");
+    } catch {
+      alert("로그아웃 실패 😵");
+    }
+  };
   return (
     <>
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
-        <div className="mx-auto flex h-14 items-center justify-between px-6">
-          {/* Logo */}
-          <h1 className="font- text-2xl text-black">
-            <Link href="/dashboard">
-              STACK<sup className="text-xs ml-0.5">+</sup>
-            </Link>
-          </h1>
+      <header className="sticky top-0 z-20 p-6 bg-white/80 backdrop-blur-md border-b border-gray-200">
+        <div className="mx-auto flex max-w-6xl items-center justify-between">
+          <Link
+            href="/dashboard"
+            className="text-xl text-black transition-colors hover:text-point group"
+          >
+            STACK
+            <span className="text-point transition-colors group-hover:text-black">
+              PLUS
+            </span>
+          </Link>
 
-          {/* User actions */}
           <div className="flex items-center gap-3 text-gray-600">
-            <Link href="/mypage" className="text-sm hover:underline">
+            <Button variant="text_underline" href="/mypage">
               다슬기
-            </Link>
+            </Button>
 
-            <Button type="button" variant="text" className="p-1">
+            <Button
+              type="button"
+              variant="text"
+              className="p-1"
+              onClick={handleLogout}
+            >
               <RiLogoutBoxRLine className="text-lg" />
             </Button>
 

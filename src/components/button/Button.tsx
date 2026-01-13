@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import Link from "next/link";
 
-type ButtonVariant = "default" | "outline" | "text";
+type ButtonVariant = "default" | "outline" | "text" | "text_underline";
 
 type BaseProps = {
   children: React.ReactNode;
@@ -21,7 +21,9 @@ const baseStyles =
 const variantStyles: Record<ButtonVariant, string> = {
   default: "bg-point px-4 py-3.5",
   outline: "border border-point bg-white px-4 py-3.5 hover:bg-point",
-  text: "p-1 hover:translate-y-0 relative after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full",
+  text_underline:
+    "p-1 hover:translate-y-0 relative after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full",
+  text: "p-1 hover:translate-y-0 relative",
 };
 export default function Button(props: ButtonProps) {
   const { children, variant = "default", className = "" } = props;
