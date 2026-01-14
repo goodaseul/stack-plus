@@ -39,7 +39,7 @@ export default function Header() {
             </span>
           </Link>
 
-          <div className="flex items-center gap-3 text-gray-600">
+          <div className="relative flex items-center gap-3 text-gray-600">
             <Button variant="text_underline" href="/mypage">
               {id && `${nickname}`}
             </Button>
@@ -65,11 +65,10 @@ export default function Header() {
                 <GiHamburgerMenu className="text-xl" />
               )}
             </Button>
+            <MenuLink isMenuOpen={isMenuOpen} />
           </div>
         </div>
       </header>
-
-      <MenuLink isMenuOpen={isMenuOpen} />
     </>
   );
 }

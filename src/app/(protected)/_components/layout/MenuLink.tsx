@@ -12,17 +12,18 @@ export default function MenuLink({ isMenuOpen }: { isMenuOpen: boolean }) {
   return (
     <nav
       className={`
-        fixed top-16 right-0 z-40
+        absolute top-10 right-0 z-40
+        opacity-0
         transition-transform duration-300 ease-out
-        ${isMenuOpen ? "-translate-x-6" : "translate-x-100"}
+        ${isMenuOpen ? "opacity-100" : "opactiy-0"}
       `}
     >
-      <ul className="flex items-center gap-6 rounded-xl bg-white px-5 py-3 border border-gray-200 shadow-sm">
+      <ul className="rounded-xl bg-white px-5 py-3 border border-gray-200 shadow-sm">
         {menuLinks.map(({ url, link }) => {
           const isActive = pathname === url;
 
           return (
-            <li key={link}>
+            <li key={link} className="py-2">
               <Link
                 href={url}
                 className={`
