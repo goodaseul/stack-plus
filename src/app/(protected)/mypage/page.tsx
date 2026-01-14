@@ -15,7 +15,10 @@ export default function Mypage() {
   const searchParams = useSearchParams();
   const tab = searchParams.get("tab") ?? "memo";
   return (
-    <div className="w-full px-5 py-6 md:px-10 md:py-8">
+    <div
+      className="
+        w-full lg:py-10 mx-auto max-w-6xl p-6"
+    >
       {/* 헤더 영역 */}
       <section className="mb-6">
         <Title>마이 페이지</Title>

@@ -3,6 +3,8 @@ import { usePathname } from "next/navigation";
 
 const menuLinks = [
   { url: "/dashboard", link: "Home" },
+  { url: "/mypage", link: "MyPage" },
+
   { url: "/record", link: "Record" },
 ];
 
@@ -13,9 +15,13 @@ export default function MenuLink({ isMenuOpen }: { isMenuOpen: boolean }) {
     <nav
       className={`
         absolute top-10 right-0 z-40
-        opacity-0
+        opacity-0 pointer-events-none:
         transition-transform duration-300 ease-out
-        ${isMenuOpen ? "opacity-100" : "opactiy-0"}
+        ${
+          isMenuOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opactiy-0 pointer-events-none"
+        }
       `}
     >
       <ul className="rounded-xl bg-white px-5 py-3 border border-gray-200 shadow-sm">
