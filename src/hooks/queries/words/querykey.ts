@@ -1,6 +1,6 @@
 export const wordsQueryKeys = {
   all: ["words"] as const,
-  list: () => [...wordsQueryKeys.all] as const,
+  list: (filter: string) => ["words", filter] as const,
 };
 
 export default wordsQueryKeys;

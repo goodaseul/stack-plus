@@ -2,6 +2,7 @@ import ErrorState from "@/components/error-state/ErrorState";
 import clsx from "clsx";
 
 type InputProps = {
+  id?: string;
   children?: React.ReactNode;
   value: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -13,6 +14,7 @@ type InputProps = {
 };
 
 export default function Input({
+  id,
   children,
   type = "text",
   placeholder,
@@ -26,6 +28,7 @@ export default function Input({
     <div className="w-full">
       <div className="relative">
         <input
+          id={id}
           type={type}
           value={value}
           placeholder={placeholder}

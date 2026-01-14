@@ -1,5 +1,6 @@
 export interface WordsApi {
   id: number;
+  user_id: string;
   meaning: string;
   expression: string;
   sentence?: string;

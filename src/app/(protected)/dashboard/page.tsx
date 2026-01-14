@@ -11,18 +11,15 @@ export default function DashboardPage() {
         w-full lg:py-10 mx-auto max-w-6xl p-6"
     >
       <section className="mb-14 sm:mb-12 lg:mb-16 grid grid-cols-1 xl:grid-cols-[65%_30%] gap-5 xl:gap-[5%]">
-        {/* Section 1 : 최근 단어  */}
         <RecentWords />
 
-        {/* Section 2 : 메모 관련 배너 */}
-        <div className="flex flex-col justify-around gap-5 xl:gap-0">
+        <div className="flex flex-col justify-between gap-4">
           <AllWordsBanner />
           <MemoBanner />
           <RecentMemos />
         </div>
       </section>
 
-      {/* Section 3 : 공부 기록 */}
       <section>
         <RecordStudy />
       </section>

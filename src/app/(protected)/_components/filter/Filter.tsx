@@ -14,7 +14,7 @@ export function Filter({ filterMenus, activeFilter, onClick }: FilterProps) {
         <Button
           key={key}
           onClick={() => onClick(key)}
-          className={activeFilter === key ? "active" : ""}
+          variant={activeFilter === key ? "default" : "outline"}
         >
           {filterMenus[key]}
         </Button>

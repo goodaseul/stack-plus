@@ -5,8 +5,7 @@ import wordsQueryKeys from "./querykey";
 
 export function useWordsQuery(filter?: FilterValue) {
   return useQuery({
-    queryKey: [wordsQueryKeys, filter ?? "ALL"],
-    queryFn: () => getWords({ filter }),
-    initialData: [],
+    queryKey: wordsQueryKeys.list(filter ?? "ALL"),
+    queryFn: () => getWords({ filter, range: { from: 0, to: 10000 } }),
   });
 }

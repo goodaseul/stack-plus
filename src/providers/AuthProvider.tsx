@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { getMyProfile } from "@/lib/profile";
 import { useUserStore } from "@/store/useUserStore";
-import { supabase } from "@/lib/supabase/supabase";
+import { getMyProfile, getSession, subscribeAuthChange } from "@/lib/supabase";
 
 export default function AuthProvider({
   children,
@@ -13,11 +12,7 @@ export default function AuthProvider({
   const { setUser, clearUser, setInitialized } = useUserStore();
 
   useEffect(() => {
-    supabase.auth.getSession().then(async ({ data, error }) => {
-      console.log(error);
-
-      const session = data.session;
-
+    getSession().then(async (session) => {
       if (!session) {
         setInitialized();
         return;
@@ -35,13 +30,7 @@ export default function AuthProvider({
       }
     });
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === "INITIAL_SESSION") {
-        return;
-      }
-
+    const { data } = subscribeAuthChange(async (session) => {
       if (!session) {
         clearUser();
         return;
@@ -60,7 +49,7 @@ export default function AuthProvider({
     });
 
     return () => {
-      subscription.unsubscribe();
+      data.subscription.unsubscribe();
     };
   }, [setUser, clearUser, setInitialized]);
 

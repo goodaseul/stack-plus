@@ -3,10 +3,10 @@
 import { useFormFields } from "@/hooks/auth/useFormFields";
 import { validateEmail, validatePassword } from "@/utils/validator";
 import Title from "../_components/title/Title";
-import Input from "../_components/input/Input";
+import Input from "../../../components/input/Input";
 import Button from "@/components/button/Button";
 import { useRouter } from "next/navigation";
-import { signIn } from "@/lib/auth";
+import { signIn } from "@/lib/supabase";
 
 export default function LoginPage() {
   const router = useRouter();

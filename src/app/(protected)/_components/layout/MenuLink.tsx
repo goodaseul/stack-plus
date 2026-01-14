@@ -14,7 +14,7 @@ export default function MenuLink({ isMenuOpen }: { isMenuOpen: boolean }) {
       className={`
         fixed top-16 right-0 z-40
         transition-transform duration-300 ease-out
-        ${isMenuOpen ? "translate-x-0" : "translate-x-100"}
+        ${isMenuOpen ? "-translate-x-6" : "translate-x-100"}
       `}
     >
       <ul className="flex items-center gap-6 rounded-xl bg-white px-5 py-3 border border-gray-200 shadow-sm">

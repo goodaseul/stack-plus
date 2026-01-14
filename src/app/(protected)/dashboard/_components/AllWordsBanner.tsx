@@ -1,7 +1,6 @@
 import { BannerTitle } from "./common/banner/BannerTitle";
 import Button from "@/components/button/Button";
 import { Banner } from "./common/banner/Banner";
-import { TiArrowRight } from "react-icons/ti";
 
 export function AllWordsBanner() {
   return (
@@ -11,12 +10,8 @@ export function AllWordsBanner() {
         description="등록한 단어를 한 번에 모아보기"
       />
 
-      <Button
-        href="/record"
-        variant="text_underline"
-        className="self-start text-sm text-gray-600 hover:text-black"
-      >
-        보러가기 <TiArrowRight />
+      <Button href="/record" className="self-end">
+        보러 가기
       </Button>
     </Banner>
   );

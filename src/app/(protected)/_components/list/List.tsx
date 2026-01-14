@@ -3,12 +3,13 @@
 import Link from "next/link";
 import ListActions from "./ListActions";
 import ListContent from "./ListContent";
+import { Word } from "@/types/word";
 
 export function List({
   words,
   className,
 }: {
-  words: WordType[];
+  words: Word[];
   className?: string;
 }) {
   return (
@@ -25,7 +26,7 @@ export function List({
             className="
             border border-gray-200 rounded-lg 
             group 
-            gap-3 p-5 hover:bg-gray-50 transition-colors"
+            gap-3 px-5 py-7 hover:bg-gray-50 transition-colors"
           >
             {word.memo ? (
               <Link href={`/mypage?tab=memo&wordId=${word.id}`} className="">
@@ -43,7 +44,11 @@ export function List({
               </div>
             )}
 
-            <ListActions memo={word.memo} bookmarked={word.bookmarked} />
+            <ListActions
+              memo={word.memo}
+              bookmarked={word.bookmarked}
+              wordId={word.id}
+            />
           </li>
         );
       })}

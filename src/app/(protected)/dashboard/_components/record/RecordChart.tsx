@@ -9,7 +9,7 @@ import { RecordChartToggle } from "./RecordLineChart/RecordChartToggle";
 import { RecordChartView } from "./RecordLineChart/RecordChartView";
 
 export function RecordChart() {
-  const { data } = useWordsQuery();
+  const { data = [] } = useWordsQuery();
   const { dailyData, monthlyData, yearlyData } = useRecordChartData(data);
   const [period, setPeriod] = useState<"daily" | "monthly" | "yearly">("daily");
 
@@ -22,7 +22,6 @@ export function RecordChart() {
 
   return (
     <Banner>
-      {/* 제목 */}
       <BannerTitle
         title={
           period === "daily"
@@ -34,10 +33,8 @@ export function RecordChart() {
         description="지금까지의 기록을 확인해보세요"
       />
 
-      {/* 토글 */}
       <RecordChartToggle period={period} onChange={setPeriod} />
 
-      {/* 차트 */}
       <RecordChartView data={chartData} />
     </Banner>
   );

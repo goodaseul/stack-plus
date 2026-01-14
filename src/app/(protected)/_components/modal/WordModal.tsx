@@ -1,52 +1,44 @@
 "use client";
 
+import Input from "@/components/input/Input";
 import Button from "@/components/button/Button";
-import ErrorState from "@/components/error-state/ErrorState";
-import { useState } from "react";
+import { useFormFields } from "@/hooks/auth/useFormFields";
+import { WordCreateInput } from "@/types/word";
 import { FiChevronDown } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
+import { ModalField } from "./ModalField";
 
 type WordFormProps = {
-  onAdd: (item: PopupAddType) => void;
+  onAdd: (item: WordCreateInput) => void;
   onClose: () => void;
 };
 
 export default function WordModal({ onAdd, onClose }: WordFormProps) {
-  const [expression, setExpression] = useState("");
-  const [meaning, setMeaning] = useState("");
-  const [sentence, setSentence] = useState("");
-  const [usage, setUsage] = useState("일상생활");
-  const [memo, setMemo] = useState("");
-
-  const [errors, setErrors] = useState({
-    expression: false,
-    meaning: false,
+  const { form, errors, setErrors, updateField } = useFormFields({
+    expression: "",
+    meaning: "",
+    sentence: "",
+    usage: "일상생활",
+    memo: "",
   });
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const newErrors = {
-      expression: !expression.trim(),
-      meaning: !meaning.trim(),
+      ...errors,
+      expression: form.expression.trim() ? "" : "단어를 입력해주세요",
+      meaning: form.meaning.trim() ? "" : "뜻을 입력해주세요",
     };
 
     setErrors(newErrors);
-    if (newErrors.expression || newErrors.meaning) return;
 
-    onAdd({
-      id: Date.now(),
-      expression,
-      meaning,
-      sentence,
-      usage,
-      memo,
-    });
+    if (Object.values(newErrors).some(Boolean)) return;
 
+    onAdd({ ...form });
     onClose();
   };
 
-  const LabelStyles = "text-sm font-medium text-gray-700";
   const InputStyles =
     "w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition";
   const SelectStyles =
@@ -55,7 +47,6 @@ export default function WordModal({ onAdd, onClose }: WordFormProps) {
   return (
     <form onSubmit={onSubmit}>
       <div className="relative mx-auto max-w-[640px] rounded-2xl bg-white p-8 space-y-8">
-        {/* X 버튼 */}
         <button
           type="button"
           onClick={onClose}
@@ -65,7 +56,6 @@ export default function WordModal({ onAdd, onClose }: WordFormProps) {
           <IoClose className="text-xl" />
         </button>
 
-        {/* 헤더 */}
         <div>
           <h2 className="text-xl font-semibold text-black">단어 추가</h2>
           <p className="mt-1 text-sm text-gray-600">
@@ -73,79 +63,41 @@ export default function WordModal({ onAdd, onClose }: WordFormProps) {
           </p>
         </div>
 
-        {/* 단어 */}
-        <div className="space-y-1">
-          <label htmlFor="word" className={LabelStyles}>
-            단어 *
-          </label>
-          <input
-            id="word"
-            type="text"
-            value={expression}
-            onChange={(e) => {
-              setExpression(e.target.value);
-              if (errors.expression && e.target.value.trim()) {
-                setErrors((prev) => ({ ...prev, expression: false }));
-              }
-            }}
+        <ModalField label="단어*">
+          <Input
+            value={form.expression}
+            onChange={(e) => updateField("expression", e.target.value)}
             placeholder="book"
-            className={InputStyles}
+            errors={errors.expression}
           />
-          {errors.expression && <ErrorState>단어를 입력해주세요</ErrorState>}
-        </div>
-
-        {/* 뜻 */}
-        <div className="space-y-1">
-          <label htmlFor="meaning" className={LabelStyles}>
-            뜻 *
-          </label>
-          <input
-            id="meaning"
-            type="text"
-            value={meaning}
-            onChange={(e) => {
-              setMeaning(e.target.value);
-              if (errors.meaning && e.target.value.trim()) {
-                setErrors((prev) => ({ ...prev, meaning: false }));
-              }
-            }}
+        </ModalField>
+        <ModalField label="뜻*">
+          <Input
+            value={form.meaning}
+            onChange={(e) => updateField("meaning", e.target.value)}
             placeholder="책"
-            className={InputStyles}
+            errors={errors.meaning}
           />
-          {errors.meaning && <ErrorState>뜻을 입력해주세요</ErrorState>}
-        </div>
-
-        {/* 작문 */}
-        <div className="space-y-1">
-          <label htmlFor="sentence" className={LabelStyles}>
-            예문
-          </label>
-          <input
-            id="sentence"
-            type="text"
-            value={sentence}
-            onChange={(e) => setSentence(e.target.value)}
+        </ModalField>
+        <ModalField label="예문">
+          <Input
+            value={form.sentence}
+            onChange={(e) => updateField("sentence", e.target.value)}
             placeholder="I bought a book yesterday."
-            className={InputStyles}
           />
-        </div>
-
-        {/* 사용 위치 */}
-        <div className="space-y-1 relative ">
-          <label htmlFor="usage" className={LabelStyles}>
-            사용 장소
-          </label>
-          <div className="flex items-center">
+        </ModalField>
+        <ModalField label="사용 장소">
+          <div className="flex items-center relative">
             <select
-              id="usage"
-              value={usage}
-              onChange={(e) => setUsage(e.target.value)}
+              value={form.usage}
+              onChange={(e) => updateField("usage", e.target.value)}
               className={SelectStyles}
             >
               <option value="일상생활">일상생활</option>
               <option value="회사">회사</option>
               <option value="학교">학교</option>
             </select>
+
             <FiChevronDown
               className="
                 pointer-events-none
@@ -155,23 +107,15 @@ export default function WordModal({ onAdd, onClose }: WordFormProps) {
               size={18}
             />
           </div>
-        </div>
-
-        {/* 메모 */}
-        <div className="space-y-1">
-          <label htmlFor="memo" className={LabelStyles}>
-            메모
-          </label>
+        </ModalField>
+        <ModalField label="메모">
           <textarea
-            id="memo"
-            value={memo}
-            onChange={(e) => setMemo(e.target.value)}
+            value={form.memo}
+            onChange={(e) => updateField("memo", e.target.value)}
             placeholder="헷갈렸던 포인트 정리"
             className={`${InputStyles} min-h-[90px] resize-none`}
           />
-        </div>
-
-        {/* 버튼 */}
+        </ModalField>
         <div className="flex justify-end gap-2 pt-4">
           <Button type="button" variant="outline" onClick={onClose}>
             취소

@@ -1,4 +1,3 @@
-import { TiArrowRight } from "react-icons/ti";
 import { Banner } from "../common/banner/Banner";
 import { BannerTitle } from "../common/banner/BannerTitle";
 import Button from "@/components/button/Button";
@@ -6,7 +5,6 @@ import Button from "@/components/button/Button";
 export function MemoBanner() {
   return (
     <div className="relative">
-      {/* 카드 */}
       <Banner className="relative">
         <BannerTitle
           title="오늘 메모 안 한 단어가 있어요"
@@ -14,11 +12,11 @@ export function MemoBanner() {
         />
 
         <Button
+          variant="outline"
           href="/record?filter=noMemo"
-          variant="text_underline"
-          className="self-start text-sm text-gray-600 hover:text-black"
+          className="self-end"
         >
-          메모 하러 가기 <TiArrowRight />
+          메모 하기
         </Button>
       </Banner>
     </div>

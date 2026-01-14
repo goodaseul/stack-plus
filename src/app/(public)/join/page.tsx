@@ -1,5 +1,4 @@
 "use client";
-import { signUp } from "@/lib/auth";
 import { useFormFields } from "@/hooks/auth/useFormFields";
 import {
   validateEmail,
@@ -7,11 +6,12 @@ import {
   validateConfirmPassword,
 } from "@/utils/validator";
 import Title from "../_components/title/Title";
-import Input from "../_components/input/Input";
+import Input from "../../../components/input/Input";
 import Button from "@/components/button/Button";
 import { useRouter } from "next/navigation";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
+import { signUp } from "@/lib/supabase";
 
 export default function JoinPage() {
   const [passwordShow, setPasswordShow] = useState({

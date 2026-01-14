@@ -8,7 +8,6 @@ type ModalProps = {
 };
 
 export default function Modal({ children, onClose }: ModalProps) {
-  // ESC 키로 닫기
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -33,7 +32,6 @@ export default function Modal({ children, onClose }: ModalProps) {
       <div
         className="
           w-full max-w-2xl
-          max-h-[90vh]
           overflow-y-auto
         "
         onClick={(e) => e.stopPropagation()}

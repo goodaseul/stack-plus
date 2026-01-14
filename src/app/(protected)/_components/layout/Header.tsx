@@ -7,9 +7,9 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { IoClose } from "react-icons/io5";
 import MenuLink from "./MenuLink";
-import { signOut } from "@/lib/auth";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/store/useUserStore";
+import { signOut } from "@/lib/supabase";
 
 export default function Header() {
   const { id, nickname } = useUserStore();
