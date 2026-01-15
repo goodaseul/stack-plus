@@ -1,6 +1,6 @@
 "use client";
 
-import ListActions from "./ListActions";
+import ListActions from "./list-actions/ListActions";
 import ListContent from "./ListContent";
 import { Word } from "@/types/word";
 
