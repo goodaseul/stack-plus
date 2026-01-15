@@ -40,7 +40,7 @@ export default function MenuLink({
         }
       `}
     >
-      <ul className="rounded-xl bg-white px-5 py-3 border border-gray-200 shadow-sm font-sekuya">
+      <ul className="rounded-xl bg-white px-5 py-3 border border-gray-200 shadow-sm font-bold">
         {menuLinks.map(({ url, link }) => {
           const isActive = pathname === url;
 
