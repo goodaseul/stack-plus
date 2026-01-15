@@ -25,7 +25,7 @@ export function List({
             className="
             border border-gray-200 rounded-lg 
             group relative
-            gap-3 px-5 py-7 pb-13 hover:bg-gray-50 transition-colors"
+            gap-3 px-5 py-7 pb-13"
           >
             <div>
               <ListContent
@@ -37,11 +37,7 @@ export function List({
               />
             </div>
 
-            <ListActions
-              memo={word.memo}
-              bookmarked={word.bookmarked}
-              wordId={word.id}
-            />
+            <ListActions {...word} />
           </li>
         );
       })}

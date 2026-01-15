@@ -7,7 +7,7 @@ export default function PublicHeader() {
       <div className="mx-auto flex max-w-6xl items-center justify-between">
         <Link
           href="/"
-          className="text-xl text-black transition-colors hover:text-point group"
+          className="font-sekuya text-xl text-black transition-colors hover:text-point group"
         >
           STACK
           <span className="text-point transition-colors group-hover:text-black">

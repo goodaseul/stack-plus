@@ -3,39 +3,46 @@
 import Input from "@/components/input/Input";
 import Button from "@/components/button/Button";
 import { useFormFields } from "@/hooks/auth/useFormFields";
-import { WordCreateInput } from "@/types/word";
+import { WordCreateInput, WordUpdateInput } from "@/types/word";
 import { FiChevronDown } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import { ModalField } from "./ModalField";
 
 type WordFormProps = {
-  onAdd: (item: WordCreateInput) => void;
+  initialValues: WordCreateInput | WordUpdateInput;
+  onSubmit: (item: WordCreateInput | WordUpdateInput) => void;
+  title: string;
+  description?: string;
   onClose: () => void;
 };
 
-export default function WordModal({ onAdd, onClose }: WordFormProps) {
-  const { form, errors, setErrors, updateField } = useFormFields({
-    expression: "",
-    meaning: "",
-    sentence: "",
-    usage: "일상생활",
-    memo: "",
-  });
+export default function WordModal({
+  initialValues,
+  onSubmit,
+  title,
+  description,
+  onClose,
+}: WordFormProps) {
+  const { form, errors, setErrors, updateField } = useFormFields<
+    WordCreateInput | WordUpdateInput
+  >(initialValues);
 
-  const onSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const newErrors = {
       ...errors,
-      expression: form.expression.trim() ? "" : "단어를 입력해주세요",
-      meaning: form.meaning.trim() ? "" : "뜻을 입력해주세요",
+      expression: form.expression?.trim() ? "" : "단어를 입력해주세요",
+      meaning: form.meaning?.trim() ? "" : "뜻을 입력해주세요",
     };
 
     setErrors(newErrors);
 
     if (Object.values(newErrors).some(Boolean)) return;
 
-    onAdd({ ...form });
+    console.log("form data:", form);
+
+    onSubmit(form);
     onClose();
   };
 
@@ -45,7 +52,7 @@ export default function WordModal({ onAdd, onClose }: WordFormProps) {
     "w-full appearance-none rounded-md border border-gray-300 px-3 py-2 pr-10 text-sm text-black bg-white focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition";
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="relative mx-auto max-w-[640px] rounded-2xl bg-white p-8 space-y-8">
         <button
           type="button"
@@ -57,15 +64,15 @@ export default function WordModal({ onAdd, onClose }: WordFormProps) {
         </button>
 
         <div>
-          <h2 className="text-xl font-semibold text-black">단어 추가</h2>
-          <p className="mt-1 text-sm text-gray-600">
-            단어와 의미만 입력해도 충분해요
-          </p>
+          <h2 className="text-xl font-semibold text-black">{title}</h2>
+          {description && (
+            <p className="mt-1 text-sm text-gray-600">{description} </p>
+          )}
         </div>
 
         <ModalField label="단어*">
           <Input
-            value={form.expression}
+            value={form.expression || ""}
             onChange={(e) => updateField("expression", e.target.value)}
             placeholder="book"
             errors={errors.expression}
@@ -73,7 +80,7 @@ export default function WordModal({ onAdd, onClose }: WordFormProps) {
         </ModalField>
         <ModalField label="뜻*">
           <Input
-            value={form.meaning}
+            value={form.meaning || ""}
             onChange={(e) => updateField("meaning", e.target.value)}
             placeholder="책"
             errors={errors.meaning}
@@ -81,7 +88,7 @@ export default function WordModal({ onAdd, onClose }: WordFormProps) {
         </ModalField>
         <ModalField label="예문">
           <Input
-            value={form.sentence}
+            value={form.sentence || ""}
             onChange={(e) => updateField("sentence", e.target.value)}
             placeholder="I bought a book yesterday."
           />

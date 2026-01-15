@@ -1,7 +1,7 @@
 import { supabase } from "@/lib/supabase/supabase";
 import { FilterValue } from "@/constants/filter";
 import { WordsApi } from "./types/words";
-import { WordCreateInput } from "@/types/word";
+import { WordCreateInput, WordUpdateInput } from "@/types/word";
 
 export async function getWords({
   filter,
@@ -66,6 +66,32 @@ export async function uploadWords(word: WordCreateInput) {
       user_id: user.id,
       bookmarked: word.bookmarked ?? false,
     })
+    .select();
+
+  if (error) {
+    throw error;
+  }
+}
+
+export async function modifyWords(word: WordUpdateInput) {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    throw new Error("Unauthorized");
+  }
+
+  const { id, ...updateData } = word;
+
+  const { error } = await supabase
+    .from("words")
+    .update({
+      ...updateData,
+      bookmarked: word.bookmarked ?? false,
+    })
+    .eq("id", id)
+    .eq("user_id", user.id)
     .select();
 
   if (error) {

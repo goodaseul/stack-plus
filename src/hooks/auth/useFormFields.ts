@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-export function useFormFields<T extends Record<string, string>>(
+type FormFieldValue = string | number | boolean | string[] | number[] | null;
+
+export function useFormFields<T extends Record<string, FormFieldValue>>(
   initialValues: T
 ) {
   const [form, setForm] = useState<T>(initialValues);

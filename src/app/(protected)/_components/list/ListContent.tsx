@@ -20,7 +20,7 @@ export default function ListContent({
   return (
     <>
       <div className="gap-1 md:gap-6 w-full">
-        <p className="text-xl font-bold mb-2 text-black truncate">
+        <p className="text-xl font-bold mb-2 text-black">
           {expression}
           <span> : {meaning}</span>
         </p>

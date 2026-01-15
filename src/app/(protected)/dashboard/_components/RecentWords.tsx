@@ -17,7 +17,7 @@ export function RecentWords() {
   const { data = [] } = useWordsQuery();
   const uploadWords = useUploadWordMutation();
   const isMobile = useMobileSize();
-  const words = data.slice(0, isMobile ? 3 : 6);
+  const words = data.slice(0, isMobile ? 2 : 4);
 
   const handleSubmit = async (form: WordCreateInput) => {
     await uploadWords.mutateAsync(form);
@@ -44,7 +44,22 @@ export function RecentWords() {
 
       {isOpenModal && (
         <Modal onClose={onClose}>
-          <WordModal onAdd={handleSubmit} onClose={onClose} />
+          <WordModal
+            title="단어 추가"
+            description="단어와 의미만 입력해도 충분해요"
+            initialValues={{
+              expression: "",
+              meaning: "",
+              sentence: "",
+              usage: "일상생활",
+              memo: "",
+            }}
+            onSubmit={(data) => {
+              handleSubmit(data as WordCreateInput);
+              onClose();
+            }}
+            onClose={onClose}
+          />
         </Modal>
       )}
     </div>

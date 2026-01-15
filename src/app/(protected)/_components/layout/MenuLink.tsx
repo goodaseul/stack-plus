@@ -1,18 +1,34 @@
+import { useClickOutside } from "@/hooks/useClickOutside";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRef } from "react";
 
 const menuLinks = [
   { url: "/dashboard", link: "Home" },
   { url: "/mypage", link: "MyPage" },
-
   { url: "/record", link: "Record" },
 ];
 
-export default function MenuLink({ isMenuOpen }: { isMenuOpen: boolean }) {
+export default function MenuLink({
+  isMenuOpen,
+  setIsMenuOpen,
+}: {
+  isMenuOpen: boolean;
+  setIsMenuOpen: (boolean: boolean) => void;
+}) {
   const pathname = usePathname();
+  const navRef = useRef<HTMLElement | null>(null);
 
+  useClickOutside(
+    navRef,
+    () => {
+      setIsMenuOpen(false);
+    },
+    isMenuOpen
+  );
   return (
     <nav
+      ref={navRef}
       className={`
         absolute top-10 right-0 z-40
         opacity-0 pointer-events-none:
@@ -32,6 +48,7 @@ export default function MenuLink({ isMenuOpen }: { isMenuOpen: boolean }) {
             <li key={link} className="py-2">
               <Link
                 href={url}
+                onClick={() => setIsMenuOpen(false)}
                 className={`
                   relative text-lg
                   transition-colors

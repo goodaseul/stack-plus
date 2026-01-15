@@ -65,7 +65,7 @@ export default function Header() {
                 <GiHamburgerMenu className="text-xl" />
               )}
             </Button>
-            <MenuLink isMenuOpen={isMenuOpen} />
+            <MenuLink isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
           </div>
         </div>
       </header>
