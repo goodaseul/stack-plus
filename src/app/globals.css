@@ -7,6 +7,7 @@
   --color-text-700: #364153;
 
   --font-pretendard: var(--font-pretendard);
+  --font-sekuya: var(--font-sekuya);
 }
 
 *,
@@ -27,7 +28,7 @@ html {
 }
 
 body {
-  font-family: var(--font-sekuya), var(--font-pretendard), sans-serif;
+  font-family: var(--font-pretendard), sans-serif;
   line-height: 1.5;
   color: var(--color-text-black);
 }

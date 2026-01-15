@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import ListActions from "./ListActions";
 import ListContent from "./ListContent";
 import { Word } from "@/types/word";
@@ -25,24 +24,18 @@ export function List({
             key={word.id}
             className="
             border border-gray-200 rounded-lg 
-            group 
-            gap-3 px-5 py-7 hover:bg-gray-50 transition-colors"
+            group relative
+            gap-3 px-5 py-7 pb-13 hover:bg-gray-50 transition-colors"
           >
-            {word.memo ? (
-              <Link href={`/mypage?tab=memo&wordId=${word.id}`} className="">
-                <ListContent
-                  expression={word.expression}
-                  meaning={word.meaning}
-                />
-              </Link>
-            ) : (
-              <div>
-                <ListContent
-                  expression={word.expression}
-                  meaning={word.meaning}
-                />
-              </div>
-            )}
+            <div>
+              <ListContent
+                expression={word.expression}
+                meaning={word.meaning}
+                usage={word.usage}
+                memo={word.memo ?? ""}
+                sentence={word.sentence ?? ""}
+              />
+            </div>
 
             <ListActions
               memo={word.memo}

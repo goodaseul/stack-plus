@@ -24,7 +24,7 @@ export default function MenuLink({ isMenuOpen }: { isMenuOpen: boolean }) {
         }
       `}
     >
-      <ul className="rounded-xl bg-white px-5 py-3 border border-gray-200 shadow-sm">
+      <ul className="rounded-xl bg-white px-5 py-3 border border-gray-200 shadow-sm font-sekuya">
         {menuLinks.map(({ url, link }) => {
           const isActive = pathname === url;
 

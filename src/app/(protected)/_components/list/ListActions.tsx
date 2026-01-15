@@ -23,7 +23,7 @@ export default function ListActions({
       <div
         className="flex items-center gap-1
       opacity-60 group-hover:opacity-100 transition-opacity
-      justify-end
+      justify-end absolute right-5 bottom-7
       "
       >
         {memo && (

@@ -31,7 +31,7 @@ export default function Header() {
         <div className="mx-auto flex max-w-6xl items-center justify-between">
           <Link
             href="/dashboard"
-            className="text-xl text-black transition-colors hover:text-point group"
+            className="text-xl font-sekuya text-black transition-colors hover:text-point group "
           >
             STACK
             <span className="text-point transition-colors group-hover:text-black">
