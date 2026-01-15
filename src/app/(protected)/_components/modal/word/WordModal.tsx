@@ -2,7 +2,7 @@
 
 import { useFormFields } from "@/hooks/auth/useFormFields";
 import { WordCreateInput, WordUpdateInput } from "@/types/word";
-import ModalTop from "./ModalTop";
+import ModalContainer from "./ModalContainer";
 import ModalBody from "./ModalBody";
 
 type WordFormProps = {
@@ -10,7 +10,7 @@ type WordFormProps = {
   onSubmit: (item: WordCreateInput | WordUpdateInput) => void;
   title: string;
   description: string;
-  onClose: () => void;
+  closeModal: () => void;
 };
 
 export default function WordModal({
@@ -18,7 +18,7 @@ export default function WordModal({
   onSubmit,
   title,
   description,
-  onClose,
+  closeModal,
 }: WordFormProps) {
   const { form, errors, setErrors, updateField } = useFormFields<
     WordCreateInput | WordUpdateInput
@@ -38,17 +38,17 @@ export default function WordModal({
     if (Object.values(newErrors).some(Boolean)) return;
 
     onSubmit(form);
-    onClose();
+    closeModal();
   };
 
   return (
-    <ModalTop
+    <ModalContainer
       handleSubmit={handleSubmit}
-      onClose={onClose}
+      closeModal={closeModal}
       title={title}
       description={description}
     >
       <ModalBody updateField={updateField} form={form} errors={errors} />
-    </ModalTop>
+    </ModalContainer>
   );
 }

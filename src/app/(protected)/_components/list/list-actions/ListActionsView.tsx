@@ -1,44 +1,55 @@
 import Button from "@/components/button/Button";
 import { useModifyWordMutation } from "@/hooks/queries/words/useModifyWordMutation";
-import { useToggleBookmarkMutate } from "@/hooks/queries/words/useToggleBookmarkMutate";
 import { Word, WordUpdateInput } from "@/types/word";
-import { RefObject } from "react";
+import { RefObject, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { TfiWrite } from "react-icons/tfi";
-import EditWordModal from "./EditWordModal";
+import { useDeleteWordMutation } from "@/hooks/queries/words/useDeleteWordMutation";
+import Modal from "../../modal/Modal";
+import WordModal from "../../modal/word/WordModal";
+import { useToggleBookmarkMutation } from "@/hooks/queries/words/useToggleBookmarkMutation";
+import ConfirmModal from "../../modal/confirm/ConfirmModal";
+import { toast } from "sonner";
 
 type ListActionsViewProps = {
   word: Word;
   isDropdownOpen: boolean;
   toggleDropdown: () => void;
-  onOpen: () => void;
-  onClose: () => void;
   dropdownWrapperRef: RefObject<HTMLDivElement | null>;
-  isOpenModal: boolean;
+  openModal: "edit" | "delete" | null;
+  openEditModal: () => void;
+  openDeleteModal: () => void;
+  closeModal: () => void;
 };
-
 export default function ListActionsView({
   word,
   isDropdownOpen,
   toggleDropdown,
-  onOpen,
-  onClose,
   dropdownWrapperRef,
-  isOpenModal,
+  openModal,
+  openEditModal,
+  openDeleteModal,
+  closeModal,
 }: ListActionsViewProps) {
-  const { mutate: toggleBookmark } = useToggleBookmarkMutate();
-  const modifyWords = useModifyWordMutation();
-
+  const { mutate: toggleBookmark } = useToggleBookmarkMutation();
+  const modifyWord = useModifyWordMutation();
+  const { mutate: deleteWord } = useDeleteWordMutation();
   const handleModify = async (form: WordUpdateInput) => {
-    await modifyWords.mutateAsync(form);
-    onClose();
+    await modifyWord.mutateAsync(form);
+    toast.success("수정이 완료되었습니다.");
+    closeModal();
   };
+
   const buttonStyles = `
     flex items-center justify-center w-6 h-6 p-0
   `;
   return (
-    <>
+    <div
+      className="flex items-center gap-1
+      justify-end absolute right-5 bottom-7
+      "
+    >
       {word.memo && (
         <Button
           type="button"
@@ -49,7 +60,6 @@ export default function ListActionsView({
           <TfiWrite className=" text-gray-500" />
         </Button>
       )}
-
       <Button
         type="button"
         variant="text"
@@ -82,12 +92,12 @@ export default function ListActionsView({
          bg-white px-5 py-3 border border-gray-200 shadow-sm"
           >
             <li>
-              <Button onClick={onOpen} variant="text">
+              <Button onClick={openEditModal} variant="text">
                 수정하기
               </Button>
             </li>
             <li>
-              <Button href="/" variant="text">
+              <Button onClick={openDeleteModal} variant="text">
                 삭제하기
               </Button>
             </li>
@@ -95,13 +105,38 @@ export default function ListActionsView({
         )}
       </div>
 
-      {isOpenModal && (
-        <EditWordModal
-          word={word}
-          onClose={onClose}
-          handleModify={handleModify}
-        />
+      {openModal === "edit" && (
+        <Modal closeModal={closeModal}>
+          <WordModal
+            title="단어 수정"
+            description="필요한 부분만 고쳐도 돼요"
+            initialValues={{
+              id: word.id,
+              expression: word.expression,
+              meaning: word.meaning,
+              sentence: word.sentence ?? "",
+              usage: word.usage,
+              memo: word.memo ?? "",
+            }}
+            onSubmit={(data) => {
+              handleModify(data as WordUpdateInput);
+              closeModal();
+            }}
+            closeModal={closeModal}
+          />
+        </Modal>
       )}
-    </>
+
+      {openModal === "delete" && (
+        <Modal closeModal={closeModal}>
+          <ConfirmModal
+            closeModal={closeModal}
+            deleteWord={() => deleteWord(word.id)}
+            title="정말로 삭제하시겠어요?"
+            description="삭제한 후에는 복구가 되지 않아요."
+          />
+        </Modal>
+      )}
+    </div>
   );
 }

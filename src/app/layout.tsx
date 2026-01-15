@@ -4,6 +4,7 @@ import Footer from "@/components/layout/Footer";
 import QueryProvider from "@/providers/QueryProvider";
 import localFont from "next/font/local";
 import AuthProvider from "@/providers/AuthProvider";
+import { Toaster } from "sonner";
 
 const pretendard = localFont({
   src: "../../public/fonts/pretendard/PretendardVariable.woff2",
@@ -41,6 +42,7 @@ export default function RootLayout({
       >
         <QueryProvider>
           <AuthProvider>
+            <Toaster richColors position="top-center" />
             {children}
             <Footer />
           </AuthProvider>

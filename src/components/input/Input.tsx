@@ -3,6 +3,7 @@ import clsx from "clsx";
 
 type InputProps = {
   id?: string;
+  name: string;
   children?: React.ReactNode;
   value: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -15,6 +16,7 @@ type InputProps = {
 
 export default function Input({
   id,
+  name,
   children,
   type = "text",
   placeholder,
@@ -29,6 +31,7 @@ export default function Input({
       <div className="relative">
         <input
           id={id}
+          name={name}
           type={type}
           value={value}
           placeholder={placeholder}

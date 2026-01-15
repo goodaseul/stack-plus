@@ -1,7 +1,7 @@
 import Input from "@/components/input/Input";
-import { ModalField } from "./ModalField";
 import { WordCreateInput, WordUpdateInput } from "@/types/word";
 import { FiChevronDown } from "react-icons/fi";
+import { ModalField } from "./ModalField";
 
 type ModalBodyProps = {
   updateField: (
@@ -36,6 +36,7 @@ export default function ModalBody({
     <>
       <ModalField label="단어*">
         <Input
+          name={form.expression || ""}
           value={form.expression || ""}
           onChange={(e) => updateField("expression", e.target.value)}
           placeholder="book"
@@ -44,6 +45,7 @@ export default function ModalBody({
       </ModalField>
       <ModalField label="뜻*">
         <Input
+          name={form.meaning || ""}
           value={form.meaning || ""}
           onChange={(e) => updateField("meaning", e.target.value)}
           placeholder="책"
@@ -52,6 +54,7 @@ export default function ModalBody({
       </ModalField>
       <ModalField label="예문">
         <Input
+          name={form.sentence || ""}
           value={form.sentence || ""}
           onChange={(e) => updateField("sentence", e.target.value)}
           placeholder="I bought a book yesterday."
@@ -60,6 +63,7 @@ export default function ModalBody({
       <ModalField label="사용 장소">
         <div className="flex items-center relative">
           <select
+            name="usage"
             value={form.usage}
             onChange={(e) => updateField("usage", e.target.value)}
             className={SelectStyles}
@@ -81,6 +85,7 @@ export default function ModalBody({
       </ModalField>
       <ModalField label="메모">
         <textarea
+          name="memo"
           value={form.memo}
           onChange={(e) => updateField("memo", e.target.value)}
           placeholder="헷갈렸던 포인트 정리"

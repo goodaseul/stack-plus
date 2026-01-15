@@ -99,6 +99,13 @@ export async function modifyWords(word: WordUpdateInput) {
   }
 }
 
+export async function deleteWords(wordId: number) {
+  const { error } = await supabase.from("words").delete().eq("id", wordId);
+  if (error) {
+    throw error;
+  }
+}
+
 export async function toggleBookmark(wordId: number, bookmarked: boolean) {
   const { error } = await supabase
     .from("words")

@@ -4,7 +4,7 @@ import { toggleBookmark } from "@/api/words";
 import { FilterValue } from "@/constants/filter";
 import { WordsApi } from "@/api/types/words";
 
-export function useToggleBookmarkMutate(filter?: FilterValue) {
+export function useToggleBookmarkMutation(filter?: FilterValue) {
   const queryClient = useQueryClient();
   const queryKey = wordsQueryKeys.list(filter ?? "ALL");
 

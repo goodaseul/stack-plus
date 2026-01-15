@@ -3,11 +3,12 @@ import { useRef, useState } from "react";
 import { Word } from "@/types/word";
 
 import ListActionsView from "./ListActionsView";
+import { ModalType } from "@/types/modal";
 
 export default function ListActions({ ...word }: Word) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownWrapperRef = useRef<HTMLDivElement | null>(null);
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState<ModalType>(null);
 
   useClickOutside(
     dropdownWrapperRef,
@@ -17,15 +18,20 @@ export default function ListActions({ ...word }: Word) {
     isDropdownOpen
   );
 
+  const openEditModal = () => setOpenModal("edit");
+  const openDeleteModal = () => setOpenModal("delete");
+  const closeModal = () => setOpenModal(null);
+
   return (
     <ListActionsView
       word={word}
       isDropdownOpen={isDropdownOpen}
       toggleDropdown={() => setIsDropdownOpen((prev) => !prev)}
-      onOpen={() => setIsOpenModal(true)}
-      onClose={() => setIsOpenModal(false)}
+      openEditModal={openEditModal}
+      openDeleteModal={openDeleteModal}
+      closeModal={closeModal}
       dropdownWrapperRef={dropdownWrapperRef}
-      isOpenModal={isOpenModal}
+      openModal={openModal}
     />
   );
 }

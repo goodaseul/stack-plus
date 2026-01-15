@@ -10,6 +10,7 @@ export default function ProtectedLayout({
     <ProtectedProvider>
       <Header />
       {children}
+      <div id="modal-root"></div>
     </ProtectedProvider>
   );
 }

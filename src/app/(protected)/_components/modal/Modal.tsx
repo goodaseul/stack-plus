@@ -1,33 +1,39 @@
 "use client";
 
-import { useEffect } from "react";
+import { createPortal } from "react-dom";
+import { ReactNode, useEffect } from "react";
 
 type ModalProps = {
-  children: React.ReactNode;
-  onClose: () => void;
+  children: ReactNode;
+  closeModal: () => void;
 };
 
-export default function Modal({ children, onClose }: ModalProps) {
+export default function Modal({ children, closeModal }: ModalProps) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        onClose();
+        closeModal();
       }
     };
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [onClose]);
+  }, [closeModal]);
 
-  return (
+  if (typeof window === "undefined") return null;
+
+  const modalRoot = document.getElementById("modal-root");
+  if (!modalRoot) return null;
+
+  return createPortal(
     <div
       className="
-        fixed inset-0 z-50
+        fixed inset-0 z-9999
         flex items-center justify-center
         bg-black/40
         px-4
       "
-      onClick={onClose}
+      onClick={closeModal}
     >
       <div
         className="
@@ -38,6 +44,7 @@ export default function Modal({ children, onClose }: ModalProps) {
       >
         {children}
       </div>
-    </div>
+    </div>,
+    modalRoot
   );
 }
