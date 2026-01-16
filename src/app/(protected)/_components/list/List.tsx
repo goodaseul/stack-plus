@@ -4,7 +4,7 @@ import ListActions from "./list-actions/ListActions";
 import ListContent from "./ListContent";
 import { Word } from "@/types/word";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export function List({
   words,
@@ -14,6 +14,8 @@ export function List({
   className?: string;
 }) {
   const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const isRecordPage = pathname === "/record";
   const createWordLink = (wordId: string, expression: string) => {
     const params = new URLSearchParams(searchParams);
     params.set("wordId", wordId);
@@ -28,6 +30,15 @@ export function List({
         ${className}`}
     >
       {words.map((word) => {
+        const content = (
+          <ListContent
+            expression={word.expression}
+            meaning={word.meaning}
+            usage={word.usage}
+            memo={word.memo ?? ""}
+            sentence={word.sentence ?? ""}
+          />
+        );
         return (
           <li
             key={word.id}
@@ -36,17 +47,13 @@ export function List({
             group relative
             gap-3 px-5 py-7 pb-13"
           >
-            <Link href={createWordLink(`${word.id}`, word.expression)}>
-              <div>
-                <ListContent
-                  expression={word.expression}
-                  meaning={word.meaning}
-                  usage={word.usage}
-                  memo={word.memo ?? ""}
-                  sentence={word.sentence ?? ""}
-                />
-              </div>
-            </Link>
+            {isRecordPage ? (
+              <div>{content}</div>
+            ) : (
+              <Link href={createWordLink(`${word.id}`, word.expression)}>
+                {content}
+              </Link>
+            )}
             <ListActions {...word} />
           </li>
         );
