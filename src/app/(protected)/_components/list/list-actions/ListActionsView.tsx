@@ -1,7 +1,7 @@
 import Button from "@/components/button/Button";
 import { useModifyWordMutation } from "@/hooks/queries/words/useModifyWordMutation";
 import { Word, WordUpdateInput } from "@/types/word";
-import { RefObject, useState } from "react";
+import { RefObject } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { TfiWrite } from "react-icons/tfi";
@@ -54,8 +54,8 @@ export default function ListActionsView({
         <Button
           type="button"
           variant="text"
-          className={`${buttonStyles}`}
-          href="/mypage?filter=hasMemo"
+          className={`${buttonStyles} pointer-events-none`}
+          disabled
         >
           <TfiWrite className=" text-gray-500" />
         </Button>
@@ -104,7 +104,6 @@ export default function ListActionsView({
           </ul>
         )}
       </div>
-
       {openModal === "edit" && (
         <Modal closeModal={closeModal}>
           <WordModal
@@ -126,7 +125,6 @@ export default function ListActionsView({
           />
         </Modal>
       )}
-
       {openModal === "delete" && (
         <Modal closeModal={closeModal}>
           <ConfirmModal

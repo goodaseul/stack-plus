@@ -13,21 +13,53 @@ import {
 import { RecordHeader } from "./RecordHeader";
 import { Filter } from "../../_components/filter/Filter";
 import EmptyState from "@/components/empty-state/EmptyState";
+import SearchInput from "./SearchInput";
+import { Pagination } from "./Pagination";
+
+const ITEMS_PER_PAGE = 20;
 
 export function Record() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
 
+  const wordId = searchParams.get("wordId");
+  const keyword = searchParams.get("keyword") ?? "";
+  const currentPage = Number(searchParams.get("page")) || 1;
+
   const { key: activeFilterKey, value: currentFilter } = parseFilter(
     searchParams.get("filter")
   );
 
-  const { data: words = [] } = useWordsQuery(currentFilter);
+  const { data } = useWordsQuery({
+    filter: currentFilter,
+    keyword,
+    wordId,
+    page: currentPage,
+    pageSize: ITEMS_PER_PAGE,
+  });
+
+  const words = data?.words ?? [];
+  const totalCount = data?.totalCount ?? 0;
 
   const handleFilterClick = (filterKey: FilterKey) => {
     const value = getFilterValue(filterKey);
-    router.push(value === null ? pathname : `${pathname}?filter=${value}`);
+    const params = new URLSearchParams(searchParams);
+
+    if (value === null) params.delete("filter");
+    else params.set("filter", value);
+
+    params.delete("page");
+
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", page.toString());
+    router.push(`${pathname}?${params.toString()}`);
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const emptyMessage =
@@ -37,7 +69,8 @@ export function Record() {
     <>
       <RecordHeader />
       <div className="mt-6 space-y-3">
-        <FilterCount filterKey={activeFilterKey} total={words.length} />
+        <SearchInput keyword={keyword} />
+        <FilterCount filterKey={activeFilterKey} total={totalCount} />
 
         <Filter
           filterMenus={FILTER_LABELS}
@@ -45,10 +78,19 @@ export function Record() {
           onClick={handleFilterClick}
         />
       </div>
+
       {words.length === 0 ? (
         <EmptyState>{emptyMessage}</EmptyState>
       ) : (
-        <List words={words} />
+        <>
+          <List words={words} />
+          <Pagination
+            currentPage={currentPage}
+            totalItems={totalCount}
+            itemsPerPage={ITEMS_PER_PAGE}
+            onPageChange={handlePageChange}
+          />
+        </>
       )}
     </>
   );

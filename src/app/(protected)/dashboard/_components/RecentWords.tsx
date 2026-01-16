@@ -7,9 +7,10 @@ import { useMobileSize } from "@/hooks/useMobileSize";
 import AddWordButton from "../../_components/add-word-button/AddWordButton";
 
 export function RecentWords() {
-  const { data = [] } = useWordsQuery();
+  const { data } = useWordsQuery();
   const isMobile = useMobileSize();
-  const words = data.slice(0, isMobile ? 2 : 4);
+
+  const words = data?.words.slice(0, isMobile ? 2 : 4) ?? [];
 
   return (
     <div>

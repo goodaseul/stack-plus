@@ -2,11 +2,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import wordsQueryKeys from "./querykey";
 import { toggleBookmark } from "@/api/words";
 import { FilterValue } from "@/constants/filter";
-import { WordsApi } from "@/api/types/words";
+import { WordsResponse } from "@/api/types/words";
 
 export function useToggleBookmarkMutation(filter?: FilterValue) {
   const queryClient = useQueryClient();
-  const queryKey = wordsQueryKeys.list(filter ?? "ALL");
 
   return useMutation({
     mutationFn: ({
@@ -18,26 +17,44 @@ export function useToggleBookmarkMutation(filter?: FilterValue) {
     }) => toggleBookmark(wordId, bookmarked),
 
     onMutate: async ({ wordId }) => {
-      await queryClient.cancelQueries({ queryKey });
+      // 모든 words 쿼리 취소
+      await queryClient.cancelQueries({ queryKey: wordsQueryKeys.all });
 
-      const previous = queryClient.getQueryData<WordsApi[]>(queryKey);
+      // 모든 쿼리의 이전 상태 저장
+      const previousQueries = queryClient.getQueriesData<WordsResponse>({
+        queryKey: wordsQueryKeys.all,
+      });
 
-      queryClient.setQueryData<WordsApi[]>(queryKey, (old) =>
-        old?.map((word) =>
-          word.id === wordId ? { ...word, bookmarked: !word.bookmarked } : word
-        )
+      // 모든 words 쿼리에 낙관적 업데이트 적용
+      queryClient.setQueriesData<WordsResponse>(
+        { queryKey: wordsQueryKeys.all },
+        (old) => {
+          if (!old) return old;
+
+          return {
+            ...old,
+            words: old.words.map((word) =>
+              word.id === wordId
+                ? { ...word, bookmarked: !word.bookmarked }
+                : word
+            ),
+          };
+        }
       );
 
-      return { previous };
+      return { previousQueries };
     },
 
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: wordsQueryKeys.all });
+      // 낙관적 업데이트로 충분
     },
 
     onError: (_err, _vars, ctx) => {
-      if (ctx?.previous) {
-        queryClient.setQueryData(queryKey, ctx.previous);
+      // 에러 시 롤백
+      if (ctx?.previousQueries) {
+        ctx.previousQueries.forEach(([queryKey, data]) => {
+          queryClient.setQueryData(queryKey, data);
+        });
       }
     },
   });

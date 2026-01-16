@@ -10,3 +10,8 @@ export interface WordsApi {
   created_at: string;
   updated_at: string;
 }
+
+export type WordsResponse = {
+  words: WordsApi[];
+  totalCount: number;
+};

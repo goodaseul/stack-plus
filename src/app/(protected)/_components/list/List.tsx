@@ -3,6 +3,8 @@
 import ListActions from "./list-actions/ListActions";
 import ListContent from "./ListContent";
 import { Word } from "@/types/word";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 export function List({
   words,
@@ -11,6 +13,13 @@ export function List({
   words: Word[];
   className?: string;
 }) {
+  const searchParams = useSearchParams();
+  const createWordLink = (wordId: string, expression: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("wordId", wordId);
+    params.set("keyword", expression);
+    return `/record?${params.toString()}`;
+  };
   return (
     <ul
       className={`
@@ -27,16 +36,17 @@ export function List({
             group relative
             gap-3 px-5 py-7 pb-13"
           >
-            <div>
-              <ListContent
-                expression={word.expression}
-                meaning={word.meaning}
-                usage={word.usage}
-                memo={word.memo ?? ""}
-                sentence={word.sentence ?? ""}
-              />
-            </div>
-
+            <Link href={createWordLink(`${word.id}`, word.expression)}>
+              <div>
+                <ListContent
+                  expression={word.expression}
+                  meaning={word.meaning}
+                  usage={word.usage}
+                  memo={word.memo ?? ""}
+                  sentence={word.sentence ?? ""}
+                />
+              </div>
+            </Link>
             <ListActions {...word} />
           </li>
         );

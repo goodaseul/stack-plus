@@ -5,11 +5,19 @@ import { WordCreateInput, WordUpdateInput } from "@/types/word";
 
 export async function getWords({
   filter,
+  keyword,
+  wordId,
   range,
+  page = 1,
+  pageSize = 20,
 }: {
   filter?: FilterValue;
+  keyword?: string;
+  wordId?: string | null;
   range?: { from: number; to: number };
-}): Promise<WordsApi[]> {
+  page?: number;
+  pageSize?: number;
+}): Promise<{ words: WordsApi[]; totalCount: number }> {
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -20,9 +28,9 @@ export async function getWords({
 
   let query = supabase
     .from("words")
-    .select("*")
+    .select("*", { count: "exact" })
     .eq("user_id", user.id)
-    .order("created_at", { ascending: false });
+    .order("id", { ascending: false });
 
   const filterMap: Record<
     Exclude<FilterValue, null>,
@@ -33,15 +41,49 @@ export async function getWords({
     bookmarked: (queryBuilder) => queryBuilder.eq("bookmarked", true),
   };
 
-  if (filter && filter in filterMap) {
-    query = filterMap[filter](query);
+  if (wordId) {
+    query = query.eq("id", wordId);
+  } else {
+    if (keyword) {
+      query = query.ilike("expression", `%${keyword}%`);
+    }
+
+    if (filter && filter in filterMap) {
+      query = filterMap[filter](query);
+    }
   }
 
-  if (range) {
-    query = query.range(range.from, range.to);
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
+
+  query = query.range(from, to);
+
+  const { data, error, count } = await query;
+
+  if (error) {
+    throw error;
   }
 
-  const { data, error } = await query;
+  return {
+    words: data ?? [],
+    totalCount: count ?? 0,
+  };
+}
+
+export async function getAllWords(): Promise<WordsApi[]> {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    throw new Error("Unauthorized");
+  }
+
+  const { data, error } = await supabase
+    .from("words")
+    .select("*")
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: false });
 
   if (error) {
     throw error;

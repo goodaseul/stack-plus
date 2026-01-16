@@ -1,16 +1,18 @@
+// RecordChart.tsx
 "use client";
 
 import { useState } from "react";
 import { Banner } from "../common/banner/Banner";
 import { BannerTitle } from "../common/banner/BannerTitle";
-import { useWordsQuery } from "@/hooks/queries/words";
 import { useRecordChartData } from "./RecordLineChart/useRecordChartData";
 import { RecordChartToggle } from "./RecordLineChart/RecordChartToggle";
 import { RecordChartView } from "./RecordLineChart/RecordChartView";
+import { useAllWordsQuery } from "@/hooks/queries/words/useAllWordsQuert";
 
 export function RecordChart() {
-  const { data = [] } = useWordsQuery();
-  const { dailyData, monthlyData, yearlyData } = useRecordChartData(data);
+  const { data: words } = useAllWordsQuery();
+
+  const { dailyData, monthlyData, yearlyData } = useRecordChartData(words);
   const [period, setPeriod] = useState<"daily" | "monthly" | "yearly">("daily");
 
   const chartData =
