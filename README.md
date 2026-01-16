@@ -1,43 +1,96 @@
-# STACK PLUS
+# StackPlus
 
-STACK PLUS는 영어 학습 과정에서 정리한 단어와 표현을  
-개인 계정 기반으로 관리하고 한눈에 확인할 수 있도록 만든 서브 프로젝트입니다.
+영어 단어 학습 및 관리 애플리케이션
 
----
+## 주요 기능
 
-## 🛠 Tech Stack
+### 📚 단어 관리
 
-- **Next.js 14 (App Router)**
+- **단어 추가/수정/삭제**: 단어, 의미, 예문, 용도, 메모 등을 관리
+- **중복 체크**: 대소문자 및 공백 정규화를 통한 중복 단어 방지
+- **북마크**: 중요한 단어를 북마크하여 빠르게 접근
+
+### 🔍 검색 및 필터링
+
+- **실시간 검색**: 디바운싱이 적용된 검색 기능
+- **필터링**: 전체/북마크/메모있음/메모없음으로 분류
+- **페이지네이션**: 효율적인 대량 데이터 처리 (20개씩)
+
+### 📊 학습 기록
+
+- **일일/월간/연간 차트**: 학습 진행 상황을 시각적으로 확인
+- **대시보드**: 최근 학습한 단어 및 통계 확인
+
+## 기술 스택
+
+### Frontend
+
+- **Next.js 14** (App Router)
 - **TypeScript**
 - **Tailwind CSS**
-- **Supabase (PostgreSQL, Auth, Row Level Security)**
-- **TanStack Query (React Query)**
+- **React Query (TanStack Query)** - 서버 상태 관리
+- **Zustand** -
 
----
+### Backend & Database
 
-### ⚡ 서버 상태 관리 (React Query)
+- **Supabase** - PostgreSQL 기반 백엔드
+- **Supabase Auth** - 사용자 인증
 
-- 서버 데이터를 전역 상태와 분리하여 관리
-- 캐싱을 통해 불필요한 네트워크 요청 최소화
-- 자동 리페칭으로 데이터 최신 상태 유지
+### 라이브러리
 
----
+- **Recharts** - 차트 시각화
+- **Sonner** - Toast 알림
 
-### 🔍 Filter (Query String 기반 상태 관리)
+## 핵심 구현 사항
 
-필터 상태를 URL 쿼리 스트링으로 관리하여:
+### 1. 효율적인 상태 관리
 
-- 새로고침 시에도 필터 유지
-- URL 공유 시 동일한 상태 재현 가능
-- 브라우저 뒤로가기/앞으로가기 자연스럽게 동작
+#### ⚡ 서버 상태 관리 (React Query)
 
-UX 일관성을 확보했습니다.
+#### 낙관적 업데이트 (Optimistic Update)
 
----
+- 북마크 토글 시 즉각적인 UI 반응
+- 에러 발생 시 자동 롤백
 
-### 🎓 What I Learned
+### 2. 검색 최적화
 
-- Supabase를 활용한 BaaS 기반 서비스 설계 경험
-- PostgreSQL Row Level Security를 이용한 데이터 접근 제어
-- React Query를 활용한 서버 상태 캐싱 전략
-- URL 상태 관리 패턴을 통한 UX 개선
+#### 디바운싱 (Debouncing)
+
+타이핑 중 불필요한 API 요청 방지 (300ms 지연)
+
+### 3. 서버 사이드 페이지네이션
+
+대량의 데이터를 효율적으로 처리
+
+### 4. 중복 단어 방지
+
+- 대소문자 무시 (`ilike`)
+- 중복 발견 시 기존 단어로 이동
+
+## 시작하기
+
+### 설치
+
+```bash
+npm install
+```
+
+### 환경 변수 설정
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### 개발 서버 실행
+
+```bash
+npm run dev
+```
+
+### 배운 점
+
+1. **React Query의 강력함**: 낙관적 업데이트, 캐싱, 자동 리페칭
+2. **디바운싱의 중요성**: 검색 기능에서 불필요한 API 요청 방지
+3. **타입 안전성**: TypeScript로 런타임 에러 사전 방지
+4. **서버 사이드 페이지네이션**: 대량 데이터 처리 시 필수
