@@ -2,6 +2,7 @@ import { supabase } from "@/lib/supabase/supabase";
 import { FilterValue } from "@/constants/filter";
 import { WordsApi } from "./types/words";
 import { WordCreateInput, WordUpdateInput } from "@/types/word";
+import { DuplicateWordError } from "./types/errors";
 
 export async function getWords({
   filter,
@@ -99,6 +100,20 @@ export async function uploadWords(word: WordCreateInput) {
 
   if (!user) {
     throw new Error("Unauthorized");
+  }
+  const { data: existingWord } = await supabase
+    .from("words")
+    .select("id, expression")
+    .eq("user_id", user.id)
+    .ilike("expression", word.expression)
+    .maybeSingle();
+
+  if (existingWord) {
+    throw {
+      code: "DUPLICATE_WORD",
+      wordId: existingWord.id,
+      expression: existingWord.expression,
+    } as DuplicateWordError;
   }
 
   const { error } = await supabase
