@@ -5,7 +5,6 @@ import { useRef } from "react";
 
 const menuLinks = [
   { url: "/dashboard", link: "Home" },
-  { url: "/mypage", link: "MyPage" },
   { url: "/record", link: "Record" },
 ];
 

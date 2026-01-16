@@ -75,6 +75,7 @@ export default function JoinPage() {
 
         <form className="mt-8 grid gap-5 font-pretendard" onSubmit={handleJoin}>
           <Input
+            name="email"
             value={form.email}
             onChange={(e) => updateField("email", e.target.value)}
             type="email"
@@ -83,6 +84,7 @@ export default function JoinPage() {
           />
 
           <Input
+            name="nickname"
             value={form.nickname}
             onChange={(e) => updateField("nickname", e.target.value)}
             type="text"
@@ -91,6 +93,7 @@ export default function JoinPage() {
           />
 
           <Input
+            name="password"
             value={form.password}
             onChange={(e) => updateField("password", e.target.value)}
             type={passwordShow.password ? "text" : "password"}
@@ -108,6 +111,7 @@ export default function JoinPage() {
           </Input>
 
           <Input
+            name="confirmPassword"
             value={form.confirmPassword}
             onChange={(e) => updateField("confirmPassword", e.target.value)}
             type={passwordShow.confirmPassword ? "text" : "password"}

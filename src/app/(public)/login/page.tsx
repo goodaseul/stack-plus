@@ -51,6 +51,7 @@ export default function LoginPage() {
           onSubmit={handleLogin}
         >
           <Input
+            name="email"
             value={form.email}
             onChange={(e) => updateField("email", e.target.value)}
             type="email"
@@ -59,6 +60,7 @@ export default function LoginPage() {
           />
 
           <Input
+            name="password"
             value={form.password}
             onChange={(e) => updateField("password", e.target.value)}
             type="password"
