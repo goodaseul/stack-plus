@@ -11,8 +11,8 @@ export default function SectionWrapper({
   children,
 }: SectionWrapperProps) {
   return (
-    <section className={`mx-auto min-h-screen w-full text-center ${bg}`}>
-      <div className="m-auto max-w-6xl min-h-screen flex flex-col justify-center px-4 py-10 md:py-0">
+    <section className={`mx-auto min-h-screen w-full text-center py-20 ${bg}`}>
+      <div className="m-auto max-w-6xl min-h-screen flex flex-col justify-center px-4">
         <h2 className="break-keep text-3xl font-bold tracking-tight md:text-4xl mb-5">
           {title}
         </h2>

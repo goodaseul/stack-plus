@@ -1,5 +1,5 @@
 "use client";
-import { useFormFields } from "@/hooks/auth/useFormFields";
+import { useFormFields } from "@/hooks/form/useFormFields";
 import {
   validateEmail,
   validatePassword,
@@ -37,7 +37,7 @@ export default function JoinPage() {
       password: validatePassword(form.password),
       confirmPassword: validateConfirmPassword(
         form.password,
-        form.confirmPassword
+        form.confirmPassword,
       ),
     };
 

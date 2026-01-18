@@ -1,6 +1,6 @@
 "use client";
 
-import { useFormFields } from "@/hooks/auth/useFormFields";
+import { useFormFields } from "@/hooks/form/useFormFields";
 import { validateEmail, validatePassword } from "@/utils/validator";
 import Title from "../_components/title/Title";
 import Input from "../../../components/input/Input";

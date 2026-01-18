@@ -1,9 +1,15 @@
+"use client";
 import Button from "@/components/button/Button";
+import { useAuthStatus } from "@/hooks/auth/useAuthStatus";
 import Link from "next/link";
 
 export default function PublicHeader() {
+  const { isReady, isLoggedIn } = useAuthStatus();
+
+  if (!isReady) return null;
+
   return (
-    <header className="fixed top-0 left-0 z-20 w-full p-6">
+    <header className="fixed top-0 left-0 z-20 w-full p-6 backdrop-blur-lg">
       <div className="mx-auto flex max-w-6xl items-center justify-between">
         <Link
           href="/"
@@ -15,14 +21,22 @@ export default function PublicHeader() {
           </span>
         </Link>
 
-        <nav className="flex items-center gap-4">
-          <Button type="button" variant="text_underline" href="/login">
-            로그인
-          </Button>
-          <Button type="button" variant="text_underline" href="/join">
-            회원가입
-          </Button>
-        </nav>
+        {isLoggedIn ? (
+          <nav className="flex items-center gap-4">
+            <Button type="button" variant="text_underline" href="/dashboard">
+              대시보드
+            </Button>
+          </nav>
+        ) : (
+          <nav className="flex items-center gap-4">
+            <Button type="button" variant="text_underline" href="/login">
+              로그인
+            </Button>
+            <Button type="button" variant="text_underline" href="/join">
+              회원가입
+            </Button>
+          </nav>
+        )}
       </div>
     </header>
   );

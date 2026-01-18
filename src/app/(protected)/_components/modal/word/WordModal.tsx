@@ -1,6 +1,6 @@
 "use client";
 
-import { useFormFields } from "@/hooks/auth/useFormFields";
+import { useFormFields } from "@/hooks/form/useFormFields";
 import { WordCreateInput, WordUpdateInput } from "@/types/word";
 import ModalContainer from "./ModalContainer";
 import ModalBody from "./ModalBody";
