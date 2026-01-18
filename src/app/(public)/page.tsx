@@ -1,6 +1,5 @@
-// import LandingPage from "./landing-page/LadingPage";
-import LoginPage from "./login/page";
+import LandingPage from "./landing-page/LadingPage";
 
 export default function PublicHome() {
-  return <LoginPage />;
+  return <LandingPage />;
 }
