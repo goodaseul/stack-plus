@@ -139,12 +139,15 @@ export async function modifyWords(word: WordUpdateInput) {
     throw new Error("Unauthorized");
   }
 
-  const { id, ...updateData } = word;
+  const { id, memo, ...updateData } = word;
+
+  const normalizedMemo = memo !== undefined && memo.trim() === "" ? null : memo;
 
   const { error } = await supabase
     .from("words")
     .update({
       ...updateData,
+      memo: normalizedMemo,
       bookmarked: word.bookmarked ?? false,
     })
     .eq("id", id)
