@@ -28,7 +28,7 @@ export function Record() {
   const currentPage = Number(searchParams.get("page")) || 1;
 
   const { key: activeFilterKey, value: currentFilter } = parseFilter(
-    searchParams.get("filter")
+    searchParams.get("filter"),
   );
 
   const { data } = useWordsQuery({

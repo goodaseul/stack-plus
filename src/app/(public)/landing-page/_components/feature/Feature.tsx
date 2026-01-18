@@ -47,6 +47,7 @@ export function FeaturePage() {
     <SectionWrapper
       title="영어 학습을 위한 모든 기능"
       desc="Stack Plus가 제공하는 강력한 기능들을 만나보세요"
+      padding="py-20 md:py-0"
     >
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 text-left mt-10">
         {features.map((feature) => (

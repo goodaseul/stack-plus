@@ -23,7 +23,7 @@ export default function MenuLink({
     () => {
       setIsMenuOpen(false);
     },
-    isMenuOpen
+    isMenuOpen,
   );
   return (
     <nav
@@ -35,7 +35,7 @@ export default function MenuLink({
         ${
           isMenuOpen
             ? "opacity-100 pointer-events-auto"
-            : "opactiy-0 pointer-events-none"
+            : "opacity-0 pointer-events-none"
         }
       `}
     >

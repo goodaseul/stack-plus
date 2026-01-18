@@ -7,7 +7,7 @@ import { BannerTitle } from "../common/banner/BannerTitle";
 import { useRecordChartData } from "./RecordLineChart/useRecordChartData";
 import { RecordChartToggle } from "./RecordLineChart/RecordChartToggle";
 import { RecordChartView } from "./RecordLineChart/RecordChartView";
-import { useAllWordsQuery } from "@/hooks/queries/words/useAllWordsQuert";
+import { useAllWordsQuery } from "@/hooks/queries/words/useAllWordsQuery";
 
 export function RecordChart() {
   const { data: words } = useAllWordsQuery();
@@ -19,8 +19,8 @@ export function RecordChart() {
     period === "daily"
       ? dailyData
       : period === "monthly"
-      ? monthlyData
-      : yearlyData;
+        ? monthlyData
+        : yearlyData;
 
   return (
     <Banner>
@@ -29,8 +29,8 @@ export function RecordChart() {
           period === "daily"
             ? "일일 기록"
             : period === "monthly"
-            ? "월간 기록"
-            : "연간 기록"
+              ? "월간 기록"
+              : "연간 기록"
         }
         description="지금까지의 기록을 확인해보세요"
       />
