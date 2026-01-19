@@ -7,6 +7,7 @@ import Input from "../../../components/input/Input";
 import Button from "@/components/button/Button";
 import { useRouter } from "next/navigation";
 import { signIn } from "@/lib/supabase";
+import { toast } from "sonner";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -29,6 +30,7 @@ export default function LoginPage() {
 
     try {
       await signIn(form.email, form.password);
+      toast.success("로그인이 되었습니다.");
       router.push("/dashboard");
     } catch {
       setErrors((prev) => ({

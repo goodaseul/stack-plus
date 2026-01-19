@@ -5,7 +5,7 @@ interface UserState {
   nickname: string | null;
   isInitialized: boolean;
   setUser: (
-    user: Partial<Omit<UserState, "setUser" | "clearUser" | "setInitialized">>
+    user: Partial<Omit<UserState, "setUser" | "clearUser" | "setInitialized">>,
   ) => void;
   clearUser: () => void;
   setInitialized: () => void;

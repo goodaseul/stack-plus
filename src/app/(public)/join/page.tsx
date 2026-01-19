@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import { signUp } from "@/lib/supabase";
+import { toast } from "sonner";
 
 export default function JoinPage() {
   const [passwordShow, setPasswordShow] = useState({
@@ -47,6 +48,7 @@ export default function JoinPage() {
     try {
       await signUp(form.email, form.password, form.nickname);
       router.push("/login");
+      toast.success("로그인이 되었습니다.");
     } catch (error) {
       const message = (error as Error).message;
       if (message.includes("duplicate")) {

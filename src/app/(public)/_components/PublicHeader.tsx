@@ -1,23 +1,13 @@
 "use client";
 import Button from "@/components/button/Button";
 import { useAuthStatus } from "@/hooks/auth/useAuthStatus";
-import { signOut } from "@/lib/supabase";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useLogout } from "@/hooks/auth/useLogout";
 
 export default function PublicHeader() {
+  const { logout } = useLogout();
   const { isReady, isLoggedIn } = useAuthStatus();
-  const router = useRouter();
   if (!isReady) return null;
-
-  const handleLogout = async () => {
-    try {
-      await signOut();
-      router.push("/login");
-    } catch {
-      alert("로그아웃 실패");
-    }
-  };
 
   return (
     <header className="fixed top-0 left-0 z-20 w-full p-6 backdrop-blur-lg">
@@ -37,11 +27,7 @@ export default function PublicHeader() {
             <Button type="button" variant="text_underline" href="/dashboard">
               대시보드
             </Button>
-            <Button
-              type="button"
-              variant="text_underline"
-              onClick={handleLogout}
-            >
+            <Button type="button" variant="text_underline" onClick={logout}>
               로그아웃
             </Button>
           </nav>

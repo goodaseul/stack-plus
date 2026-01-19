@@ -7,16 +7,15 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { IoClose } from "react-icons/io5";
 import MenuLink from "./MenuLink";
-import { useRouter } from "next/navigation";
 import { useUserStore } from "@/store/useUserStore";
-import { signOut } from "@/lib/supabase";
 import { useWordStats } from "@/hooks/queries/words";
 import MyTooltip from "./MyTooltip";
 import { useClickOutside } from "@/hooks/useClickOutside";
+import { useLogout } from "@/hooks/auth/useLogout";
 
 export default function Header() {
   const { id, nickname } = useUserStore();
-  const router = useRouter();
+  const { logout } = useLogout();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMyOpen, setIsMyOpen] = useState(false);
@@ -25,15 +24,6 @@ export default function Header() {
   const myWrapperRef = useRef<HTMLDivElement | null>(null);
 
   useClickOutside(myWrapperRef, () => setIsMyOpen(false), isMyOpen);
-
-  const handleLogout = async () => {
-    try {
-      await signOut();
-      router.push("/login");
-    } catch {
-      alert("로그아웃 실패");
-    }
-  };
 
   return (
     <header className="sticky top-0 z-20 p-6 bg-white/80 backdrop-blur-md border-b border-gray-200">
@@ -67,12 +57,7 @@ export default function Header() {
             )}
           </div>
 
-          <Button
-            type="button"
-            variant="text"
-            className="p-1"
-            onClick={handleLogout}
-          >
+          <Button type="button" variant="text" className="p-1" onClick={logout}>
             <RiLogoutBoxRLine className="text-lg" />
           </Button>
 
