@@ -101,6 +101,11 @@ export async function uploadWords(word: WordCreateInput) {
   if (!user) {
     throw new Error("Unauthorized");
   }
+
+  const { memo, ...uploadData } = word;
+
+  const normalizedMemo = memo !== undefined && memo.trim() === "" ? null : memo;
+
   const { data: existingWord } = await supabase
     .from("words")
     .select("id, expression")
@@ -120,6 +125,7 @@ export async function uploadWords(word: WordCreateInput) {
     .from("words")
     .insert({
       ...word,
+      memo: normalizedMemo,
       user_id: user.id,
       bookmarked: word.bookmarked ?? false,
     })
