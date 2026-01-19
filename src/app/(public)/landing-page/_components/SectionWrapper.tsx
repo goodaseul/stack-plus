@@ -18,7 +18,7 @@ export default function SectionWrapper({
       className={`mx-auto min-h-screen w-full text-center ${bg} ${padding}`}
     >
       <div className="m-auto max-w-6xl min-h-screen flex flex-col justify-center px-4">
-        <h2 className="break-keep text-3xl font-bold tracking-tight md:text-4xl mb-5">
+        <h2 className="break-keep text-3xl font-bold tracking-tight leading-normal md:text-4xl mb-5">
           {title}
         </h2>
         <p className="break-keep text-base leading-relaxed text-gray-600 sm:text-lg">
