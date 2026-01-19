@@ -14,7 +14,7 @@ export default function InfoPage() {
       title={
         <>
           나만의 단어장으로 <br />
-          <span className="text-point">영어 실력</span>을 쌓아보세요
+          <span className="text-point">영어 실력</span>을 쌓아보세요.
         </>
       }
       desc={
@@ -31,7 +31,7 @@ export default function InfoPage() {
         </Button>
       ) : (
         <Button href="./login" type="button" className="mt-10 w-40 mx-auto">
-          무료로 시작하기
+          시작하기
         </Button>
       )}
     </SectionWrapper>

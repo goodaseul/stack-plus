@@ -12,7 +12,7 @@ export default function BannerPage() {
         <h2 className="break-keep text-2xl font-bold tracking-tight">
           오늘 배운 영어 표현부터
           <br />
-          Stack+에 차곡차곡 쌓아보세요
+          Stack+에 차곡차곡 쌓아보세요.
         </h2>
         {isLoggedIn ? (
           <Button

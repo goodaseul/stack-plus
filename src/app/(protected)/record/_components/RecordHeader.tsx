@@ -10,7 +10,7 @@ export function RecordHeader() {
       </Title>
 
       <p className="mt-2 text-sm text-gray-600">
-        지금까지 기록한 단어와 메모를 확인해보세요
+        지금까지 기록한 단어와 메모를 확인해보세요.
       </p>
     </>
   );

@@ -32,7 +32,7 @@ export function RecordChart() {
               ? "월간 기록"
               : "연간 기록"
         }
-        description="지금까지의 기록을 확인해보세요"
+        description="지금까지의 기록을 확인해보세요."
       />
 
       <RecordChartToggle period={period} onChange={setPeriod} />
