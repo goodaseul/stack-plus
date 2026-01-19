@@ -7,7 +7,7 @@ export default function BannerPage() {
 
   if (!isReady) return null;
   return (
-    <section className="bg-point text-black py-20">
+    <section className="bg-linear-to-br from-point/25 to-point/5 text-black py-20">
       <div className="mx-auto max-w-3xl px-6 text-center">
         <h2 className="break-keep text-2xl font-bold tracking-tight">
           오늘 배운 영어 표현부터
