@@ -97,6 +97,32 @@
 
 ---
 
+## ⚙️ CI / CD
+
+### GitHub Actions (CI)
+
+GitHub Actions를 활용해 **코드 변경 시 자동으로 검증이 수행되는 CI 파이프라인**을 구성했습니다.
+
+- `dev` 브랜치에 push 또는 Pull Request 생성 시 CI 자동 실행
+- GitHub Actions Runner(`ubuntu-latest`) 환경에서 작업 수행
+- Node.js 20 및 pnpm 기반 의존성 설치 자동화
+- CI 실행 결과를 통해 코드 변경 사항의 안정성 사전 검증
+
+````text
+.github/workflows/ci.yml
+
+
+🚀 Deployment
+
+Vercel을 활용한 Next.js 애플리케이션 배포
+
+Supabase 관련 환경 변수를 배포 환경에서 관리
+
+GitHub 저장소와 연동된 자동 배포 환경 구성
+
+---
+
+
 ## 핵심 구현 사항
 
 ### 1. 서버 상태와 클라이언트 상태 분리
@@ -125,7 +151,7 @@
 
 ```bash
 npm install
-```
+````
 
 ### 환경 변수 설정
 
