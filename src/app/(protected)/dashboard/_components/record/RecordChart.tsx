@@ -8,6 +8,7 @@ import { useRecordChartData } from "./RecordLineChart/useRecordChartData";
 import { RecordChartToggle } from "./RecordLineChart/RecordChartToggle";
 import { RecordChartView } from "./RecordLineChart/RecordChartView";
 import { useAllWordsQuery } from "@/hooks/queries/words/useAllWordsQuery";
+import EmptyState from "@/components/empty-state/EmptyState";
 
 export function RecordChart() {
   const { data: words } = useAllWordsQuery();
@@ -37,7 +38,11 @@ export function RecordChart() {
 
       <RecordChartToggle period={period} onChange={setPeriod} />
 
-      <RecordChartView data={chartData} />
+      {words?.length === 0 ? (
+        <EmptyState>아직 저장된 단어가 없습니다.</EmptyState>
+      ) : (
+        <RecordChartView data={chartData} />
+      )}
     </Banner>
   );
 }

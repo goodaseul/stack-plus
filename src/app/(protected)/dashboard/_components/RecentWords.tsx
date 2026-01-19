@@ -5,6 +5,7 @@ import { Title } from "./common/Title";
 import { useWordsQuery } from "@/hooks/queries/words";
 import { useMobileSize } from "@/hooks/useMobileSize";
 import AddWordButton from "../../_components/add-word-button/AddWordButton";
+import EmptyState from "@/components/empty-state/EmptyState";
 
 export function RecentWords() {
   const { data } = useWordsQuery();
@@ -19,7 +20,11 @@ export function RecentWords() {
         <AddWordButton>추가 </AddWordButton>
       </div>
 
-      <List words={words} />
+      {words.length === 0 ? (
+        <EmptyState>아직 저장된 단어가 없습니다.</EmptyState>
+      ) : (
+        <List words={words} />
+      )}
     </div>
   );
 }
