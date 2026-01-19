@@ -6,9 +6,11 @@ import { useWordsQuery } from "@/hooks/queries/words";
 import { useMobileSize } from "@/hooks/useMobileSize";
 import AddWordButton from "../../_components/add-word-button/AddWordButton";
 import EmptyState from "@/components/empty-state/EmptyState";
+import Loading from "../../_components/loading/Loading";
+import ErrorState from "@/components/error-state/ErrorState";
 
 export function RecentWords() {
-  const { data } = useWordsQuery();
+  const { data, isLoading, isError } = useWordsQuery();
   const isMobile = useMobileSize();
 
   const words = data?.words.slice(0, isMobile ? 2 : 4) ?? [];
@@ -20,7 +22,9 @@ export function RecentWords() {
         <AddWordButton>추가 </AddWordButton>
       </div>
 
-      {words.length === 0 ? (
+      {isLoading && <Loading />}
+      {isError && <ErrorState>단어를 불러올 수 없습니다.</ErrorState>}
+      {!isLoading && words.length === 0 ? (
         <EmptyState>아직 저장된 단어가 없습니다.</EmptyState>
       ) : (
         <List words={words} />

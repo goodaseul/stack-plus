@@ -15,6 +15,8 @@ import { Filter } from "../../_components/filter/Filter";
 import EmptyState from "@/components/empty-state/EmptyState";
 import SearchInput from "./SearchInput";
 import { Pagination } from "./Pagination";
+import Loading from "../../_components/loading/Loading";
+import ErrorState from "@/components/error-state/ErrorState";
 
 const ITEMS_PER_PAGE = 20;
 
@@ -31,7 +33,7 @@ export function Record() {
     searchParams.get("filter"),
   );
 
-  const { data } = useWordsQuery({
+  const { data, isLoading, isError } = useWordsQuery({
     filter: currentFilter,
     keyword,
     wordId,
@@ -78,6 +80,9 @@ export function Record() {
           onClick={handleFilterClick}
         />
       </div>
+
+      {isLoading && <Loading />}
+      {isError && <ErrorState>단어를 불러올 수 없습니다.</ErrorState>}
 
       {words.length === 0 ? (
         <EmptyState>{emptyMessage}</EmptyState>
