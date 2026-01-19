@@ -67,7 +67,7 @@ export default function ListActionsView({
         onClick={() =>
           toggleBookmark({
             wordId: word.id,
-            bookmarked: word.bookmarked,
+            bookmarked: !word.bookmarked,
           })
         }
       >

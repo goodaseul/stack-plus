@@ -169,7 +169,7 @@ export async function deleteWords(wordId: number) {
 export async function toggleBookmark(wordId: number, bookmarked: boolean) {
   const { error } = await supabase
     .from("words")
-    .update({ bookmarked: !bookmarked })
+    .update({ bookmarked: bookmarked })
     .eq("id", wordId);
 
   if (error) throw error;
