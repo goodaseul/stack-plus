@@ -102,7 +102,7 @@ export async function uploadWords(word: WordCreateInput) {
     throw new Error("Unauthorized");
   }
 
-  const { memo, ...uploadData } = word;
+  const { memo } = word;
 
   const normalizedMemo = memo !== undefined && memo.trim() === "" ? null : memo;
 
