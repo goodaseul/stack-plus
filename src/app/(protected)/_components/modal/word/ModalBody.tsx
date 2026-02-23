@@ -12,7 +12,7 @@ type ModalBodyProps = {
       | "usage"
       | "memo"
       | "bookmarked",
-    value: string
+    value: string,
   ) => void;
 
   form: WordCreateInput | WordUpdateInput;
@@ -36,6 +36,7 @@ export default function ModalBody({
     <>
       <ModalField label="단어*">
         <Input
+          autoFocus
           name={form.expression || ""}
           value={form.expression || ""}
           onChange={(e) => updateField("expression", e.target.value)}

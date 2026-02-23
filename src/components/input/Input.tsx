@@ -12,6 +12,7 @@ type InputProps = {
   placeholder?: string;
   className?: string;
   errors?: string;
+  autoFocus?: boolean;
 };
 
 export default function Input({
@@ -25,11 +26,13 @@ export default function Input({
   onClick,
   errors,
   className,
+  autoFocus,
 }: InputProps) {
   return (
     <div className="w-full">
       <div className="relative">
         <input
+          autoFocus={autoFocus}
           id={id}
           name={name}
           type={type}
@@ -41,7 +44,7 @@ export default function Input({
             errors
               ? "border border-red-500 focus:ring-2 focus:ring-red-500"
               : "border border-gray-100 focus:ring-2 shadow-md focus:ring-gray-900",
-            className
+            className,
           )}
         />
         <button
@@ -49,7 +52,7 @@ export default function Input({
           type="button"
           className={clsx(
             "absolute right-5 top-1/2 -translate-y-1/2",
-            errors ? "text-red-500" : "text-black"
+            errors ? "text-red-500" : "text-black",
           )}
         >
           {children}
