@@ -4,15 +4,17 @@ import { Banner } from "./common/banner/Banner";
 
 export function AllWordsBanner() {
   return (
-    <Banner>
-      <BannerTitle
-        title="단어 모두 보기"
-        description="등록한 단어를 한 번에 모아보기"
-      />
+    <div className="flex-1">
+      <Banner>
+        <BannerTitle
+          title="단어 모두 보기"
+          description="등록한 단어를 한 번에 모아보기"
+        />
 
-      <Button href="/record" className="self-end">
-        보러 가기
-      </Button>
-    </Banner>
+        <Button href="/record" className="self-end">
+          보러 가기
+        </Button>
+      </Banner>
+    </div>
   );
 }

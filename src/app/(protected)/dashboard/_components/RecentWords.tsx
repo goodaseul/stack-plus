@@ -16,7 +16,7 @@ export function RecentWords() {
   const words = data?.words.slice(0, isMobile ? 2 : 4) ?? [];
 
   return (
-    <div>
+    <div className="h-full">
       <div className="mb-5 flex items-center justify-between">
         <Title className="text-base">최근 등록한 단어</Title>
         <AddWordButton>추가 </AddWordButton>

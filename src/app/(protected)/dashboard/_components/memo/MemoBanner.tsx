@@ -4,10 +4,10 @@ import Button from "@/components/button/Button";
 
 export function MemoBanner() {
   return (
-    <div className="relative">
+    <div className="relative h-full flex-1">
       <Banner className="relative">
         <BannerTitle
-          title="오늘 메모 안 한 단어가 있어요"
+          title="메모 안 한 단어가 있어요"
           description="등록만 하고 지나간 단어들 정리해볼까요?"
         />
 
