@@ -8,9 +8,13 @@ import Button from "@/components/button/Button";
 import { useRouter } from "next/navigation";
 import { signIn } from "@/lib/supabase";
 import { toast } from "sonner";
+import { useState } from "react";
+import { FaRegEyeSlash } from "react-icons/fa";
 
 export default function LoginPage() {
   const router = useRouter();
+
+  const [passwordShow, setPasswordShow] = useState(false);
 
   const { form, errors, setErrors, updateField } = useFormFields({
     email: "",
@@ -65,11 +69,16 @@ export default function LoginPage() {
             name="password"
             value={form.password}
             onChange={(e) => updateField("password", e.target.value)}
-            type="password"
+            type={passwordShow ? "text" : "password"}
             placeholder="비밀번호를 입력하세요."
             errors={errors.password}
-          />
-
+          >
+            <FaRegEyeSlash
+              onClick={() => {
+                setPasswordShow((prev) => !prev);
+              }}
+            />
+          </Input>
           <Button type="submit" className="mt-2">
             로그인
           </Button>
