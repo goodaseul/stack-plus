@@ -3,7 +3,7 @@
 import Button from "@/components/button/Button";
 import { useUploadWordMutation } from "@/hooks/queries/words/useUploadWordMutation";
 import { WordCreateInput } from "@/types/word";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CiCirclePlus } from "react-icons/ci";
 import Modal from "../modal/Modal";
 import WordModal from "../modal/word/WordModal";
@@ -34,6 +34,17 @@ export default function AddWordButton({ children }: AddWordButtonProps) {
       }
     }
   };
+  useEffect(() => {
+    if (openModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [openModal]);
   const openCreateModal = () => {
     setOpenModal(true);
   };
