@@ -1,7 +1,6 @@
-import { useClickOutside } from "@/hooks/useClickOutside";
+// import { useClickOutside } from "@/hooks/useClickOutside";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useRef } from "react";
 
 const menuLinks = [
   { url: "/dashboard", link: "Home" },
@@ -16,18 +15,9 @@ export default function MenuLink({
   setIsMenuOpen: (boolean: boolean) => void;
 }) {
   const pathname = usePathname();
-  const navRef = useRef<HTMLElement | null>(null);
 
-  useClickOutside(
-    navRef,
-    () => {
-      setIsMenuOpen(false);
-    },
-    isMenuOpen,
-  );
   return (
     <nav
-      ref={navRef}
       className={`
         absolute top-10 right-0 z-40
         opacity-0 pointer-events-none:
