@@ -31,9 +31,9 @@ export default function SearchInput({ keyword }: { keyword: string }) {
   useEffect(() => {
     const params = new URLSearchParams(searchParamsString);
     params.delete("wordId");
-
     if (debouncedSearchValue.trim()) {
       params.set("keyword", debouncedSearchValue.trim());
+      params.delete("page");
     } else {
       params.delete("keyword");
     }
