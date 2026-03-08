@@ -29,7 +29,7 @@ export default function WordModal({
 
     const newErrors = {
       ...errors,
-      expression: form.expression?.trim() ? "" : "단어를 입력해주세요.",
+      expression: form.expression?.trim() ? "" : "표현를 입력해주세요.",
       meaning: form.meaning?.trim() ? "" : "뜻을 입력해주세요.",
     };
 

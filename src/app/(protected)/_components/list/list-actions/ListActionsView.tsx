@@ -107,7 +107,7 @@ export default function ListActionsView({
       {openModal === "edit" && (
         <Modal closeModal={closeModal}>
           <WordModal
-            title="단어 수정"
+            title="표현 수정"
             description="필요한 부분만 고쳐도 돼요"
             initialValues={{
               id: word.id,

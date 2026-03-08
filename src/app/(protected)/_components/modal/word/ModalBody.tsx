@@ -34,7 +34,7 @@ export default function ModalBody({
 
   return (
     <>
-      <ModalField label="단어*">
+      <ModalField label="표현*">
         <Input
           autoFocus
           name={form.expression || ""}

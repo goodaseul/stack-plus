@@ -20,13 +20,13 @@ export default function MyTooltip({
         닉네임: <span className="bg-point px-1">{nickname}</span>
       </p>
       <p className="font-bold mt-2">
-        현재 저장 단어: <span className="bg-point px-1">{total}</span>
+        현재 저장 표현: <span className="bg-point px-1">{total}</span>
       </p>
       <p className="font-bold mt-2">
-        메모가 있는 단어: <span className="bg-point px-1">{memo}</span>
+        메모가 있는 표현: <span className="bg-point px-1">{memo}</span>
       </p>
       <p className="font-bold mt-2">
-        북마크가 있는 단어: <span className="bg-point px-1">{bookmark}</span>
+        북마크가 있는 표현: <span className="bg-point px-1">{bookmark}</span>
       </p>
     </div>
   );

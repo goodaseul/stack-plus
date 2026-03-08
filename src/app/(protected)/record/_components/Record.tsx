@@ -65,7 +65,7 @@ export function Record() {
   };
 
   const emptyMessage =
-    currentFilter === null ? "아직 단어가 없어요" : "조건에 맞는 단어가 없어요";
+    currentFilter === null ? "아직 표현가 없어요" : "조건에 맞는 표현가 없어요";
 
   return (
     <>
@@ -82,7 +82,7 @@ export function Record() {
       </div>
 
       {isLoading && <Loading />}
-      {isError && <ErrorState>단어를 불러올 수 없습니다.</ErrorState>}
+      {isError && <ErrorState>표현를 불러올 수 없습니다.</ErrorState>}
 
       {words.length === 0 ? (
         <EmptyState>{emptyMessage}</EmptyState>

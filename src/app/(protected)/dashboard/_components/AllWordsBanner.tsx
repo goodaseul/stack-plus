@@ -7,8 +7,8 @@ export function AllWordsBanner() {
     <div className="flex-1">
       <Banner>
         <BannerTitle
-          title="단어 모두 보기"
-          description="등록한 단어를 한 번에 모아보기"
+          title="표현 모두 보기"
+          description="등록한 표현를 한 번에 모아보기"
         />
 
         <Button href="/record" className="self-end">

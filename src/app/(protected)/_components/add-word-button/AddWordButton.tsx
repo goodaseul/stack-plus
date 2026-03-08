@@ -22,15 +22,15 @@ export default function AddWordButton({ children }: AddWordButtonProps) {
   const handleSubmit = async (form: WordCreateInput) => {
     try {
       await uploadWords.mutateAsync(form);
-      toast.success("단어가 추가되었습니다.");
+      toast.success("표현가 추가되었습니다.");
       closeModal();
     } catch (error) {
       if (isDuplicateWordError(error)) {
-        toast.error(`"${error.expression}"는(은) 이미 존재하는 단어입니다.`);
+        toast.error(`"${error.expression}"는(은) 이미 존재하는 표현입니다.`);
         closeModal();
         router.push(`/record?keyword=${error.expression}`);
       } else {
-        toast.error("단어 추가에 실패했습니다.");
+        toast.error("표현 추가에 실패했습니다.");
       }
     }
   };
@@ -66,8 +66,8 @@ export default function AddWordButton({ children }: AddWordButtonProps) {
       {openModal && (
         <Modal closeModal={closeModal}>
           <WordModal
-            title="단어 추가"
-            description="단어와 의미만 입력해도 충분해요"
+            title="표현 추가"
+            description="표현과 의미만 입력해도 충분해요"
             initialValues={{
               expression: "",
               meaning: "",
