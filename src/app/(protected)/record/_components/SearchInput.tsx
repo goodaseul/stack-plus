@@ -1,6 +1,6 @@
 import Input from "@/components/input/Input";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function useDebouncedValue(value: string, delay: number) {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -20,27 +20,41 @@ export default function SearchInput({ keyword }: { keyword: string }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
-  const searchParamsString = searchParams.toString();
   const [searchValue, setSearchValue] = useState(keyword);
   const debouncedSearchValue = useDebouncedValue(searchValue, 300);
+
+  const prevKeywordRef = useRef(searchParams.get("keyword") ?? "");
 
   useEffect(() => {
     setSearchValue(keyword);
   }, [keyword]);
 
   useEffect(() => {
-    const params = new URLSearchParams(searchParamsString);
+    const params = new URLSearchParams(searchParams.toString());
     params.delete("wordId");
-    if (debouncedSearchValue.trim()) {
-      params.set("keyword", debouncedSearchValue.trim());
-      params.delete("page");
+
+    const trimmed = debouncedSearchValue.trim();
+    const currentKeyword = searchParams.get("keyword") ?? "";
+
+    if (trimmed) {
+      params.set("keyword", trimmed);
+
+      // 🔥 검색어가 바뀌었으면 page 초기화
+      if (prevKeywordRef.current !== trimmed) {
+        params.set("page", "1");
+      }
     } else {
       params.delete("keyword");
+      params.set("page", "1");
     }
 
-    router.replace(`${pathname}?${params.toString()}`);
-  }, [debouncedSearchValue, pathname, router, searchParamsString]);
+    prevKeywordRef.current = trimmed;
 
+    const newQuery = params.toString();
+    if (newQuery !== searchParams.toString()) {
+      router.replace(`${pathname}?${newQuery}`);
+    }
+  }, [debouncedSearchValue, pathname, router, searchParams]);
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
