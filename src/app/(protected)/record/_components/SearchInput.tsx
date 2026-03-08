@@ -52,7 +52,7 @@ export default function SearchInput({ keyword }: { keyword: string }) {
       type="text"
       name="search-input"
       onChange={onChange}
-      placeholder="단어를 검색할 수 있어요"
+      placeholder="단어/뜻을 검색할 수 있어요"
       className="mb-5"
     />
   );

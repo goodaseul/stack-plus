@@ -46,7 +46,9 @@ export async function getWords({
     query = query.eq("id", wordId);
   } else {
     if (keyword) {
-      query = query.ilike("expression", `%${keyword}%`);
+      query = query.or(
+        `expression.ilike.%${keyword}%,meaning.ilike.%${keyword}%`,
+      );
     }
 
     if (filter && filter in filterMap) {
