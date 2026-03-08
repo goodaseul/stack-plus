@@ -35,25 +35,31 @@ export default function SearchInput({ keyword }: { keyword: string }) {
 
     const trimmed = debouncedSearchValue.trim();
     const currentKeyword = searchParams.get("keyword") ?? "";
+    const currentPage = searchParams.get("page") ?? "1";
+
+    const isKeywordChanged = currentKeyword !== trimmed;
 
     if (trimmed) {
       params.set("keyword", trimmed);
 
-      if (prevKeywordRef.current !== trimmed) {
+      if (isKeywordChanged) {
         params.set("page", "1");
       }
     } else {
       params.delete("keyword");
-      params.set("page", "1");
+
+      if (currentKeyword) {
+        params.set("page", "1");
+      }
     }
 
-    prevKeywordRef.current = trimmed;
-
     const newQuery = params.toString();
+
     if (newQuery !== searchParams.toString()) {
       router.replace(`${pathname}?${newQuery}`);
     }
   }, [debouncedSearchValue, pathname, router, searchParams]);
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
