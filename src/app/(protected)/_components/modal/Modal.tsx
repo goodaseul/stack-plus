@@ -33,7 +33,6 @@ export default function Modal({ children, closeModal }: ModalProps) {
         bg-black/40
         px-4
       "
-      onClick={closeModal}
     >
       <div
         className="
@@ -45,6 +44,6 @@ export default function Modal({ children, closeModal }: ModalProps) {
         {children}
       </div>
     </div>,
-    modalRoot
+    modalRoot,
   );
 }
