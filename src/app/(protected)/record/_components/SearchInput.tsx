@@ -39,7 +39,6 @@ export default function SearchInput({ keyword }: { keyword: string }) {
     if (trimmed) {
       params.set("keyword", trimmed);
 
-      // 🔥 검색어가 바뀌었으면 page 초기화
       if (prevKeywordRef.current !== trimmed) {
         params.set("page", "1");
       }
