@@ -1,13 +1,7 @@
-"use client";
 import SectionWrapper from "@/app/(public)/landing-page/_components/SectionWrapper";
 import Button from "@/components/button/Button";
-import { useAuthStatus } from "@/hooks/auth/useAuthStatus";
 
 export default function InfoPage() {
-  const { isReady, isLoggedIn } = useAuthStatus();
-
-  if (!isReady) return null;
-
   return (
     <SectionWrapper
       bg="bg-linear-to-br from-point/25 to-point/5"
@@ -25,15 +19,9 @@ export default function InfoPage() {
         </>
       }
     >
-      {isLoggedIn ? (
-        <Button href="./dashboard" type="button" className="mt-10 w-40 mx-auto">
-          대시보드 보러가기
-        </Button>
-      ) : (
-        <Button href="./login" type="button" className="mt-10 w-40 mx-auto">
-          시작하기
-        </Button>
-      )}
+      <Button href="./dashboard" type="button" className="mt-10 w-40 mx-auto">
+        시작하기
+      </Button>
     </SectionWrapper>
   );
 }
