@@ -33,14 +33,14 @@ export default function SearchInput({ keyword }: { keyword: string }) {
     const params = new URLSearchParams(searchParams.toString());
     params.delete("wordId");
 
-    const trimmed = debouncedSearchValue.trim();
+    const searchValue = debouncedSearchValue;
     const currentKeyword = searchParams.get("keyword") ?? "";
     const currentPage = searchParams.get("page") ?? "1";
 
-    const isKeywordChanged = currentKeyword !== trimmed;
+    const isKeywordChanged = currentKeyword !== searchValue;
 
-    if (trimmed) {
-      params.set("keyword", trimmed);
+    if (searchValue) {
+      params.set("keyword", searchValue);
 
       if (isKeywordChanged) {
         params.set("page", "1");
