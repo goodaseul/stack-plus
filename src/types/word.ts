@@ -1,14 +1,14 @@
-import type { WordsApi } from "@/api/types/words";
+import type { WordsRequest } from "@/api/types/words";
 
-export type Word = Omit<WordsApi, "updated_at">;
+export type Word = Omit<WordsRequest, "updated_at">;
 
 export type WordFormInput = Pick<
-  WordsApi,
+  WordsRequest,
   "id" | "expression" | "meaning" | "sentence" | "usage" | "memo"
 >;
 
 export type WordCreateInput = Pick<
-  WordsApi,
+  WordsRequest,
   "expression" | "meaning" | "sentence" | "usage" | "memo"
 > & {
   bookmarked?: boolean;

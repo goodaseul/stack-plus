@@ -1,6 +1,6 @@
 import { supabase } from "@/lib/supabase/supabase";
 import { FilterValue } from "@/constants/filter";
-import { WordsApi } from "./types/words";
+import { WordsRequest } from "./types/words";
 import { WordCreateInput, WordUpdateInput } from "@/types/word";
 import { DuplicateWordError } from "./types/errors";
 
@@ -18,7 +18,7 @@ export async function getWords({
   range?: { from: number; to: number };
   page?: number;
   pageSize?: number;
-}): Promise<{ words: WordsApi[]; totalCount: number }> {
+}): Promise<{ words: WordsRequest[]; totalCount: number }> {
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -73,7 +73,7 @@ export async function getWords({
   };
 }
 
-export async function getAllWords(): Promise<WordsApi[]> {
+export async function getAllWords(): Promise<WordsRequest[]> {
   const {
     data: { user },
   } = await supabase.auth.getUser();

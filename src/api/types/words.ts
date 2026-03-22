@@ -1,4 +1,4 @@
-export interface WordsApi {
+export interface WordsRequest {
   id: number;
   user_id: string;
   meaning: string;
@@ -12,6 +12,6 @@ export interface WordsApi {
 }
 
 export type WordsResponse = {
-  words: WordsApi[];
+  words: WordsRequest[];
   totalCount: number;
 };

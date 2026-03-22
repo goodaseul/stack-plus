@@ -1,8 +1,8 @@
 // useRecordChartData.ts
-import { WordsApi } from "@/api/types/words";
+import { WordsRequest } from "@/api/types/words";
 import { useMemo } from "react";
 
-export function useRecordChartData(words?: WordsApi[]) {
+export function useRecordChartData(words?: WordsRequest[]) {
   const dailyData = useMemo(() => {
     if (!words) return [];
 
