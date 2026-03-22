@@ -1,10 +1,5 @@
 "use client";
-import { useFormFields } from "@/hooks/form/useFormFields";
-import {
-  validateEmail,
-  validatePassword,
-  validateConfirmPassword,
-} from "@/utils/validator";
+
 import Title from "../_components/title/Title";
 import Input from "../../../components/input/Input";
 import Button from "@/components/button/Button";
@@ -13,56 +8,43 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import { signUp } from "@/lib/supabase";
 import { toast } from "sonner";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+type JoinInputs = {
+  email: string;
+  nickname: string;
+  password: string;
+  passwordConfirm: string;
+};
 
 export default function JoinPage() {
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm<JoinInputs>();
+
   const [passwordShow, setPasswordShow] = useState({
     password: false,
     confirmPassword: false,
   });
 
-  const router = useRouter();
-
-  const { form, errors, setErrors, updateField } = useFormFields({
-    email: "",
-    nickname: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const handleJoin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const newErrors = {
-      email: validateEmail(form.email),
-      nickname: form.nickname ? "" : "별명을 입력해주세요.",
-      password: validatePassword(form.password),
-      confirmPassword: validateConfirmPassword(
-        form.password,
-        form.confirmPassword,
-      ),
-    };
-
-    setErrors(newErrors);
-    if (Object.values(newErrors).some(Boolean)) return;
-
+  const onSubmit: SubmitHandler<JoinInputs> = async (formData) => {
     try {
-      await signUp(form.email, form.password, form.nickname);
+      await signUp({
+        email: formData.email,
+        nickname: formData.nickname,
+        password: formData.password,
+      });
       router.push("/login");
       toast.success("로그인이 되었습니다.");
     } catch (error) {
-      const message = (error as Error).message;
-      if (message.includes("duplicate")) {
-        setErrors((prev) => ({
-          ...prev,
-          nickname: "이미 사용 중인 별명입니다.",
-        }));
-      } else if (message.includes("email")) {
-        setErrors((prev) => ({
-          ...prev,
-          nickname: "이미 존재하는 이메일입니다.",
-        }));
+      if (error instanceof Error) {
+        toast.error(error.message);
       } else {
-        alert("회원가입에 실패했습니다. 잠시 후 다시 시도해주세요.");
+        toast.error("회원가입 중 알 수 없는 오류가 발생했습니다.");
       }
     }
   };
@@ -75,32 +57,40 @@ export default function JoinPage() {
           desc="Stack plus와 함께 영어 표현을 쌓아가세요."
         />
 
-        <form className="mt-8 grid gap-5 font-pretendard" onSubmit={handleJoin}>
+        <form
+          className="mt-8 grid gap-5 font-pretendard"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <Input
-            name="email"
-            value={form.email}
-            onChange={(e) => updateField("email", e.target.value)}
             type="email"
+            {...register("email", {
+              required: "이메일을 입력하세요.",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "이메일이 틀렸습니다.",
+              },
+            })}
             placeholder="이메일을 입력하세요."
-            errors={errors.email}
+            errors={errors.email?.message}
           />
 
           <Input
-            name="nickname"
-            value={form.nickname}
-            onChange={(e) => updateField("nickname", e.target.value)}
             type="text"
+            {...register("nickname")}
             placeholder="별명을 입력하세요."
-            errors={errors.nickname}
           />
 
           <Input
-            name="password"
-            value={form.password}
-            onChange={(e) => updateField("password", e.target.value)}
             type={passwordShow.password ? "text" : "password"}
+            {...register("password", {
+              required: "비밀번호를 입력하세요",
+              pattern: {
+                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$/,
+                message: "비밀번호는 영문과 숫자를 포함한 6~20자여야 합니다.",
+              },
+            })}
             placeholder="비밀번호를 입력하세요."
-            errors={errors.password}
+            errors={errors.password?.message}
           >
             <FaRegEyeSlash
               onClick={() => {
@@ -113,12 +103,15 @@ export default function JoinPage() {
           </Input>
 
           <Input
-            name="confirmPassword"
-            value={form.confirmPassword}
-            onChange={(e) => updateField("confirmPassword", e.target.value)}
             type={passwordShow.confirmPassword ? "text" : "password"}
+            {...register("passwordConfirm", {
+              required: "비밀번호를 다시 입력하세요",
+              validate: (value) =>
+                value === getValues("password") ||
+                "비밀번호가 일치하지 않습니다",
+            })}
             placeholder="비밀번호를 다시 입력하세요."
-            errors={errors.confirmPassword}
+            errors={errors.passwordConfirm?.message} // 여기 주목
           >
             <FaRegEyeSlash
               onClick={() => {

@@ -1,7 +1,5 @@
 "use client";
 
-import { useFormFields } from "@/hooks/form/useFormFields";
-import { validateEmail, validatePassword } from "@/utils/validator";
 import Title from "../_components/title/Title";
 import Input from "../../../components/input/Input";
 import Button from "@/components/button/Button";
@@ -10,37 +8,36 @@ import { signIn } from "@/lib/supabase";
 import { toast } from "sonner";
 import { useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+type LoginInputs = {
+  email: string;
+  password: string;
+};
 
 export default function LoginPage() {
   const router = useRouter();
-
   const [passwordShow, setPasswordShow] = useState(false);
 
-  const { form, errors, setErrors, updateField } = useFormFields({
-    email: "",
-    password: "",
-  });
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<LoginInputs>();
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const newErrors = {
-      email: validateEmail(form.email),
-      password: validatePassword(form.password),
-    };
-
-    setErrors(newErrors);
-    if (Object.values(newErrors).some(Boolean)) return;
-
+  const onSubmit: SubmitHandler<LoginInputs> = async (formData) => {
     try {
-      await signIn(form.email, form.password);
-      toast.success("로그인이 되었습니다.");
+      await signIn({
+        email: formData.email,
+        password: formData.password,
+      });
+      toast.success("로그인에 성공했습니다.");
       router.push("/dashboard");
-    } catch {
-      setErrors((prev) => ({
-        ...prev,
-        password: "이메일 또는 비밀번호가 올바르지 않습니다.",
-      }));
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
+      toast.error("알 수 없는 오류가 발생했습니다.");
     }
   };
 
@@ -54,24 +51,32 @@ export default function LoginPage() {
 
         <form
           className="mt-8 grid gap-5 font-pretendard"
-          onSubmit={handleLogin}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <Input
-            name="email"
-            value={form.email}
-            onChange={(e) => updateField("email", e.target.value)}
             type="email"
+            {...register("email", {
+              required: "이메일을 입력하세요.",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "이메일이 틀렸습니다.",
+              },
+            })}
             placeholder="이메일을 입력하세요."
-            errors={errors.email}
+            errors={errors.email?.message}
           />
 
           <Input
-            name="password"
-            value={form.password}
-            onChange={(e) => updateField("password", e.target.value)}
             type={passwordShow ? "text" : "password"}
+            {...register("password", {
+              required: "비밀번호를 입력하세요.",
+              pattern: {
+                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$/,
+                message: "비밀번호가 틀렸습니다.",
+              },
+            })}
             placeholder="비밀번호를 입력하세요."
-            errors={errors.password}
+            errors={errors.password?.message}
           >
             <FaRegEyeSlash
               onClick={() => {

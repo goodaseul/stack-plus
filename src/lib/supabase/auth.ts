@@ -1,13 +1,10 @@
+import { SignInResponse, SignUpResponse } from "@/api/auth";
 import { supabase } from "./supabase";
 
-export async function signUp(
-  email: string,
-  password: string,
-  nickname: string
-) {
+export async function signUp(payload: SignUpResponse) {
   const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
+    email: payload.email,
+    password: payload.password,
   });
 
   if (error) throw error;
@@ -17,7 +14,7 @@ export async function signUp(
 
   const { error: profileError } = await supabase.from("profiles").insert({
     id: user.id,
-    nickname,
+    nickname: payload.nickname,
   });
 
   if (profileError) throw profileError;
@@ -25,10 +22,10 @@ export async function signUp(
   return user;
 }
 
-export async function signIn(email: string, password: string) {
+export async function signIn(payload: SignInResponse) {
   const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
+    email: payload.email,
+    password: payload.password,
   });
 
   if (error) throw error;
