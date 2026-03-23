@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 type ListContentProps = {
   expression: string;
   meaning: string;
@@ -17,6 +19,16 @@ export default function ListContent({
   const lowerExpression = expression.toLowerCase();
 
   const idx = lowerSentence.indexOf(lowerExpression);
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height =
+        textareaRef.current.scrollHeight + "px";
+    }
+  }, [memo]);
   return (
     <>
       <div className="gap-1 md:gap-6 w-full">
@@ -47,12 +59,13 @@ export default function ListContent({
 
         {memo && (
           <textarea
+            ref={textareaRef}
             value={`메모 : ${memo}`}
             name="memo"
             id={`memo-${expression}`}
             readOnly
             tabIndex={-1}
-            className="font-medium font-sm mt-5 resize-none w-full focus-visible:outline-none"
+            className="font-medium font-sm mt-5 resize-none w-full overflow-hidden focus-visible:outline-none"
           />
         )}
       </div>
