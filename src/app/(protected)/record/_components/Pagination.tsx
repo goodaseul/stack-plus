@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Button from "@/components/button/Button";
 
 interface PaginationProps {
@@ -17,72 +18,74 @@ export function Pagination({
 }: PaginationProps) {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
+  const [pageBlockSize, setPageBlockSize] = useState(10);
+  useEffect(() => {
+    const handleResize = () => {
+      setPageBlockSize(window.innerWidth > 768 ? 10 : 5);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   if (totalPages <= 1) return null;
 
-  const getPageNumbers = () => {
-    const pages: (number | string)[] = [];
-    const maxVisible = 5;
+  const currentBlock = Math.floor((currentPage - 1) / pageBlockSize);
+  const startPage = currentBlock * pageBlockSize + 1;
+  const endPage = Math.min(startPage + pageBlockSize - 1, totalPages);
 
-    if (totalPages <= maxVisible) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
-    } else {
-      pages.push(1);
-
-      if (currentPage > 3) {
-        pages.push("...");
-      }
-
-      const start = Math.max(2, currentPage - 1);
-      const end = Math.min(totalPages - 1, currentPage + 1);
-
-      for (let i = start; i <= end; i++) {
-        pages.push(i);
-      }
-
-      if (currentPage < totalPages - 2) {
-        pages.push("...");
-      }
-
-      pages.push(totalPages);
-    }
-
-    return pages;
-  };
+  const pages = [];
+  for (let i = startPage; i <= endPage; i++) pages.push(i);
 
   return (
-    <div className="flex items-center justify-center gap-2 mt-8">
-      <Button
-        onClick={() => onPageChange(currentPage - 1)}
+    <div className="flex items-center justify-center gap-2 mt-8 flex-wrap">
+      {/* 첫 페이지 */}
+      <button
+        onClick={() => onPageChange(1)}
         disabled={currentPage === 1}
-        className="disabled:opacity-50 disabled:cursor-not-allowed"
+        className="disabled:opacity-50 disabled:cursor-not-allowed px-2 bg-transparent"
       >
-        이전
-      </Button>
+        &lt;&lt;
+      </button>
 
-      {getPageNumbers().map((page, index) => (
+      {/* 이전 페이지 */}
+      <button
+        onClick={() => onPageChange(Math.max(1, currentPage - 1))}
+        disabled={currentPage === 1}
+        className="disabled:opacity-50 disabled:cursor-not-allowed px-2 bg-transparent"
+      >
+        &lt;
+      </button>
+
+      {/* 페이지 번호 */}
+      {pages.map((page) => (
         <Button
-          key={index}
+          key={page}
           variant="text_underline"
-          onClick={() => typeof page === "number" && onPageChange(page)}
-          disabled={page === "..."}
-          className={`
-            ${page === currentPage && "after:w-full"}
-            ${page === "..." && "cursor-default border-none after:w-0"}
-          `}
+          onClick={() => onPageChange(page)}
+          className={page === currentPage ? "after:w-full" : ""}
         >
           {page}
         </Button>
       ))}
 
-      <Button
-        onClick={() => onPageChange(currentPage + 1)}
+      {/* 다음 페이지 */}
+      <button
+        onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage === totalPages}
-        className="disabled:opacity-50 disabled:cursor-not-allowed"
+        className="disabled:opacity-50 disabled:cursor-not-allowed px-2 bg-transparent"
       >
-        다음
-      </Button>
+        &gt;
+      </button>
+
+      {/* 마지막 페이지 */}
+      <button
+        onClick={() => onPageChange(totalPages)}
+        disabled={currentPage === totalPages}
+        className="disabled:opacity-50 disabled:cursor-not-allowed px-2 bg-transparent"
+      >
+        &gt;&gt;
+      </button>
     </div>
   );
 }
