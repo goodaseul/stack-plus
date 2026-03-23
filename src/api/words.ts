@@ -18,12 +18,14 @@ export async function getWords({
   filter,
   keyword,
   wordId,
+  range,
   page = 1,
   pageSize = 20,
 }: {
   filter?: FilterValue;
   keyword?: string;
   wordId?: string | null;
+  range?: { from: number; to: number };
   page?: number;
   pageSize?: number;
 }): Promise<{ words: WordsRequest[]; totalCount: number }> {
