@@ -35,12 +35,6 @@ export default function AddWordButton({
       }
     }
   };
-  useEffect(() => {
-    document.body.style.overflow = openModal ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [openModal]);
 
   const closeModal = () => {
     setOpenModal(false);

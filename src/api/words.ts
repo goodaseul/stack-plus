@@ -1,31 +1,33 @@
-import { supabase } from "@/lib/supabase";
 import { FilterValue } from "@/constants/filter";
 import { WordsRequest } from "./types/words";
 import { WordCreateInput, WordUpdateInput } from "@/types/word";
 import { DuplicateWordError } from "./types/errors";
+import { supabase } from "@/lib/supabase";
 
+async function getUserOrThrow() {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Unauthorized");
+  return user;
+}
+export function normalizeMemo(memo?: string | null) {
+  return memo?.trim() === "" ? null : memo;
+}
 export async function getWords({
   filter,
   keyword,
   wordId,
-  range,
   page = 1,
   pageSize = 20,
 }: {
   filter?: FilterValue;
   keyword?: string;
   wordId?: string | null;
-  range?: { from: number; to: number };
   page?: number;
   pageSize?: number;
 }): Promise<{ words: WordsRequest[]; totalCount: number }> {
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    throw new Error("Unauthorized");
-  }
+  const user = await getUserOrThrow();
 
   let query = supabase
     .from("words")
@@ -47,7 +49,7 @@ export async function getWords({
   } else {
     if (keyword) {
       query = query.or(
-        `expression.ilike.%${keyword}%,meaning.ilike.%${keyword}%`,
+        `expression.ilike.%${keyword}%,meaning.ilike.%${keyword}%,memo.ilike.%${keyword}%,sentence.ilike.%${keyword}%`,
       );
     }
 
@@ -72,15 +74,8 @@ export async function getWords({
     totalCount: count ?? 0,
   };
 }
-
 export async function getAllWords(): Promise<WordsRequest[]> {
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    throw new Error("Unauthorized");
-  }
+  const user = await getUserOrThrow();
 
   const { data, error } = await supabase
     .from("words")
@@ -94,19 +89,10 @@ export async function getAllWords(): Promise<WordsRequest[]> {
 
   return data ?? [];
 }
-
 export async function uploadWords(word: WordCreateInput) {
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUserOrThrow();
 
-  if (!user) {
-    throw new Error("Unauthorized");
-  }
-
-  const { memo } = word;
-
-  const normalizedMemo = memo !== undefined && memo.trim() === "" ? null : memo;
+  const normalizedMemo = normalizeMemo(word.memo);
 
   const { data: existingWord } = await supabase
     .from("words")
@@ -137,19 +123,11 @@ export async function uploadWords(word: WordCreateInput) {
     throw error;
   }
 }
-
 export async function modifyWords(word: WordUpdateInput) {
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    throw new Error("Unauthorized");
-  }
+  const user = await getUserOrThrow();
 
   const { id, memo, ...updateData } = word;
-
-  const normalizedMemo = memo !== undefined && memo.trim() === "" ? null : memo;
+  const normalizedMemo = normalizeMemo(memo);
 
   const { error } = await supabase
     .from("words")
@@ -166,14 +144,12 @@ export async function modifyWords(word: WordUpdateInput) {
     throw error;
   }
 }
-
 export async function deleteWords(wordId: number) {
   const { error } = await supabase.from("words").delete().eq("id", wordId);
   if (error) {
     throw error;
   }
 }
-
 export async function toggleBookmark(wordId: number, bookmarked: boolean) {
   const { error } = await supabase
     .from("words")

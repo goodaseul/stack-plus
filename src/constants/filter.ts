@@ -15,19 +15,12 @@ export const FILTER_LABELS: Record<keyof typeof FILTERS, string> = {
 export type FilterKey = keyof typeof FILTERS;
 export type FilterValue = (typeof FILTERS)[FilterKey];
 
-export const parseFilter = (
-  queryValue: string | null
-): { key: FilterKey; value: FilterValue } => {
-  if (!queryValue) return { key: "ALL", value: null };
+export const toFilterKey = (query: string | null): FilterKey => {
+  if (!query) return "ALL";
 
-  const entry = (Object.entries(FILTERS) as [FilterKey, FilterValue][]).find(
-    ([, value]) => value === queryValue
+  const found = (Object.keys(FILTERS) as FilterKey[]).find(
+    (key) => FILTERS[key] === query,
   );
-  return entry
-    ? { key: entry[0], value: entry[1] }
-    : { key: "ALL", value: null };
-};
 
-export const getFilterValue = (key: FilterKey): FilterValue => {
-  return FILTERS[key];
+  return found ?? "ALL";
 };

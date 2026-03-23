@@ -7,8 +7,8 @@ import { useWordsQuery } from "@/hooks/queries/words";
 import {
   FILTER_LABELS,
   FilterKey,
-  getFilterValue,
-  parseFilter,
+  FILTERS,
+  toFilterKey,
 } from "@/constants/filter";
 import { RecordHeader } from "./RecordHeader";
 import { Filter } from "../../_components/filter/Filter";
@@ -29,9 +29,8 @@ export function Record() {
   const keyword = searchParams.get("keyword") ?? "";
   const currentPage = Number(searchParams.get("page")) || 1;
 
-  const { key: activeFilterKey, value: currentFilter } = parseFilter(
-    searchParams.get("filter"),
-  );
+  const activeFilterKey = toFilterKey(searchParams.get("filter"));
+  const currentFilter = FILTERS[activeFilterKey];
 
   const { data, isLoading, isError } = useWordsQuery({
     filter: currentFilter,
@@ -45,7 +44,7 @@ export function Record() {
   const totalCount = data?.totalCount ?? 0;
 
   const handleFilterClick = (filterKey: FilterKey) => {
-    const value = getFilterValue(filterKey);
+    const value = FILTERS[filterKey];
     const params = new URLSearchParams(searchParams);
 
     if (value === null) params.delete("filter");

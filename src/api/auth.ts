@@ -29,9 +29,6 @@ export async function signIn(payload: SignInResponse) {
   });
 
   if (error) throw error;
-  //   if (data.session?.user) {
-  //     await syncUser(data.session.user.id);
-  //   }
   return data;
 }
 

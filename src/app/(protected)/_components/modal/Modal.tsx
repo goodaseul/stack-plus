@@ -10,6 +10,14 @@ type ModalProps = {
 
 export default function Modal({ children, closeModal }: ModalProps) {
   useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         closeModal();
@@ -38,6 +46,7 @@ export default function Modal({ children, closeModal }: ModalProps) {
         className="
           w-full max-w-2xl
           overflow-y-auto
+          max-h-full
         "
         onClick={(e) => e.stopPropagation()}
       >

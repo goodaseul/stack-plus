@@ -16,12 +16,14 @@ export function List({
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const isRecordPage = pathname === "/record";
+
   const createWordLink = (wordId: string, expression: string) => {
     const params = new URLSearchParams(searchParams);
     params.set("wordId", wordId);
-    params.set("keyword", expression);
+    params.set("expression", expression);
     return `/record?${params.toString()}`;
   };
+
   return (
     <ul
       className={`
