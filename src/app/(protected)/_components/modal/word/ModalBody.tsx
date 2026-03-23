@@ -1,32 +1,15 @@
 import Input from "@/components/input/Input";
-import { WordCreateInput, WordUpdateInput } from "@/types/word";
 import { FiChevronDown } from "react-icons/fi";
 import { ModalField } from "./ModalField";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { FormType } from "@/types/word";
 
 type ModalBodyProps = {
-  updateField: (
-    name:
-      | "expression"
-      | "meaning"
-      | "sentence"
-      | "usage"
-      | "memo"
-      | "bookmarked",
-    value: string,
-  ) => void;
-
-  form: WordCreateInput | WordUpdateInput;
-  errors: Record<
-    "expression" | "meaning" | "sentence" | "usage" | "memo" | "bookmarked",
-    string
-  >;
+  register: UseFormRegister<FormType>;
+  errors: FieldErrors<FormType>;
 };
 
-export default function ModalBody({
-  updateField,
-  form,
-  errors,
-}: ModalBodyProps) {
+export default function ModalBody({ register, errors }: ModalBodyProps) {
   const InputStyles =
     "w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition";
   const SelectStyles =
@@ -37,38 +20,31 @@ export default function ModalBody({
       <ModalField label="표현*">
         <Input
           autoFocus
-          name={form.expression || ""}
-          value={form.expression || ""}
-          onChange={(e) => updateField("expression", e.target.value)}
+          {...register("expression", {
+            required: "표현을 입력해주세요.",
+          })}
           placeholder="book"
-          errors={errors.expression}
+          errors={errors.expression?.message}
         />
       </ModalField>
       <ModalField label="뜻*">
         <Input
-          name={form.meaning || ""}
-          value={form.meaning || ""}
-          onChange={(e) => updateField("meaning", e.target.value)}
+          {...register("meaning", {
+            required: "뜻을 입력해주세요.",
+          })}
           placeholder="책"
-          errors={errors.meaning}
+          errors={errors.meaning?.message}
         />
       </ModalField>
       <ModalField label="예문">
         <Input
-          name={form.sentence || ""}
-          value={form.sentence || ""}
-          onChange={(e) => updateField("sentence", e.target.value)}
+          {...register("sentence")}
           placeholder="I bought a book yesterday."
         />
       </ModalField>
       <ModalField label="사용 장소">
         <div className="flex items-center relative">
-          <select
-            name="usage"
-            value={form.usage}
-            onChange={(e) => updateField("usage", e.target.value)}
-            className={SelectStyles}
-          >
+          <select {...register("usage")} className={SelectStyles}>
             <option value="일상생활">일상생활</option>
             <option value="회사">회사</option>
             <option value="학교">학교</option>
@@ -86,9 +62,7 @@ export default function ModalBody({
       </ModalField>
       <ModalField label="메모">
         <textarea
-          name="memo"
-          value={form.memo}
-          onChange={(e) => updateField("memo", e.target.value)}
+          {...register("memo")}
           placeholder="헷갈렸던 포인트 정리"
           className={`${InputStyles} min-h-[90px] resize-none`}
         />

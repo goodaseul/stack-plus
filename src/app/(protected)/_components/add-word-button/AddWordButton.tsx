@@ -11,17 +11,18 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { isDuplicateWordError } from "@/api/types/errors";
 
-type AddWordButtonProps = {
+export default function AddWordButton({
+  children,
+}: {
   children: React.ReactNode;
-};
-
-export default function AddWordButton({ children }: AddWordButtonProps) {
+}) {
   const [openModal, setOpenModal] = useState(false);
-  const uploadWords = useUploadWordMutation();
+  const { mutateAsync: uploadWords } = useUploadWordMutation();
   const router = useRouter();
-  const handleSubmit = async (form: WordCreateInput) => {
+
+  const onSubmit = async (form: WordCreateInput) => {
     try {
-      await uploadWords.mutateAsync(form);
+      await uploadWords(form);
       toast.success("표현가 추가되었습니다.");
       closeModal();
     } catch (error) {
@@ -35,19 +36,12 @@ export default function AddWordButton({ children }: AddWordButtonProps) {
     }
   };
   useEffect(() => {
-    if (openModal) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
+    document.body.style.overflow = openModal ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [openModal]);
-  const openCreateModal = () => {
-    setOpenModal(true);
-  };
+
   const closeModal = () => {
     setOpenModal(false);
   };
@@ -58,7 +52,7 @@ export default function AddWordButton({ children }: AddWordButtonProps) {
         type="button"
         variant="text_underline"
         className="ml-auto text-sm text-gray-700 hover:text-black"
-        onClick={openCreateModal}
+        onClick={() => setOpenModal(true)}
       >
         {children} <CiCirclePlus className="text-base ml-1" />
       </Button>
@@ -66,6 +60,7 @@ export default function AddWordButton({ children }: AddWordButtonProps) {
       {openModal && (
         <Modal closeModal={closeModal}>
           <WordModal
+            mode="create"
             title="표현 추가"
             description="표현과 의미만 입력해도 충분해요"
             initialValues={{
@@ -75,10 +70,7 @@ export default function AddWordButton({ children }: AddWordButtonProps) {
               usage: "일상생활",
               memo: "",
             }}
-            onSubmit={(data) => {
-              handleSubmit(data as WordCreateInput);
-              closeModal();
-            }}
+            onSubmit={onSubmit}
             closeModal={closeModal}
           />
         </Modal>

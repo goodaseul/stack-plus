@@ -6,9 +6,9 @@ import Button from "@/components/button/Button";
 import { useRouter } from "next/navigation";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
-import { signUp } from "@/lib/supabase";
 import { toast } from "sonner";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { signUp } from "@/api/auth";
 
 type JoinInputs = {
   email: string;

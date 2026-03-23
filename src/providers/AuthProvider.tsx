@@ -2,7 +2,22 @@
 
 import { useEffect } from "react";
 import { useUserStore } from "@/store/useUserStore";
-import { getMyProfile, getSession, subscribeAuthChange } from "@/lib/supabase";
+import { getMyProfile } from "@/api/profile";
+
+import { Session } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase";
+
+async function getSession() {
+  const { data, error } = await supabase.auth.getSession();
+  if (error) throw error;
+  return data.session;
+}
+
+function subscribeAuthChange(callback: (session: Session | null) => void) {
+  return supabase.auth.onAuthStateChange((_, session) => {
+    callback(session);
+  });
+}
 
 export default function AuthProvider({
   children,
@@ -24,7 +39,7 @@ export default function AuthProvider({
         const profile = await getMyProfile(session.user.id);
         setUser({ nickname: profile.nickname });
       } catch (error) {
-        console.error("❌ profile 불러오기 실패", error);
+        console.error("profile 불러오기 실패", error);
       } finally {
         setInitialized();
       }
@@ -42,7 +57,7 @@ export default function AuthProvider({
         const profile = await getMyProfile(session.user.id);
         setUser({ nickname: profile.nickname });
       } catch (error) {
-        console.error("❌ profile 불러오기 실패", error);
+        console.error("profile 불러오기 실패", error);
       }
 
       setInitialized();

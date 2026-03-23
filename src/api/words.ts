@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase/supabase";
+import { supabase } from "@/lib/supabase";
 import { FilterValue } from "@/constants/filter";
 import { WordsRequest } from "./types/words";
 import { WordCreateInput, WordUpdateInput } from "@/types/word";

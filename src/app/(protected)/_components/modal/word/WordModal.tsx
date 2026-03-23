@@ -1,54 +1,41 @@
 "use client";
-
-import { useFormFields } from "@/hooks/form/useFormFields";
-import { WordCreateInput, WordUpdateInput } from "@/types/word";
+import { WordCreateInput, WordFormProps, WordUpdateInput } from "@/types/word";
 import ModalContainer from "./ModalContainer";
 import ModalBody from "./ModalBody";
-
-type WordFormProps = {
-  initialValues: WordCreateInput | WordUpdateInput;
-  onSubmit: (item: WordCreateInput | WordUpdateInput) => void;
-  title: string;
-  description: string;
-  closeModal: () => void;
-};
+import { useForm } from "react-hook-form";
 
 export default function WordModal({
+  mode,
   initialValues,
   onSubmit,
   title,
   description,
   closeModal,
 }: WordFormProps) {
-  const { form, errors, setErrors, updateField } = useFormFields<
-    WordCreateInput | WordUpdateInput
-  >(initialValues);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<WordCreateInput | WordUpdateInput>({
+    defaultValues: initialValues,
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const newErrors = {
-      ...errors,
-      expression: form.expression?.trim() ? "" : "표현를 입력해주세요.",
-      meaning: form.meaning?.trim() ? "" : "뜻을 입력해주세요.",
-    };
-
-    setErrors(newErrors);
-
-    if (Object.values(newErrors).some(Boolean)) return;
-
-    onSubmit(form);
-    closeModal();
+  const submitHandler = (data: WordCreateInput | WordUpdateInput) => {
+    if (mode === "create") {
+      onSubmit(data as WordCreateInput);
+    } else {
+      onSubmit(data as WordUpdateInput);
+    }
   };
 
   return (
     <ModalContainer
-      handleSubmit={handleSubmit}
+      handleSubmit={handleSubmit(submitHandler)}
       closeModal={closeModal}
       title={title}
       description={description}
     >
-      <ModalBody updateField={updateField} form={form} errors={errors} />
+      <ModalBody register={register} errors={errors} />
     </ModalContainer>
   );
 }

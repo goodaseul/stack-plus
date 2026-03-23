@@ -7,13 +7,35 @@ export type WordFormInput = Pick<
   "id" | "expression" | "meaning" | "sentence" | "usage" | "memo"
 >;
 
-export type WordCreateInput = Pick<
-  WordsRequest,
-  "expression" | "meaning" | "sentence" | "usage" | "memo"
-> & {
+type BaseWord = {
+  expression: string;
+  meaning: string;
+  sentence?: string;
+  usage?: string;
+  memo?: string;
   bookmarked?: boolean;
 };
+export type WordCreateInput = BaseWord;
 
-export type WordUpdateInput = {
+export type WordUpdateInput = BaseWord & {
   id: number;
-} & Partial<WordCreateInput>;
+};
+
+export type FormType = WordCreateInput | WordUpdateInput;
+export type WordFormProps =
+  | {
+      mode: "create";
+      initialValues: WordCreateInput;
+      onSubmit: (item: WordCreateInput) => void;
+      title: string;
+      description: string;
+      closeModal: () => void;
+    }
+  | {
+      mode: "update";
+      initialValues: WordUpdateInput;
+      onSubmit: (item: WordUpdateInput) => void;
+      title: string;
+      description: string;
+      closeModal: () => void;
+    };

@@ -1,11 +1,10 @@
 "use client";
 import Button from "@/components/button/Button";
-import { useAuthStatus } from "@/hooks/auth/useAuthStatus";
+import { useUserStore } from "@/store/useUserStore";
 
 export default function BannerPage() {
-  const { isReady, isLoggedIn } = useAuthStatus();
+  const { id } = useUserStore();
 
-  if (!isReady) return null;
   return (
     <section className="bg-linear-to-br from-point/25 to-point/5 text-black py-20">
       <div className="mx-auto max-w-3xl px-6 text-center">
@@ -14,9 +13,9 @@ export default function BannerPage() {
           <br />
           Stack+에 차곡차곡 쌓아보세요.
         </h2>
-        {isLoggedIn ? (
+        {id ? (
           <Button
-            href="./dashboard"
+            href="/dashboard"
             variant="outline"
             type="button"
             className="mt-10 w-40 mx-auto hover:bg-white hover:text-black"
@@ -25,7 +24,7 @@ export default function BannerPage() {
           </Button>
         ) : (
           <Button
-            href="./login"
+            href="/login"
             variant="outline"
             type="button"
             className="mt-10 w-40 mx-auto hover:bg-white hover:text-black"

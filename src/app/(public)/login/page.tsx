@@ -4,11 +4,11 @@ import Title from "../_components/title/Title";
 import Input from "../../../components/input/Input";
 import Button from "@/components/button/Button";
 import { useRouter } from "next/navigation";
-import { signIn } from "@/lib/supabase";
 import { toast } from "sonner";
 import { useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { signIn } from "@/api/auth";
 
 type LoginInputs = {
   email: string;

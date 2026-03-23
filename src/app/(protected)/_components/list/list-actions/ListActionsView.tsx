@@ -107,6 +107,7 @@ export default function ListActionsView({
       {openModal === "edit" && (
         <Modal closeModal={closeModal}>
           <WordModal
+            mode="update"
             title="표현 수정"
             description="필요한 부분만 고쳐도 돼요"
             initialValues={{
@@ -117,10 +118,7 @@ export default function ListActionsView({
               usage: word.usage,
               memo: word.memo ?? "",
             }}
-            onSubmit={(data) => {
-              handleModify(data as WordUpdateInput);
-              closeModal();
-            }}
+            onSubmit={handleModify}
             closeModal={closeModal}
           />
         </Modal>
