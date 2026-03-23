@@ -21,7 +21,7 @@ export function List({
     const params = new URLSearchParams(searchParams);
     params.set("wordId", wordId);
     params.set("expression", expression);
-    return `/record?${params.toString()}`;
+    return `/record?keyword=${encodeURIComponent(expression)}`;
   };
 
   return (
