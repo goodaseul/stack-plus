@@ -9,7 +9,7 @@ export function Banner({ children, className = "" }: BannerProps) {
         rounded-xl bg-white px-6 py-5
         border border-gray-200
         transition-colors
-        hover:bg-gray-50
+        hover:bg-background
         focus:outline-none focus:ring-2 focus:ring-gray-900/10
         flex flex-col justify-between
         group h-full

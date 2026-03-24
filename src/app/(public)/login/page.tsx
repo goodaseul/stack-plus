@@ -5,10 +5,11 @@ import Input from "../../../components/input/Input";
 import Button from "@/components/button/Button";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { signIn } from "@/api/auth";
+import { signIn, signUp } from "@/api/auth";
+import { useUserStore } from "@/store/useUserStore";
 
 type LoginInputs = {
   email: string;
@@ -42,7 +43,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-6">
+    <div className="flex min-h-screen items-center justify-center bg-background px-6">
       <div className="w-full max-w-lg rounded-2xl bg-white p-10 shadow-sm">
         <Title
           title="환영합니다"
