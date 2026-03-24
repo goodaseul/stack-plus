@@ -7,17 +7,17 @@ export default function PublicHeader() {
       <div className="mx-auto flex max-w-6xl items-center justify-between">
         <Link
           href="/"
-          className="font-sekuya text-xl text-black transition-colors hover:text-point group"
+          className="font-sekuya text-xl text-foreground transition-colors hover:text-point group"
         >
           STACK
-          <span className="text-point transition-colors group-hover:text-black">
+          <span className="text-point transition-colors group-hover:text-foreground">
             PLUS
           </span>
         </Link>
 
         <nav className="flex items-center gap-4">
           <Button type="button" variant="text_underline" href="/dashboard">
-            대시보드
+            시작하기
           </Button>
         </nav>
       </div>

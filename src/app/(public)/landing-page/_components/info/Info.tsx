@@ -4,7 +4,6 @@ import Button from "@/components/button/Button";
 export default function InfoPage() {
   return (
     <SectionWrapper
-      bg="bg-linear-to-br from-point/25 to-point/5"
       title={
         <>
           나만의 표현장으로 <br />

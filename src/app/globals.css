@@ -1,13 +1,26 @@
 @import "tailwindcss";
 @theme {
-  --color-bg: #f8f8f8;
-  --color-point: #ceec46;
-  --color-text-black: #1a1a1a;
-  --color-text-600: #4a5565;
-  --color-text-700: #364153;
-
   --font-pretendard: var(--font-pretendard);
   --font-sekuya: var(--font-sekuya);
+
+  --color-background: rgb(var(--background));
+  --color-foreground: rgb(var(--foreground));
+  --color-border: rgb(var(--border));
+  --color-point: rgb(var(--point));
+}
+
+:root {
+  --background: 248 249 250;
+  --foreground: 34 34 34;
+  --border: 229 231 235;
+  --point: 100 116 189;
+}
+
+.dark {
+  --background: 18 18 18;
+  --foreground: 229 231 235;
+  --border: 55 65 81;
+  --point: 124 58 237;
 }
 
 *,
@@ -28,6 +41,8 @@ html {
 }
 
 body {
+  @apply bg-background text-foreground;
+
   font-family: var(--font-pretendard), sans-serif;
   line-height: 1.5;
   color: var(--color-text-black);
