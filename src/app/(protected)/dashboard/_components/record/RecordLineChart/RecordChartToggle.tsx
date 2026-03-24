@@ -14,7 +14,7 @@ export function RecordChartToggle({ period, onChange }: Props) {
         className={
           period === "daily"
             ? "font-medium text-black after:w-full"
-            : "text-gray-500 hover:text-black"
+            : "text-gray-600 hover:text-black"
         }
       >
         일간
@@ -26,7 +26,7 @@ export function RecordChartToggle({ period, onChange }: Props) {
         className={
           period === "monthly"
             ? "font-medium text-black after:w-full"
-            : "text-gray-500 hover:text-black"
+            : "text-gray-600 hover:text-black"
         }
       >
         월간
@@ -38,7 +38,7 @@ export function RecordChartToggle({ period, onChange }: Props) {
         className={
           period === "yearly"
             ? "font-medium text-black after:w-full"
-            : "text-gray-500 hover:text-black"
+            : "text-gray-600 hover:text-black"
         }
       >
         연간

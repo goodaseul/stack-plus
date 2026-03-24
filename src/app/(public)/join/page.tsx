@@ -19,17 +19,17 @@ type JoinInputs = {
 
 export default function JoinPage() {
   const router = useRouter();
+  const [passwordShow, setPasswordShow] = useState({
+    password: false,
+    confirmPassword: false,
+  });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     getValues,
   } = useForm<JoinInputs>();
-
-  const [passwordShow, setPasswordShow] = useState({
-    password: false,
-    confirmPassword: false,
-  });
 
   const onSubmit: SubmitHandler<JoinInputs> = async (formData) => {
     try {
@@ -38,14 +38,13 @@ export default function JoinPage() {
         nickname: formData.nickname,
         password: formData.password,
       });
-      router.push("/login");
       toast.success("로그인이 되었습니다.");
+      router.push("/login");
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
-      } else {
-        toast.error("회원가입 중 알 수 없는 오류가 발생했습니다.");
       }
+      toast.error("회원가입 중 오류가 발생했습니다.");
     }
   };
 
@@ -53,10 +52,14 @@ export default function JoinPage() {
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-6">
       <div className="w-full max-w-lg rounded-2xl bg-white p-10 shadow-sm">
         <Title
-          title="Join Us!"
-          desc="Stack plus와 함께 영어 표현을 쌓아가세요."
+          title="회원가입"
+          desc={
+            <>
+              <span className="font-sekuya">stack plus</span>함께 표현을
+              쌓아가세요.
+            </>
+          }
         />
-
         <form
           className="mt-8 grid gap-5 font-pretendard"
           onSubmit={handleSubmit(onSubmit)}
@@ -111,7 +114,7 @@ export default function JoinPage() {
                 "비밀번호가 일치하지 않습니다",
             })}
             placeholder="비밀번호를 다시 입력하세요."
-            errors={errors.passwordConfirm?.message} // 여기 주목
+            errors={errors.passwordConfirm?.message}
           >
             <FaRegEyeSlash
               onClick={() => {
@@ -128,7 +131,7 @@ export default function JoinPage() {
           </Button>
         </form>
 
-        <div className="mt-6 text-center text-sm text-gray-500">
+        <div className="mt-6 text-center text-sm text-gray-600">
           이미 계정이 있으신가요?
           <Button variant="text_underline" href="/login" className="ml-1">
             로그인

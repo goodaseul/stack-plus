@@ -57,7 +57,7 @@ export default function ListActionsView({
           className={`${buttonStyles} pointer-events-none`}
           disabled
         >
-          <TfiWrite className=" text-gray-500" />
+          <TfiWrite className=" text-gray-600" />
         </Button>
       )}
       <Button
@@ -74,7 +74,7 @@ export default function ListActionsView({
         {word.bookmarked ? (
           <FaBookmark className="text-gray-700" />
         ) : (
-          <FaRegBookmark className="text-gray-500" />
+          <FaRegBookmark className="text-gray-600" />
         )}
       </Button>
       <div ref={dropdownWrapperRef}>
@@ -84,7 +84,7 @@ export default function ListActionsView({
           className={`${buttonStyles}`}
           onClick={toggleDropdown}
         >
-          <BsThreeDots className="text-gray-500" />
+          <BsThreeDots className="text-gray-600" />
         </Button>
         {isDropdownOpen && (
           <ul

@@ -37,7 +37,7 @@ export default function LoginPage() {
       if (error instanceof Error) {
         toast.error(error.message);
       }
-      toast.error("알 수 없는 오류가 발생했습니다.");
+      toast.error("로그인 중 오류가 발생했습니다.");
     }
   };
 
@@ -45,8 +45,13 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-6">
       <div className="w-full max-w-lg rounded-2xl bg-white p-10 shadow-sm">
         <Title
-          title="Welcome!"
-          desc="stack plus를 이용하기 위해서 로그인을 해주세요."
+          title="환영합니다"
+          desc={
+            <>
+              <span className="font-sekuya">stack plus</span>를 이용하기 위해서
+              로그인을 해주세요.
+            </>
+          }
         />
 
         <form
@@ -89,7 +94,7 @@ export default function LoginPage() {
           </Button>
         </form>
 
-        <div className="mt-6 text-center text-sm text-gray-500">
+        <div className="mt-6 text-center text-sm text-gray-600">
           아직 계정이 없으신가요?
           <Button variant="text_underline" href="/join" className="ml-1">
             회원가입
