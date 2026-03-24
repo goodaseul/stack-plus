@@ -1,4 +1,5 @@
 import Button from "@/components/button/Button";
+import { ThemeToggle } from "@/components/button/ThemeButton";
 import Link from "next/link";
 
 export default function PublicHeader() {
@@ -16,6 +17,7 @@ export default function PublicHeader() {
         </Link>
 
         <nav className="flex items-center gap-4">
+          <ThemeToggle />
           <Button type="button" variant="text_underline" href="/dashboard">
             시작하기
           </Button>

@@ -12,6 +12,7 @@ import { useWordStats } from "@/hooks/queries/words";
 import MyTooltip from "./MyTooltip";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { useLogout } from "@/hooks/auth/useLogout";
+import { ThemeToggle } from "@/components/button/ThemeButton";
 
 export default function Header() {
   const { id, nickname } = useUserStore();
@@ -26,7 +27,7 @@ export default function Header() {
   useClickOutside(myWrapperRef, () => setIsMyOpen(false), isMyOpen);
 
   return (
-    <header className="sticky top-0 z-20 p-6 bg-white/80 backdrop-blur-md border-b border-gray-200">
+    <header className="sticky top-0 z-20 p-6 bg-background backdrop-blur-md border-b border-gray-200">
       <div className="mx-auto flex max-w-6xl items-center justify-between">
         <Link
           href="/dashboard"
@@ -40,6 +41,8 @@ export default function Header() {
 
         <div className="relative flex items-center gap-3 text-gray-600">
           <div ref={myWrapperRef} className="relative">
+            <ThemeToggle />
+
             <Button
               onClick={() => setIsMyOpen((prev) => !prev)}
               variant="text_underline"

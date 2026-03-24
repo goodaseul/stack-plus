@@ -5,6 +5,7 @@ import QueryProvider from "@/providers/QueryProvider";
 import localFont from "next/font/local";
 import AuthProvider from "@/providers/AuthProvider";
 import { Toaster } from "sonner";
+import ThemeProvider from "@/providers/ThemeProvider";
 
 const pretendard = localFont({
   src: "../../public/fonts/pretendard/PretendardVariable.woff2",
@@ -39,21 +40,21 @@ export const viewport = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="ko">
-      <body
-        className={`${sekuya.variable} ${pretendard.variable}  antialiased`}
-      >
-        <QueryProvider>
-          <AuthProvider>
-            <Toaster richColors position="top-center" />
-            {children}
-            <Footer />
-          </AuthProvider>
-        </QueryProvider>
+    <html lang="ko" suppressHydrationWarning>
+      <body className={`${sekuya.variable} ${pretendard.variable} antialiased`}>
+        <ThemeProvider>
+          <QueryProvider>
+            <AuthProvider>
+              <Toaster richColors position="top-center" />
+              {children}
+              <Footer />
+            </AuthProvider>
+          </QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

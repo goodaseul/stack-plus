@@ -9,6 +9,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { signUp } from "@/api/auth";
+import { useTheme } from "next-themes";
 
 type JoinInputs = {
   email: string;
@@ -18,6 +19,7 @@ type JoinInputs = {
 };
 
 export default function JoinPage() {
+  const { resolvedTheme } = useTheme();
   const router = useRouter();
   const [passwordShow, setPasswordShow] = useState({
     password: false,
@@ -54,8 +56,8 @@ export default function JoinPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-6">
-      <div className="w-full max-w-lg rounded-2xl bg-white p-10 shadow-sm">
+    <div className="flex min-h-screen items-center justify-center px-6">
+      <div className="w-full max-w-lg rounded-2xl p-10 shadow-sm">
         <Title
           title="회원가입"
           desc={
@@ -98,6 +100,7 @@ export default function JoinPage() {
             errors={errors.password?.message}
           >
             <FaRegEyeSlash
+              className={`${resolvedTheme === "dark" ? "text-white" : "text-black"}`}
               onClick={() => {
                 setPasswordShow((prev) => ({
                   ...prev,
@@ -119,6 +122,7 @@ export default function JoinPage() {
             errors={errors.passwordConfirm?.message}
           >
             <FaRegEyeSlash
+              className={`${resolvedTheme === "dark" ? "text-white" : "text-black"}`}
               onClick={() => {
                 setPasswordShow((prev) => ({
                   ...prev,
@@ -133,7 +137,7 @@ export default function JoinPage() {
           </Button>
         </form>
 
-        <div className="mt-6 text-center text-sm text-gray-600">
+        <div className="mt-6 text-center text-sm text-foreground">
           이미 계정이 있으신가요?
           <Button variant="text_underline" href="/login" className="ml-1">
             로그인

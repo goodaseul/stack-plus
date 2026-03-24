@@ -54,7 +54,7 @@ export function FeaturePage() {
         {features.map((feature) => (
           <div
             key={feature.title}
-            className="rounded-2xl border border-border  p-5 md:px-2 md:py-7 md:text-center text-left"
+            className="rounded-2xl border border-border border-gray-300 p-5 md:px-2 md:py-7 md:text-center text-left"
           >
             <div className="flex items-center md:block gap-5">
               <div

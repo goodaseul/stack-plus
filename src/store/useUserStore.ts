@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface UserState {
+type UserState = {
   id: string | null;
   nickname: string | null;
   isInitialized: boolean;
@@ -9,7 +9,7 @@ interface UserState {
     user: Partial<Omit<UserState, "setUser" | "clearUser" | "setInitialized">>,
   ) => void;
   clearUser: () => void;
-}
+};
 
 export const useUserStore = create<UserState>((set) => ({
   id: null,

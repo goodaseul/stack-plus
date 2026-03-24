@@ -1,28 +1,32 @@
 @import "tailwindcss";
+
 @theme {
   --font-pretendard: var(--font-pretendard);
   --font-sekuya: var(--font-sekuya);
-
-  --color-background: rgb(var(--background));
-  --color-foreground: rgb(var(--foreground));
-  --color-border: rgb(var(--border));
-  --color-point: rgb(var(--point));
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-point: rgba(100, 116, 189, 1);
 }
 
 :root {
-  --background: 248 249 250;
-  --foreground: 34 34 34;
-  --border: 229 231 235;
-  --point: 100 116 189;
+  --background: #f8f9fa;
+  --foreground: #222222;
 }
 
 .dark {
-  --background: 18 18 18;
-  --foreground: 229 231 235;
-  --border: 55 65 81;
-  --point: 124 58 237;
+  --background: #121212;
+  --foreground: #e5e7eb;
 }
 
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+  }
+}
 *,
 *::before,
 *::after {
@@ -41,11 +45,8 @@ html {
 }
 
 body {
-  @apply bg-background text-foreground;
-
   font-family: var(--font-pretendard), sans-serif;
   line-height: 1.5;
-  color: var(--color-text-black);
 }
 
 button {
