@@ -65,10 +65,7 @@ export default function JoinPage() {
             </>
           }
         />
-        <form
-          className="mt-8 grid gap-5 font-pretendard"
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form className="mt-8 grid gap-5" onSubmit={handleSubmit(onSubmit)}>
           <Input
             type="email"
             {...register("email", {

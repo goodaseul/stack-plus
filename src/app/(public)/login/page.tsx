@@ -5,11 +5,10 @@ import Input from "../../../components/input/Input";
 import Button from "@/components/button/Button";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { signIn, signUp } from "@/api/auth";
-import { useUserStore } from "@/store/useUserStore";
+import { signIn } from "@/api/auth";
 
 type LoginInputs = {
   email: string;
@@ -55,10 +54,7 @@ export default function LoginPage() {
           }
         />
 
-        <form
-          className="mt-8 grid gap-5 font-pretendard"
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form className="mt-8 grid gap-5" onSubmit={handleSubmit(onSubmit)}>
           <Input
             type="email"
             {...register("email", {
