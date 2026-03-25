@@ -31,6 +31,7 @@ const variantStyles: Record<ButtonVariant, string> = {
   px-4 py-3.5
   hover:bg-point
   dark:hover:bg-point
+  dark:hover:text-white
 `,
 
   text: `

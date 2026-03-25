@@ -7,7 +7,7 @@ import { useUserStore } from "@/store/useUserStore";
 
 export default function DashboardPage() {
   const { isInitialized } = useUserStore();
-  if (!isInitialized) return null;
+  if (!isInitialized) return <div>로딩 중..</div>;
 
   return (
     <div

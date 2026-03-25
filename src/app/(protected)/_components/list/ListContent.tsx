@@ -32,7 +32,7 @@ export default function ListContent({
   return (
     <>
       <div className="gap-1 md:gap-6 w-full">
-        <p className="text-xl font-bold mb-2 text-black">
+        <p className="text-xl font-bold mb-2 text-black dark:text-white">
           {expression}
           <span> : {meaning}</span>
         </p>
@@ -53,7 +53,7 @@ export default function ListContent({
           </p>
         )}
 
-        <p className="absolute left-5 bottom-7 text-sm text-gray-600 truncate  break-keep">
+        <p className="absolute left-5 bottom-7 text-sm text-gray-600 dark:text-gray-100 truncate  break-keep">
           {usage}
         </p>
 

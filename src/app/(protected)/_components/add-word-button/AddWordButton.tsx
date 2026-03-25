@@ -3,7 +3,7 @@
 import Button from "@/components/button/Button";
 import { useUploadWordMutation } from "@/hooks/queries/words/useUploadWordMutation";
 import { WordCreateInput } from "@/types/word";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CiCirclePlus } from "react-icons/ci";
 import Modal from "../modal/Modal";
 import WordModal from "../modal/word/WordModal";
@@ -45,7 +45,10 @@ export default function AddWordButton({
       <Button
         type="button"
         variant="text_underline"
-        className="ml-auto text-sm text-gray-700 hover:text-black"
+        className="ml-auto text-sm text-gray-700 hover:text-black
+        
+        dark:text-white dark:hover:text-white
+        "
         onClick={() => setOpenModal(true)}
       >
         {children} <CiCirclePlus className="text-base ml-1" />

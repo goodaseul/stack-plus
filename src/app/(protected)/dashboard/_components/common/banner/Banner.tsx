@@ -10,6 +10,7 @@ export function Banner({ children, className = "" }: BannerProps) {
         border border-gray-200
         transition-colors
         hover:bg-background
+
         focus:outline-none focus:ring-2 focus:ring-gray-900/10
         flex flex-col justify-between
         group h-full

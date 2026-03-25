@@ -24,8 +24,9 @@ export function RecordChart() {
         : yearlyData;
 
   return (
-    <Banner>
+    <Banner className="dark:hover:bg-white">
       <BannerTitle
+        variant="white"
         title={
           period === "daily"
             ? "일일 기록"
