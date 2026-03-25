@@ -6,7 +6,7 @@ export const wordsQueryKeys = {
     filter: FilterValue;
     keyword: string;
     wordId: string | null;
-    page?: number;
+    page: number;
     pageSize: number;
   }) => [...wordsQueryKeys.all, params] as const,
 };

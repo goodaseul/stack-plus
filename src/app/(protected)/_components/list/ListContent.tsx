@@ -19,7 +19,6 @@ export default function ListContent({
   const lowerExpression = expression.toLowerCase();
 
   const idx = lowerSentence.indexOf(lowerExpression);
-
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -32,19 +31,19 @@ export default function ListContent({
   return (
     <>
       <div className="gap-1 md:gap-6 w-full">
-        <p className="text-xl font-bold mb-2 text-black dark:text-white">
+        <p className="text-md md:text-xl font-bold mb-2 text-black dark:text-white">
           {expression}
           <span> : {meaning}</span>
         </p>
 
         {sentence && (
-          <p className="font-medium">
+          <p className="font-medium text-sm md:text-lg">
             {idx === -1 ? (
               sentence
             ) : (
               <>
                 {sentence.slice(0, idx)}
-                <span className="bg-point px-1">
+                <span className="bg-point text-white px-1">
                   {sentence.slice(idx, idx + expression.length)}
                 </span>
                 {sentence.slice(idx + expression.length)}
@@ -60,11 +59,11 @@ export default function ListContent({
         {memo && (
           <textarea
             ref={textareaRef}
-            value={`메모 : ${memo}`}
+            value={`${memo}`}
             name="memo"
             id={`memo-${expression}`}
             readOnly
-            tabIndex={-1}
+            // tabIndex={-1}
             className="font-medium font-sm mt-5 resize-none w-full overflow-hidden focus-visible:outline-none"
           />
         )}

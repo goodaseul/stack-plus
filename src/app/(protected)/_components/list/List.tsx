@@ -48,7 +48,6 @@ export function List({
             border border-gray-200 rounded-lg 
             group relative
             gap-3 px-5 py-7 pb-13
-        
             "
           >
             {isRecordPage ? (

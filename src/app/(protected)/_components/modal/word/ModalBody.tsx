@@ -11,7 +11,7 @@ type ModalBodyProps = {
 
 export default function ModalBody({ register, errors }: ModalBodyProps) {
   const InputStyles =
-    "w-full border border-gray-300 px-3 py-2 text-sm text-black placeholder place-gray-100 focus:outline-none focus:ring-1 transition";
+    "w-full border border-gray-300 px-3 py-2 rounded-md text-sm text-black placeholder place-gray-100 focus:outline-none focus:ring-1 transition";
   const SelectStyles =
     "w-full appearance-none rounded-md border border-gray-300 px-3 py-2 pr-10 text-sm text-black bg-white focus:outline-none focus:ring-1 transition";
 

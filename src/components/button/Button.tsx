@@ -18,20 +18,20 @@ type ButtonProps =
     });
 
 const baseStyles =
-  "inline-flex items-center justify-center gap-1 rounded-full text-sm font-medium transition-all focus:outline-none cursor-pointer hover:-translate-y-1 group-hover:-translate-y-1";
+  "inline-flex items-center justify-center gap-1 rounded-md text-sm font-medium transition-all focus:outline-none cursor-pointer hover:-translate-y-1 group-hover:-translate-y-1";
 const variantStyles: Record<ButtonVariant, string> = {
   default: `
   bg-point text-white
-  px-4 py-3.5
+  p-2 md:px-4 md:py-3.5
 `,
 
   outline: `
   border border-point text-point
   bg-transparent
-  px-4 py-3.5
+   p-2 md:px-4 md:py-3.5
   hover:bg-point
   dark:hover:bg-point
-  dark:hover:text-white
+  hover:text-white
 `,
 
   text: `

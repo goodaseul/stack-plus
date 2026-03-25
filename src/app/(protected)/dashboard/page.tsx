@@ -21,15 +21,13 @@ export default function DashboardPage() {
       >
         <RecentWords />
 
-        <div className="flex flex-col h-full gap-4">
+        <div className="flex flex-col md:flex-row xl:flex-col h-full gap-4">
           <AllWordsBanner />
           <MemoBanner />
         </div>
       </section>
 
-      <section>
-        <RecordStudy />
-      </section>
+      <RecordStudy />
     </div>
   );
 }

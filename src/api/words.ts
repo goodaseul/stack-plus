@@ -1,5 +1,5 @@
 import { FilterValue } from "@/constants/filter";
-import { WordsRequest } from "./types/words";
+import { WordsQueryRequest, WordsRequest } from "./types/words";
 import { WordCreateInput, WordUpdateInput } from "@/types/word";
 import { DuplicateWordError } from "./types/errors";
 import { supabase } from "@/lib/supabase";
@@ -18,17 +18,9 @@ export async function getWords({
   filter,
   keyword,
   wordId,
-  range,
   page = 1,
   pageSize = 20,
-}: {
-  filter?: FilterValue;
-  keyword?: string;
-  wordId?: string | null;
-  range?: { from: number; to: number };
-  page?: number;
-  pageSize?: number;
-}): Promise<{ words: WordsRequest[]; totalCount: number }> {
+}: WordsQueryRequest): Promise<{ words: WordsRequest[]; totalCount: number }> {
   const user = await getUserOrThrow();
 
   let query = supabase
@@ -61,9 +53,8 @@ export async function getWords({
   }
 
   const from = (page - 1) * pageSize;
-  const to = from + pageSize - 1;
 
-  query = query.range(from, to);
+  query = query.range(from, from + pageSize - 1);
 
   const { data, error, count } = await query;
 

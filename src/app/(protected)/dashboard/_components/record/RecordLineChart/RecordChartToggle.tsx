@@ -1,17 +1,10 @@
 import Button from "@/components/button/Button";
-
-type Period = "daily" | "monthly" | "yearly";
+import { Period, PERIOD_OPTIONS } from "@/types/chartPeriod";
 
 type Props = {
   period: Period;
   onChange: (period: Period) => void;
 };
-
-const PERIOD_OPTIONS: { value: Period; label: string }[] = [
-  { value: "daily", label: "일간" },
-  { value: "monthly", label: "월간" },
-  { value: "yearly", label: "연간" },
-];
 
 export function RecordChartToggle({ period, onChange }: Props) {
   return (

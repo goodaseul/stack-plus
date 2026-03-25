@@ -34,13 +34,13 @@ export function RecordChartView({ data }: ChartProps) {
               fontSize: "12px",
               borderRadius: "8px",
               borderColor: "#E5E7EB",
-              color: "#000",
+              color: "#1a1a1a",
             }}
           />
           <Line
             type="monotone"
             dataKey="count"
-            stroke="#000"
+            stroke="#1a1a1a"
             strokeWidth={1.5}
             dot={false}
           />
