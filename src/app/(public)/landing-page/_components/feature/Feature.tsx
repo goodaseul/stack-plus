@@ -15,7 +15,7 @@ const features = [
   {
     icon: LuPencil,
     title: "메모 기능",
-    description: "메모를 추가해 헷갈리는 포인트나 사용법을 기록하세요.",
+    description: "메모를 추가하여 기록하세요.",
   },
   {
     icon: LuChartNoAxesCombined,
@@ -25,17 +25,17 @@ const features = [
   {
     icon: FaRegBookmark,
     title: "북마크",
-    description: "중요한 표현는 북마크해서 따로 모아보고 집중 학습하세요.",
+    description: "중요한 표현을 모아보고 집중 학습하세요.",
   },
   {
     icon: IoSearchOutline,
     title: "검색 기능",
-    description: "등록한 모든 표현를 빠르게 검색하고 찾아볼 수 있어요.",
+    description: "등록한 표현을 빠르게 검색할 수 있어요.",
   },
   {
     icon: FiTag,
     title: "카테고리 분류",
-    description: "일상생활, 비즈니스 등 사용 장소별로 표현를 분류하세요.",
+    description: "표현의 카테고리를 분류하세요.",
   },
 ];
 
@@ -46,15 +46,17 @@ export function FeaturePage() {
       desc={
         <>
           <span className="font-sekuya text-point">StackPlus</span>가 제공하는
+          <br className="block md:hidden" />
           강력한 기능들을 소개합니다.
         </>
       }
     >
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-10">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-10 ">
         {features.map((feature) => (
           <div
             key={feature.title}
-            className="rounded-2xl border border-border border-gray-300 p-5 md:px-2 md:py-7 md:text-center text-left"
+            className="rounded-2xl border 
+            border-gray-300 dark:border-gray-100/10 p-5 md:px-2 md:py-10 md:text-center text-left"
           >
             <div className="flex items-center md:block gap-5">
               <div

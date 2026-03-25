@@ -12,7 +12,9 @@ export function ThemeToggle() {
 
   return (
     <button
-      className={`${theme === "dark" ? "bg-white text-point" : "bg-point text-white"} rounded-sm px-2 py-1  `}
+      className={`
+        font-sekuya
+        ${theme === "dark" ? "bg-white text-point" : "bg-point text-white"} rounded-sm px-2 py-1  `}
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       {theme === "dark" ? "light" : "dark"}

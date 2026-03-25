@@ -9,7 +9,6 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { signUp } from "@/api/auth";
-import { useTheme } from "next-themes";
 
 type JoinInputs = {
   email: string;
@@ -19,7 +18,6 @@ type JoinInputs = {
 };
 
 export default function JoinPage() {
-  const { resolvedTheme } = useTheme();
   const router = useRouter();
   const [passwordShow, setPasswordShow] = useState({
     password: false,
@@ -42,6 +40,7 @@ export default function JoinPage() {
       });
 
       toast.success("로그인이 되었습니다.");
+
       if (result.session) {
         router.push("/dashboard");
       } else {
@@ -100,7 +99,7 @@ export default function JoinPage() {
             errors={errors.password?.message}
           >
             <FaRegEyeSlash
-              className={`${resolvedTheme === "dark" ? "text-white" : "text-black"}`}
+              className="text-black dark:text-white"
               onClick={() => {
                 setPasswordShow((prev) => ({
                   ...prev,
@@ -122,7 +121,7 @@ export default function JoinPage() {
             errors={errors.passwordConfirm?.message}
           >
             <FaRegEyeSlash
-              className={`${resolvedTheme === "dark" ? "text-white" : "text-black"}`}
+              className="text-black dark:text-white"
               onClick={() => {
                 setPasswordShow((prev) => ({
                   ...prev,

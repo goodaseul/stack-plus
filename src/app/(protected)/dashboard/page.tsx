@@ -1,9 +1,26 @@
+"use client";
+import { useEffect } from "react";
 import { AllWordsBanner } from "./_components/AllWordsBanner";
 import { MemoBanner } from "./_components/memo/MemoBanner";
 import { RecentWords } from "./_components/RecentWords";
 import { RecordStudy } from "./_components/record/RecordStudy";
+import { getMyProfile } from "@/api/profile";
+import { useUserStore } from "@/store/useUserStore";
 
 export default function DashboardPage() {
+  const setUser = useUserStore((state) => state.setUser);
+  useEffect(() => {
+    const init = async () => {
+      const profile = await getMyProfile();
+      if (profile) {
+        setUser({
+          id: profile.id,
+          nickname: profile.nickname,
+        });
+      }
+    };
+    init();
+  }, []);
   return (
     <div
       className="

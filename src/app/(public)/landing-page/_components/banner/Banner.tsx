@@ -1,6 +1,6 @@
 export default function BannerPage() {
   return (
-    <section className="text-background bg-point py-20">
+    <section className="text-background bg-point py-20 dark:text-white">
       <div className="mx-auto max-w-3xl px-6 text-center">
         <h2 className="break-keep text-xl md:text-2xl font-bold tracking-tight">
           오늘 배운 표현부터

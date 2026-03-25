@@ -9,7 +9,6 @@ import { useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { signIn } from "@/api/auth";
-import { useTheme } from "next-themes";
 
 type LoginInputs = {
   email: string;
@@ -17,7 +16,6 @@ type LoginInputs = {
 };
 
 export default function LoginPage() {
-  const { resolvedTheme } = useTheme();
   const router = useRouter();
   const [passwordShow, setPasswordShow] = useState(false);
 
@@ -83,7 +81,7 @@ export default function LoginPage() {
             errors={errors.password?.message}
           >
             <FaRegEyeSlash
-              className={`${resolvedTheme === "dark" ? "text-white" : "text-black"}`}
+              className="text-black dark:text-white"
               onClick={() => {
                 setPasswordShow((prev) => !prev);
               }}
