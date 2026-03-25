@@ -22,7 +22,7 @@ export default function AuthProvider({
     }
 
     try {
-      const profile = await getMyProfile(session.user.id);
+      const profile = await getMyProfile();
       if (!profile) {
         setUser({
           id: session.user.id,

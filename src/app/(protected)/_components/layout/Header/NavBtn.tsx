@@ -1,4 +1,3 @@
-"use client";
 import Button from "@/components/button/Button";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { useRef } from "react";

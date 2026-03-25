@@ -56,7 +56,7 @@ export default function JoinPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center px-6">
-      <div className="w-full max-w-lg rounded-2xl p-10 shadow-sm">
+      <div className="w-full max-w-lg rounded-2xl p-3 sm:p-10 shadow-sm">
         <Title
           title="회원가입"
           desc={

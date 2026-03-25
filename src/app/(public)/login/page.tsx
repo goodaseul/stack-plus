@@ -9,6 +9,7 @@ import { useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { signIn } from "@/api/auth";
+import { useUserStore } from "@/store/useUserStore";
 
 type LoginInputs = {
   email: string;
@@ -25,25 +26,33 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm<LoginInputs>();
 
+  const { setUser, setInitialized } = useUserStore();
   const onSubmit: SubmitHandler<LoginInputs> = async (formData) => {
     try {
-      await signIn({
+      const data = await signIn({
         email: formData.email,
         password: formData.password,
       });
+
+      setUser({
+        id: data.user.id,
+        nickname: data.user.user_metadata?.nickname ?? null,
+      });
+      setInitialized();
       toast.success("로그인에 성공했습니다.");
       router.push("/dashboard");
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
+      } else {
+        toast.error("로그인 중 오류가 발생했습니다.");
       }
-      toast.error("로그인 중 오류가 발생했습니다.");
     }
   };
 
   return (
     <div className="flex min-h-screen items-center justify-center px-6">
-      <div className="w-full max-w-lg rounded-2xl p-10 shadow-sm">
+      <div className="w-full max-w-lg rounded-2xl p-3 sm:p-10 shadow-sm">
         <Title
           title="환영합니다"
           desc={
