@@ -1,5 +1,5 @@
 import Button from "@/components/button/Button";
-import { Period, PERIOD_OPTIONS } from "@/types/chartPeriod";
+import { Period, PERIOD_OPTIONS } from "@/constants/chartPeriod";
 
 type Props = {
   period: Period;

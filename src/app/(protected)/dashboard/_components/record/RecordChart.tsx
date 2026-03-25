@@ -9,7 +9,7 @@ import { RecordChartToggle } from "./RecordLineChart/RecordChartToggle";
 import { RecordChartView } from "./RecordLineChart/RecordChartView";
 import { useAllWordsQuery } from "@/hooks/queries/words/useAllWordsQuery";
 import EmptyState from "@/components/empty-state/EmptyState";
-import { Period, PERIOD_LABELS } from "@/types/chartPeriod";
+import { Period, PERIOD_LABELS } from "@/constants/chartPeriod";
 
 export function RecordChart() {
   const { data: words } = useAllWordsQuery();
