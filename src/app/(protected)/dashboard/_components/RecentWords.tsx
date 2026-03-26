@@ -12,7 +12,7 @@ import ErrorState from "@/components/error-state/ErrorState";
 export function RecentWords() {
   const { data, isLoading, isError } = useWordsQuery();
   const isMobile = useMobileSize();
-  const words = data?.words.slice(0, isMobile ? 2 : 4) ?? [];
+  const words = data?.words.slice(0, isMobile ? 8 : 6) ?? [];
   return (
     <div className="h-full">
       <div className="mb-5 flex items-center justify-between ">

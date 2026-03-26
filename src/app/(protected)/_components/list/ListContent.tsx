@@ -6,6 +6,7 @@ type ListContentProps = {
   memo: string;
   usage: string;
   sentence: string;
+  isRecordPage: boolean;
 };
 
 export default function ListContent({
@@ -14,6 +15,7 @@ export default function ListContent({
   sentence,
   expression,
   meaning,
+  isRecordPage,
 }: ListContentProps) {
   const lowerSentence = sentence.toLowerCase();
   const lowerExpression = expression.toLowerCase();
@@ -31,12 +33,12 @@ export default function ListContent({
   return (
     <>
       <div className="gap-1 md:gap-6 w-full">
-        <p className="text-md md:text-xl font-bold mb-2 text-black dark:text-white">
+        <p className="text-sm md:text-md lg:text-lg font-bold mb-2 text-black dark:text-white">
           {expression}
           <span> : {meaning}</span>
         </p>
 
-        {sentence && (
+        {sentence && isRecordPage && (
           <p className="font-medium text-sm md:text-lg">
             {idx === -1 ? (
               sentence
@@ -56,7 +58,7 @@ export default function ListContent({
           {usage}
         </p>
 
-        {memo && (
+        {isRecordPage && memo && (
           <textarea
             ref={textareaRef}
             value={`${memo}`}

@@ -27,7 +27,7 @@ export function List({
   return (
     <ul
       className={`
-        grid grid-cols-1 sm:grid-cols-2
+        grid grid-cols-2 md:grid-cols-3
         gap-4
         ${className}`}
     >
@@ -39,6 +39,7 @@ export function List({
             usage={word.usage}
             memo={word.memo ?? ""}
             sentence={word.sentence ?? ""}
+            isRecordPage={isRecordPage}
           />
         );
         return (
