@@ -1,7 +1,5 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import Button from "@/components/button/Button";
+import { useMobileSize } from "@/hooks/useMobileSize";
 
 interface PaginationProps {
   currentPage: number;
@@ -17,16 +15,8 @@ export function Pagination({
   onPageChange,
 }: PaginationProps) {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-  const [pageBlockSize, setPageBlockSize] = useState(10);
-  useEffect(() => {
-    const handleResize = () => {
-      setPageBlockSize(window.innerWidth > 768 ? 10 : 5);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const isMobile = useMobileSize();
+  const pageBlockSize = isMobile ? 5 : 10;
 
   if (totalPages <= 1) return null;
 

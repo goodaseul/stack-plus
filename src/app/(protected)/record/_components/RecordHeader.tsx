@@ -3,15 +3,9 @@ import AddWordButton from "../../_components/add-word-button/AddWordButton";
 
 export function RecordHeader() {
   return (
-    <>
-      <Title className="flex items-center justify-between">
-        모든 표현들
-        <AddWordButton>표현 추가하기 </AddWordButton>
-      </Title>
-
-      <p className="mt-2 text-sm text-gray-600">
-        지금까지 기록한 표현과 메모를 확인해보세요.
-      </p>
-    </>
+    <Title className="flex items-center justify-between dark:text-white">
+      모든 표현들
+      <AddWordButton>표현 추가하기 </AddWordButton>
+    </Title>
   );
 }

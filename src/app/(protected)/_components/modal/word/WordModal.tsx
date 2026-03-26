@@ -1,5 +1,10 @@
 "use client";
-import { WordCreateInput, WordFormProps, WordUpdateInput } from "@/types/word";
+import {
+  FormType,
+  WordCreateInput,
+  WordFormProps,
+  WordUpdateInput,
+} from "@/types/word";
 import ModalContainer from "./ModalContainer";
 import ModalBody from "./ModalBody";
 import { useForm } from "react-hook-form";
@@ -16,11 +21,11 @@ export default function WordModal({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<WordCreateInput | WordUpdateInput>({
+  } = useForm<FormType>({
     defaultValues: initialValues,
   });
 
-  const submitHandler = (data: WordCreateInput | WordUpdateInput) => {
+  const submitHandler = (data: FormType) => {
     if (mode === "create") {
       onSubmit(data as WordCreateInput);
     } else {

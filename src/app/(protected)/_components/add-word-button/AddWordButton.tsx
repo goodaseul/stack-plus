@@ -45,8 +45,7 @@ export default function AddWordButton({
       <Button
         type="button"
         variant="text_underline"
-        className="ml-auto text-sm text-gray-700 hover:text-black
-        
+        className="text-sm text-gray-700 hover:text-black
         dark:text-white dark:hover:text-white
         "
         onClick={() => setOpenModal(true)}

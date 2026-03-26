@@ -1,16 +1,12 @@
 import Button from "@/components/button/Button";
 import { useClickOutside } from "@/hooks/useClickOutside";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
+import MenuLink from "./MenuLink";
 
-export default function NavBtn({
-  isMenuOpen,
-  setIsMenuOpen,
-}: {
-  isMenuOpen: boolean;
-  setIsMenuOpen: (boolean: boolean) => void;
-}) {
+export default function NavBtn() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
   useClickOutside(menuRef, () => setIsMenuOpen(false), isMenuOpen);
   return (
@@ -27,6 +23,7 @@ export default function NavBtn({
           <GiHamburgerMenu className="text-xl" />
         )}
       </Button>
+      <MenuLink isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
     </div>
   );
 }

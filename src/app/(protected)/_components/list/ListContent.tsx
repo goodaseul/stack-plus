@@ -33,13 +33,13 @@ export default function ListContent({
   return (
     <>
       <div className="gap-1 md:gap-6 w-full">
-        <p className="text-sm md:text-md lg:text-lg font-bold mb-2 text-black dark:text-white">
+        <p className="text-md md:text-lg lg:text-xl font-bold mb-2 text-black dark:text-white">
           {expression}
           <span> : {meaning}</span>
         </p>
 
         {sentence && isRecordPage && (
-          <p className="font-medium text-sm md:text-lg">
+          <p className="font-medium text-sm md:text-md lg:text-lg">
             {idx === -1 ? (
               sentence
             ) : (
@@ -66,7 +66,7 @@ export default function ListContent({
             id={`memo-${expression}`}
             readOnly
             // tabIndex={-1}
-            className="font-medium font-sm mt-5 resize-none w-full overflow-hidden focus-visible:outline-none"
+            className="font-medium text-sm md:text-md lg:text-lg  mt-5 resize-none w-full overflow-hidden focus-visible:outline-none"
           />
         )}
       </div>
