@@ -15,16 +15,22 @@ https://stack-plus.vercel.app/
 
 ## 📸 미리보기
 
+### 랜딩페이지
+
 ### 로그인
 
-![로그인](./public/readme/login.jpeg)
+![랜딩페이지](./public/readme/landing.png)
+
+    - Next.js로  초기 로딩 성능과 SEO를 개선하고, 서비스 소개와 앱 영역의 역할을 명확히 구분
+
+![로그인](./public/readme/login.png)
 
     - Supabase Auth를 활용한 이메일 기반 로그인
     - 앱 최초 진입 시 세션을 확인한 후 인증 상태를 초기화하여 인증 플리커링 방지
 
 ### 표현 관리
 
-![표현 목록](./public/readme/words.jpeg)
+![표현 목록](./public/readme/words.png)
 
 - 표현 CRUD
 - 검색 + 필터링
@@ -32,15 +38,15 @@ https://stack-plus.vercel.app/
 
 ### 표현 추가
 
-![표현 추가](./public/readme/add-word.jpeg)
+![표현 추가](./public/readme/add-word.png)
 
 - 표현, 의미, 예문, 메모 등 학습 정보 관리
 - 중복 표현 입력 방지 로직 구현
 
 ### 학습 대시보드
 
-![대시보드](./public/readme/dashboard.jpeg)
-![대시보드](./public/readme/dashboard-2.jpeg)
+![대시보드](./public/readme/dashboard.png)
+![대시보드](./public/readme/dashboard-2.png)
 
 - 최근 등록한 표현 / record / filter 페이지로 이동
 - 일간 / 월간 / 연간 학습 기록 시각화
@@ -109,24 +115,10 @@ https://stack-plus.vercel.app/
 
 ---
 
-## ⚙️ CI / CD
-
-### GitHub Actions (CI)
-
-GitHub Actions를 활용해 **코드 변경 시 자동으로 검증이 수행되는 CI 파이프라인**을 구성했습니다.
-
-- `dev` 브랜치에 push 또는 Pull Request 생성 시 CI 자동 실행
-- GitHub Actions Runner(`ubuntu-latest`) 환경에서 작업 수행
-- Node.js 20 및 pnpm 기반 의존성 설치 자동화
-- CI 실행 결과를 통해 코드 변경 사항의 안정성 사전 검증
-
 🚀 Deployment
 
 Vercel을 활용한 Next.js 애플리케이션 배포
-
 Supabase 관련 환경 변수를 배포 환경에서 관리
-
-GitHub 저장소와 연동된 자동 배포 환경 구성
 
 ## 시작하기
 
@@ -148,16 +140,3 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```bash
 npm run dev
 ```
-
-### 개선 예정
-
-- 테스트 코드(Jest) 추가 예정
-- 현재는 표현 학습(퀴즈, 복습 주기) 기능이 부족하여
-  향후 아이디어를 통해 퀴즈나, 복습 주기 기능까지 붙일 예정
-
-### 배운 점
-
-1. **React Query의 서버 상태 관리 방식**: 캐싱과 mutation 이후 자동 리페칭을 통한 데이터 일관성 유지
-2. **검색 최적화의 중요성**: 디바운싱을 통해 사용자 경험과 서버 부하를 동시에 개선
-3. **서버 사이드 페이지네이션의 필요성**: 데이터 규모가 커질수록 클라이언트 처리 한계를 명확히 체감
-4. **인증 플로우 설계**: 초기 세션 확인 타이밍에 따라 UX 품질이 크게 달라진다는 점을 경험
