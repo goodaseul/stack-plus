@@ -22,17 +22,18 @@ export default function AuthProvider({
     }
 
     try {
-      const profile = await getMyProfile();
-      if (!profile) {
+      const nickname = session.user.user_metadata?.nickname;
+      if (nickname) {
         setUser({
           id: session.user.id,
-          nickname: null,
+          nickname,
         });
         return;
       }
+      const profile = await getMyProfile();
       setUser({
         id: session.user.id,
-        nickname: profile.nickname,
+        nickname: profile?.nickname ?? null,
       });
     } catch (error) {
       console.error("프로필 불러오기 실패", JSON.stringify(error));
@@ -43,8 +44,8 @@ export default function AuthProvider({
   };
 
   useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange((event, sesseion) => {
-      handleSession(sesseion);
+    const { data } = supabase.auth.onAuthStateChange((event, session) => {
+      handleSession(session);
     });
     return () => {
       data.subscription.unsubscribe();
