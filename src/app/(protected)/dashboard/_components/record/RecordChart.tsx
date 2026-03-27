@@ -9,30 +9,25 @@ import { RecordChartToggle } from "./RecordLineChart/RecordChartToggle";
 import { RecordChartView } from "./RecordLineChart/RecordChartView";
 import { useAllWordsQuery } from "@/hooks/queries/words/useAllWordsQuery";
 import EmptyState from "@/components/empty-state/EmptyState";
+import { Period, PERIOD_LABELS } from "@/constants/chartPeriod";
 
 export function RecordChart() {
   const { data: words } = useAllWordsQuery();
 
   const { dailyData, monthlyData, yearlyData } = useRecordChartData(words);
-  const [period, setPeriod] = useState<"daily" | "monthly" | "yearly">("daily");
+  const [period, setPeriod] = useState<Period>("daily");
 
-  const chartData =
-    period === "daily"
-      ? dailyData
-      : period === "monthly"
-        ? monthlyData
-        : yearlyData;
+  const chartDataMap: Record<Period, typeof dailyData> = {
+    daily: dailyData,
+    monthly: monthlyData,
+    yearly: yearlyData,
+  };
 
   return (
-    <Banner>
+    <Banner className="dark:hover:bg-white">
       <BannerTitle
-        title={
-          period === "daily"
-            ? "일일 기록"
-            : period === "monthly"
-              ? "월간 기록"
-              : "연간 기록"
-        }
+        variant="white"
+        title={PERIOD_LABELS[period]}
         description="지금까지의 기록을 확인해보세요."
       />
 
@@ -41,7 +36,7 @@ export function RecordChart() {
       {words?.length === 0 ? (
         <EmptyState>아직 저장된 표현가 없습니다.</EmptyState>
       ) : (
-        <RecordChartView data={chartData} />
+        <RecordChartView data={chartDataMap[period] ?? []} />
       )}
     </Banner>
   );

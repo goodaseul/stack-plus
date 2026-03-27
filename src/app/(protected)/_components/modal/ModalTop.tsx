@@ -16,7 +16,7 @@ export default function ModalTop({
       <button
         type="button"
         onClick={closeModal}
-        className="absolute right-4 top-4 rounded-md p-1 text-gray-500
+        className="absolute right-4 top-4 rounded-md p-1 text-gray-600
             hover:text-black hover:bg-gray-100 transition"
         aria-label="닫기"
       >

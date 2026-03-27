@@ -1,3 +1,5 @@
+import { FilterValue } from "@/constants/filter";
+
 export interface WordsRequest {
   id: number;
   user_id: string;
@@ -14,4 +16,12 @@ export interface WordsRequest {
 export type WordsResponse = {
   words: WordsRequest[];
   totalCount: number;
+};
+
+export type WordsQueryRequest = {
+  filter?: FilterValue;
+  keyword?: string;
+  wordId?: string | null;
+  page?: number;
+  pageSize?: number;
 };

@@ -1,4 +1,3 @@
-// api/types/errors.ts
 export interface DuplicateWordError {
   code: "DUPLICATE_WORD";
   wordId: number;
@@ -6,7 +5,7 @@ export interface DuplicateWordError {
 }
 
 export function isDuplicateWordError(
-  error: unknown
+  error: unknown,
 ): error is DuplicateWordError {
   return (
     typeof error === "object" &&

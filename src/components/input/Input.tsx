@@ -47,7 +47,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             onClick={onClick}
             autoFocus={autoFocus}
             className={clsx(
-              "w-full rounded-full px-5 py-3.5 text-sm transition focus:outline-none",
+              "w-full rounded-md px-5 py-3.5 text-sm  transition focus:outline-none",
               errors
                 ? "border border-red-500 focus:ring-2 focus:ring-red-500"
                 : "border border-gray-100 focus:ring-2 shadow-md focus:ring-gray-900",

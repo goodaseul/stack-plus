@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useRef } from "react";
 
 type ListContentProps = {
@@ -6,6 +7,7 @@ type ListContentProps = {
   memo: string;
   usage: string;
   sentence: string;
+  isRecordPage: boolean;
 };
 
 export default function ListContent({
@@ -14,12 +16,12 @@ export default function ListContent({
   sentence,
   expression,
   meaning,
+  isRecordPage,
 }: ListContentProps) {
   const lowerSentence = sentence.toLowerCase();
   const lowerExpression = expression.toLowerCase();
 
   const idx = lowerSentence.indexOf(lowerExpression);
-
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -32,19 +34,19 @@ export default function ListContent({
   return (
     <>
       <div className="gap-1 md:gap-6 w-full">
-        <p className="text-xl font-bold mb-2 text-black">
+        <p className="text-md md:text-lg lg:text-xl font-bold mb-2 text-black dark:text-white">
           {expression}
           <span> : {meaning}</span>
         </p>
 
-        {sentence && (
-          <p className="font-medium">
+        {sentence && isRecordPage && (
+          <p className="font-medium text-sm md:text-md lg:text-lg">
             {idx === -1 ? (
               sentence
             ) : (
               <>
                 {sentence.slice(0, idx)}
-                <span className="bg-point px-1">
+                <span className="bg-point text-white px-1">
                   {sentence.slice(idx, idx + expression.length)}
                 </span>
                 {sentence.slice(idx + expression.length)}
@@ -53,19 +55,19 @@ export default function ListContent({
           </p>
         )}
 
-        <p className="absolute left-5 bottom-7 text-sm text-gray-600 truncate  break-keep">
+        <p className="absolute left-5 bottom-7 text-sm text-gray-600 dark:text-gray-100 truncate  break-keep">
           {usage}
         </p>
 
-        {memo && (
+        {isRecordPage && memo && (
           <textarea
             ref={textareaRef}
-            value={`메모 : ${memo}`}
+            value={`${memo}`}
             name="memo"
             id={`memo-${expression}`}
             readOnly
-            tabIndex={-1}
-            className="font-medium font-sm mt-5 resize-none w-full overflow-hidden focus-visible:outline-none"
+            // tabIndex={-1}
+            className="font-medium text-sm md:text-md lg:text-lg  mt-5 resize-none w-full overflow-hidden focus-visible:outline-none"
           />
         )}
       </div>

@@ -19,7 +19,7 @@ export async function signUp(payload: SignUpResponse) {
 
   if (profileError) throw profileError;
 
-  return user;
+  return data;
 }
 
 export async function signIn(payload: SignInResponse) {

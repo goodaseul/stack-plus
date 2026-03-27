@@ -7,6 +7,12 @@ export type WordFormInput = Pick<
   "id" | "expression" | "meaning" | "sentence" | "usage" | "memo"
 >;
 
+type BaseFormProps = {
+  title: string;
+  description: string;
+  closeModal: () => void;
+};
+
 type BaseWord = {
   expression: string;
   meaning: string;
@@ -22,20 +28,15 @@ export type WordUpdateInput = BaseWord & {
 };
 
 export type FormType = WordCreateInput | WordUpdateInput;
+
 export type WordFormProps =
-  | {
+  | (BaseFormProps & {
       mode: "create";
       initialValues: WordCreateInput;
       onSubmit: (item: WordCreateInput) => void;
-      title: string;
-      description: string;
-      closeModal: () => void;
-    }
-  | {
+    })
+  | (BaseFormProps & {
       mode: "update";
       initialValues: WordUpdateInput;
       onSubmit: (item: WordUpdateInput) => void;
-      title: string;
-      description: string;
-      closeModal: () => void;
-    };
+    });

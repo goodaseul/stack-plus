@@ -1,15 +1,32 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 @theme {
-  --color-bg: #f8f8f8;
-  --color-point: #ceec46;
-  --color-text-black: #1a1a1a;
-  --color-text-600: #4a5565;
-  --color-text-700: #364153;
-
   --font-pretendard: var(--font-pretendard);
   --font-sekuya: var(--font-sekuya);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-point: rgba(100, 116, 189, 1);
 }
 
+:root {
+  --background: #f8f9fa;
+  --foreground: #222222;
+}
+
+.dark {
+  --background: #222;
+  --foreground: #e5e7eb;
+}
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+  }
+}
 *,
 *::before,
 *::after {
@@ -30,7 +47,6 @@ html {
 body {
   font-family: var(--font-pretendard), sans-serif;
   line-height: 1.5;
-  color: var(--color-text-black);
 }
 
 button {

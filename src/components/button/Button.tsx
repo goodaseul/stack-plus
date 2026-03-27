@@ -18,18 +18,43 @@ type ButtonProps =
     });
 
 const baseStyles =
-  "transition-all inline-flex items-center justify-center gap-1 rounded-full text-sm text-black font-medium focus:outline-none cursor-pointer hover:-translate-y-1 group-hover:-translate-y-1";
-
+  "inline-flex items-center justify-center gap-1 rounded-md text-sm font-medium transition-all focus:outline-none cursor-pointer hover:-translate-y-1 group-hover:-translate-y-1";
 const variantStyles: Record<ButtonVariant, string> = {
-  default: "bg-point px-4 py-3.5",
-  outline:
-    "border border-point bg-white px-4 py-3.5 hover:bg-point group-hover:bg-point",
-  text_underline:
-    "p-1 hover:translate-y-0 group-hover:translate-y-0 relative after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full",
-  text: "p-1 hover:translate-y-0 group-hover:translate-y-0 relative",
+  default: `
+  bg-point text-white
+  p-2 md:px-4 md:py-3.5
+`,
+
+  outline: `
+  border border-point text-point
+  bg-transparent
+   p-2 md:px-4 md:py-3.5
+  hover:bg-point
+  dark:hover:bg-point
+  hover:text-white
+`,
+
+  text: `
+    p-1 text-foreground
+    hover:translate-y-0 group-hover:translate-y-0
+  `,
+
+  text_underline: `
+  relative inline-block p-1 text-foreground
+  hover:translate-y-0 group-hover:translate-y-0
+
+  after:absolute after:left-0 after:-bottom-1
+  after:h-[2px] after:w-0
+  after:bg-point
+  after:rounded-full
+
+  after:transition-[width] after:duration-300 after:ease-out
+  hover:after:w-full
+`,
 };
 export default function Button(props: ButtonProps) {
   const { children, variant = "default", className = "" } = props;
+
   const styles = clsx(baseStyles, variantStyles[variant], className);
 
   if ("href" in props) {

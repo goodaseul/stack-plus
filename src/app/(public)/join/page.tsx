@@ -19,6 +19,11 @@ type JoinInputs = {
 
 export default function JoinPage() {
   const router = useRouter();
+  const [passwordShow, setPasswordShow] = useState({
+    password: false,
+    confirmPassword: false,
+  });
+
   const {
     register,
     handleSubmit,
@@ -26,41 +31,42 @@ export default function JoinPage() {
     getValues,
   } = useForm<JoinInputs>();
 
-  const [passwordShow, setPasswordShow] = useState({
-    password: false,
-    confirmPassword: false,
-  });
-
   const onSubmit: SubmitHandler<JoinInputs> = async (formData) => {
     try {
-      await signUp({
+      const result = await signUp({
         email: formData.email,
         nickname: formData.nickname,
         password: formData.password,
       });
-      router.push("/login");
+
       toast.success("로그인이 되었습니다.");
+
+      if (result.session) {
+        router.push("/dashboard");
+      } else {
+        router.push("/login");
+      }
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
-      } else {
-        toast.error("회원가입 중 알 수 없는 오류가 발생했습니다.");
       }
+      toast.error("회원가입 중 오류가 발생했습니다.");
     }
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-6">
-      <div className="w-full max-w-lg rounded-2xl bg-white p-10 shadow-sm">
+    <div className="flex min-h-screen items-center justify-center px-6">
+      <div className="w-full max-w-lg rounded-2xl p-3 sm:p-10 shadow-sm">
         <Title
-          title="Join Us!"
-          desc="Stack plus와 함께 영어 표현을 쌓아가세요."
+          title="회원가입"
+          desc={
+            <>
+              <span className="font-sekuya">stack plus</span>함께 표현을
+              쌓아가세요.
+            </>
+          }
         />
-
-        <form
-          className="mt-8 grid gap-5 font-pretendard"
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form className="mt-8 grid gap-5" onSubmit={handleSubmit(onSubmit)}>
           <Input
             type="email"
             {...register("email", {
@@ -93,6 +99,7 @@ export default function JoinPage() {
             errors={errors.password?.message}
           >
             <FaRegEyeSlash
+              className="text-black dark:text-white"
               onClick={() => {
                 setPasswordShow((prev) => ({
                   ...prev,
@@ -111,9 +118,10 @@ export default function JoinPage() {
                 "비밀번호가 일치하지 않습니다",
             })}
             placeholder="비밀번호를 다시 입력하세요."
-            errors={errors.passwordConfirm?.message} // 여기 주목
+            errors={errors.passwordConfirm?.message}
           >
             <FaRegEyeSlash
+              className="text-black dark:text-white"
               onClick={() => {
                 setPasswordShow((prev) => ({
                   ...prev,
@@ -128,7 +136,7 @@ export default function JoinPage() {
           </Button>
         </form>
 
-        <div className="mt-6 text-center text-sm text-gray-500">
+        <div className="mt-6 text-center text-sm text-foreground">
           이미 계정이 있으신가요?
           <Button variant="text_underline" href="/login" className="ml-1">
             로그인

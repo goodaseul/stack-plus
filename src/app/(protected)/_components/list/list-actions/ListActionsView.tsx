@@ -57,7 +57,7 @@ export default function ListActionsView({
           className={`${buttonStyles} pointer-events-none`}
           disabled
         >
-          <TfiWrite className=" text-gray-500" />
+          <TfiWrite className=" text-gray-600  dark:text-white" />
         </Button>
       )}
       <Button
@@ -72,9 +72,9 @@ export default function ListActionsView({
         }
       >
         {word.bookmarked ? (
-          <FaBookmark className="text-gray-700" />
+          <FaBookmark className="text-gray-700 dark:text-white" />
         ) : (
-          <FaRegBookmark className="text-gray-500" />
+          <FaRegBookmark className="text-gray-600  dark:text-white" />
         )}
       </Button>
       <div ref={dropdownWrapperRef}>
@@ -84,20 +84,28 @@ export default function ListActionsView({
           className={`${buttonStyles}`}
           onClick={toggleDropdown}
         >
-          <BsThreeDots className="text-gray-500" />
+          <BsThreeDots className="text-gray-600 dark:text-white" />
         </Button>
         {isDropdownOpen && (
           <ul
             className="absolute z-10 right-0 -bottom-23 w-max rounded-xl
-         bg-white px-5 py-3 border border-gray-200 shadow-sm"
+         bg-white px-5 py-3 border border-gray-200 shadow-sm  "
           >
             <li>
-              <Button onClick={openEditModal} variant="text">
+              <Button
+                onClick={openEditModal}
+                variant="text"
+                className="dark:text-black"
+              >
                 수정하기
               </Button>
             </li>
             <li>
-              <Button onClick={openDeleteModal} variant="text">
+              <Button
+                onClick={openDeleteModal}
+                variant="text"
+                className="dark:text-black"
+              >
                 삭제하기
               </Button>
             </li>

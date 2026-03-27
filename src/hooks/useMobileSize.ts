@@ -5,7 +5,7 @@ export function useMobileSize() {
 
   useEffect(() => {
     const check = () => {
-      setIsSm(window.innerWidth < 640); // tailwind sm 기준
+      setIsSm(window.innerWidth < 640);
     };
 
     check();

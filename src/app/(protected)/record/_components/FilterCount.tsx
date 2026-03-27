@@ -7,7 +7,7 @@ type FilterCountItem = {
 
 export function FilterCount({ total, filterKey }: FilterCountItem) {
   return (
-    <p className="text-sm text-gray-500">
+    <p className="text-sm text-gray-600 dark:text-white">
       {FILTER_LABELS[filterKey]} {total}개
     </p>
   );

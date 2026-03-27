@@ -1,9 +1,14 @@
+"use client";
 import { AllWordsBanner } from "./_components/AllWordsBanner";
 import { MemoBanner } from "./_components/memo/MemoBanner";
 import { RecentWords } from "./_components/RecentWords";
 import { RecordStudy } from "./_components/record/RecordStudy";
+import { useUserStore } from "@/store/useUserStore";
 
 export default function DashboardPage() {
+  const { isInitialized } = useUserStore();
+  if (!isInitialized) return <div>로딩 중..</div>;
+
   return (
     <div
       className="
@@ -16,15 +21,13 @@ export default function DashboardPage() {
       >
         <RecentWords />
 
-        <div className="flex flex-col h-full gap-4">
+        <div className="flex flex-col md:flex-row xl:flex-col h-full gap-4">
           <AllWordsBanner />
           <MemoBanner />
         </div>
       </section>
 
-      <section>
-        <RecordStudy />
-      </section>
+      <RecordStudy />
     </div>
   );
 }
