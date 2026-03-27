@@ -23,7 +23,7 @@ export default function AddWordButton({
   const onSubmit = async (form: WordCreateInput) => {
     try {
       await uploadWords(form);
-      toast.success("표현가 추가되었습니다.");
+      toast.success("표현이 추가되었습니다.");
       closeModal();
     } catch (error) {
       if (isDuplicateWordError(error)) {

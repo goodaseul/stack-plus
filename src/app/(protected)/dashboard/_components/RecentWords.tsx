@@ -25,7 +25,7 @@ export function RecentWords() {
       {isLoading && <Loading />}
       {isError && <ErrorState>표현를 불러올 수 없습니다.</ErrorState>}
       {!isLoading && words.length === 0 ? (
-        <EmptyState>아직 저장된 표현가 없습니다.</EmptyState>
+        <EmptyState>아직 저장된 표현이 없습니다.</EmptyState>
       ) : (
         <List words={words} />
       )}

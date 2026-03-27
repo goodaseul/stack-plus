@@ -7,7 +7,7 @@ export function MemoBanner() {
     <div className="relative h-full flex-1">
       <Banner className="relative">
         <BannerTitle
-          title="메모 안 한 표현가 있어요"
+          title="메모 안 한 표현이 있어요"
           description="등록만 하고 지나간 표현들 정리해볼까요?"
         />
 

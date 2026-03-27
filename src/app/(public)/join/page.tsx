@@ -35,8 +35,8 @@ export default function JoinPage() {
     try {
       const result = await signUp({
         email: formData.email,
-        nickname: formData.nickname,
         password: formData.password,
+        nickname: formData.nickname,
       });
 
       toast.success("로그인이 되었습니다.");

@@ -1,10 +1,15 @@
-import { SignInResponse, SignUpResponse } from "@/api/types/auth";
+import { SignInParams, SignUpParams } from "@/api/types/auth";
 import { supabase } from "../lib/supabase";
 
-export async function signUp(payload: SignUpResponse) {
+export async function signUp(payload: SignUpParams) {
   const { data, error } = await supabase.auth.signUp({
     email: payload.email,
     password: payload.password,
+    options: {
+      data: {
+        nickname: payload.nickname,
+      },
+    },
   });
 
   if (error) throw error;
@@ -22,7 +27,7 @@ export async function signUp(payload: SignUpResponse) {
   return data;
 }
 
-export async function signIn(payload: SignInResponse) {
+export async function signIn(payload: SignInParams) {
   const { data, error } = await supabase.auth.signInWithPassword({
     email: payload.email,
     password: payload.password,

@@ -34,7 +34,7 @@ export function RecordChart() {
       <RecordChartToggle period={period} onChange={setPeriod} />
 
       {words?.length === 0 ? (
-        <EmptyState>아직 저장된 표현가 없습니다.</EmptyState>
+        <EmptyState>아직 저장된 표현이 없습니다.</EmptyState>
       ) : (
         <RecordChartView data={chartDataMap[period] ?? []} />
       )}
