@@ -3,10 +3,10 @@
 import Button from "@/components/button/Button";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { useLogout } from "@/hooks/auth/useLogout";
-import { ThemeToggle } from "@/components/button/ThemeButton";
+import { ThemeToggle } from "@/components/layout/header/ThemeButton";
 import MyMenu from "./Header/MyMenu";
 import NavBtn from "./Header/NavBtn";
-import Logo from "./Header/Logo";
+import Logo from "@/components/layout/header/Logo";
 
 export default function Header() {
   const { logout } = useLogout();
@@ -16,7 +16,7 @@ export default function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between">
         <Logo />
 
-        <div className="relative flex items-center gap-1 text-gray-600">
+        <div className="relative flex items-center gap-">
           <ThemeToggle />
 
           <MyMenu />

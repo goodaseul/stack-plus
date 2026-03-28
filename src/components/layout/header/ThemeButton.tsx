@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   const isMobile = useMobileSize();
@@ -13,19 +13,14 @@ export function ThemeToggle() {
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
+  const isDark = resolvedTheme === "dark";
   return (
     <button
       className={`
         font-sekuya text-sm md:text-md bg-whiterounded-sm px-2 py-1`}
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      onClick={() => setTheme(isDark ? "light" : "dark")}
     >
-      {theme === "dark"
-        ? isMobile
-          ? "☀️"
-          : "light"
-        : isMobile
-          ? "🌙"
-          : "dark"}
+      {isDark ? (isMobile ? "☀️" : "light") : isMobile ? "🌙" : "dark"}
     </button>
   );
 }
