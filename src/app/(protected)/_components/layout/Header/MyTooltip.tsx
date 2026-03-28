@@ -5,6 +5,15 @@ type MyTooltipProps = {
   bookmark: number;
 };
 
+/**
+ * Render a tooltip displaying a user's nickname and counts for saved, memoed, and bookmarked expressions.
+ *
+ * @param nickname - The user's nickname, or `null` if unavailable
+ * @param total - Total number of saved expressions
+ * @param memo - Number of expressions that have a memo
+ * @param bookmark - Number of expressions that have a bookmark
+ * @returns A JSX element that renders an absolutely positioned tooltip containing the provided values
+ */
 export default function MyTooltip({
   nickname,
   total,
