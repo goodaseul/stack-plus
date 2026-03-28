@@ -14,7 +14,7 @@ export default function MyTooltip({
   return (
     <div
       className="absolute z-10 -left-35 top-10 w-max rounded-xl
-                 bg-white px-5 py-3 border border-gray-200 shadow-sm"
+                 bg-white px-5 py-3 border border-gray-200 text-gray-600 shadow-sm"
     >
       <p className="font-bold">
         닉네임: <span className="bg-point text-white px-1">{nickname}</span>

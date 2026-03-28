@@ -28,6 +28,15 @@ https://stack-plus.vercel.app/
     - Supabase Auth를 활용한 이메일 기반 로그인
     - 앱 최초 진입 시 세션을 확인한 후 인증 상태를 초기화하여 인증 플리커링 방지
 
+### 학습 대시보드
+
+![대시보드](./public/readme/dashboard.png)
+![대시보드](./public/readme/dashboard-2.png)
+
+- 최근 등록한 표현 / record / filter 페이지로 이동
+- 일간 / 월간 / 연간 학습 기록 시각화
+- 누적 학습 현황을 한눈에 확인 가능
+
 ### 표현 관리
 
 ![표현 목록](./public/readme/words.png)
@@ -42,15 +51,6 @@ https://stack-plus.vercel.app/
 
 - 표현, 의미, 예문, 메모 등 학습 정보 관리
 - 중복 표현 입력 방지 로직 구현
-
-### 학습 대시보드
-
-![대시보드](./public/readme/dashboard.png)
-![대시보드](./public/readme/dashboard-2.png)
-
-- 최근 등록한 표현 / record / filter 페이지로 이동
-- 일간 / 월간 / 연간 학습 기록 시각화
-- 누적 학습 현황을 한눈에 확인 가능
 
 ## 주요 기능
 
@@ -97,6 +97,9 @@ https://stack-plus.vercel.app/
   - mutation 이후 `invalidateQueries`를 통한 서버 상태 재동기화
 - **Zustand**
   - 로그인 사용자 정보 및 인증 초기화 상태 전역 관리
+- **React Hook Form**
+  - 로그인/회원가입 폼의 상태를 효율적으로 관리하고, 불필요한 리렌더링을 최소화
+- **Next themes**
 
 ### Backend & Database
 
