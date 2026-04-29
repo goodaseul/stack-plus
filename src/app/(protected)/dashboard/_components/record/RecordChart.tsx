@@ -24,9 +24,8 @@ export function RecordChart() {
   };
 
   return (
-    <Banner className="dark:hover:bg-white">
+    <Banner>
       <BannerTitle
-        variant="white"
         title={PERIOD_LABELS[period]}
         description="지금까지의 기록을 확인해보세요."
       />

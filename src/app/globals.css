@@ -18,6 +18,13 @@
   --foreground: #e5e7eb;
 }
 
+.recharts-axis-tick text {
+  fill: #6b7280;
+}
+
+.dark .recharts-axis-tick text {
+  fill: #fff;
+}
 @layer base {
   body {
     background-color: var(--background);
