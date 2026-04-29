@@ -33,7 +33,13 @@ export const metadata: Metadata = {
     title: "Stack+",
     description:
       "Stack+는 언어를 학습하고, 데이터로 성장을 기록하는 학습 플랫폼입니다.",
-    images: ["/public/og-image.png"],
+    images: [
+      {
+        url: "https://stack-plus.vercel.app/og-image.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
 };
 
