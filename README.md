@@ -19,19 +19,19 @@ https://stack-plus.vercel.app/
 
 ### 로그인
 
-![랜딩페이지](./public/readme/landing.png)
+![랜딩페이지](./public/readme/landing.png?v=2)
 
     - Next.js로  초기 로딩 성능과 SEO를 개선하고, 서비스 소개와 앱 영역의 역할을 명확히 구분
 
-![로그인](./public/readme/login.png)
+![로그인](./public/readme/login.png?v=2)
 
     - Supabase Auth를 활용한 이메일 기반 로그인
     - 앱 최초 진입 시 세션을 확인한 후 인증 상태를 초기화하여 인증 플리커링 방지
 
 ### 학습 대시보드
 
-![대시보드](./public/readme/dashboard.png)
-![대시보드](./public/readme/dashboard-2.png)
+![대시보드](./public/readme/dashboard.png?v=2)
+![대시보드](./public/readme/dashboard-2.png?v=2)
 
     - 최근 등록한 표현 / record / filter 페이지로 이동
     - 일간 / 월간 / 연간 학습 기록 시각화
@@ -39,7 +39,7 @@ https://stack-plus.vercel.app/
 
 ### 표현 관리
 
-![표현 목록](./public/readme/words.png)
+![표현 목록](./public/readme/words.png?v=2)
 
     - 표현 CRUD
     - 검색 + 필터링
@@ -47,7 +47,7 @@ https://stack-plus.vercel.app/
 
 ### 표현 추가
 
-![표현 추가](./public/readme/add-word.png)
+![표현 추가](./public/readme/add-word.png?v=2)
 
     - 표현, 의미, 예문, 메모 등 학습 정보 관리
     - 중복 표현 입력 방지 로직 구현
