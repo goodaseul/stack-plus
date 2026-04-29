@@ -1,38 +1,19 @@
-import clsx from "clsx";
-
 type BannerTitleProps = {
   title: React.ReactNode;
   description: React.ReactNode;
-  variant?: "default" | "white";
 };
 
-export function BannerTitle({
-  title,
-  description,
-  variant = "default",
-}: BannerTitleProps) {
-  const isWhite = variant === "white";
-
+export function BannerTitle({ title, description }: BannerTitleProps) {
   return (
-    <div className="space-y-2 pb-3">
+    <div className="space-y-2 pb-3 text-black dark:text-white">
       <h3
-        className={clsx(
-          "text-base font-semibold",
-          isWhite
-            ? "dark:text-black"
-            : "text-black dark:group-hover:text-white",
-        )}
+        className="
+          text-base font-semibold
+        "
       >
         {title}
       </h3>
-      <p
-        className={clsx(
-          "text-sm leading-relaxed",
-          isWhite ? "text-black" : "text-gray-600 dark:group-hover:text-white",
-        )}
-      >
-        {description}
-      </p>
+      <p className="text-sm leading-relaxed">{description}</p>
     </div>
   );
 }

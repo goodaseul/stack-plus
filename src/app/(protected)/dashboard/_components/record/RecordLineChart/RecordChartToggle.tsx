@@ -1,5 +1,6 @@
 import Button from "@/components/button/Button";
 import { Period, PERIOD_OPTIONS } from "@/constants/chartPeriod";
+import clsx from "clsx";
 
 type Props = {
   period: Period;
@@ -14,11 +15,12 @@ export function RecordChartToggle({ period, onChange }: Props) {
           key={value}
           onClick={() => onChange(value)}
           variant="text_underline"
-          className={
+          className={clsx(
+            "text-black dark:text-white",
             period === value
               ? "font-medium text-point after:w-full"
-              : "text-gray-600 hover:text-point"
-          }
+              : "text-gray-600 hover:text-point",
+          )}
         >
           {label}
         </Button>
