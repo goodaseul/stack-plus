@@ -33,24 +33,24 @@ https://stack-plus.vercel.app/
 ![대시보드](./public/readme/dashboard.png)
 ![대시보드](./public/readme/dashboard-2.png)
 
-- 최근 등록한 표현 / record / filter 페이지로 이동
-- 일간 / 월간 / 연간 학습 기록 시각화
-- 누적 학습 현황을 한눈에 확인 가능
+    - 최근 등록한 표현 / record / filter 페이지로 이동
+    - 일간 / 월간 / 연간 학습 기록 시각화
+    - 누적 학습 현황을 한눈에 확인 가능
 
 ### 표현 관리
 
 ![표현 목록](./public/readme/words.png)
 
-- 표현 CRUD
-- 검색 + 필터링
-- 북마크 기능
+    - 표현 CRUD
+    - 검색 + 필터링
+    - 북마크 기능
 
 ### 표현 추가
 
 ![표현 추가](./public/readme/add-word.png)
 
-- 표현, 의미, 예문, 메모 등 학습 정보 관리
-- 중복 표현 입력 방지 로직 구현
+    - 표현, 의미, 예문, 메모 등 학습 정보 관리
+    - 중복 표현 입력 방지 로직 구현
 
 ## 주요 기능
 
