@@ -31,8 +31,9 @@ export const metadata: Metadata = {
     "Stack+는 언어를 학습하고, 데이터로 성장을 기록하는 학습 플랫폼입니다.",
   openGraph: {
     title: "Stack+",
-    description: "영어 표현 학습 플랫폼",
-    images: ["/og-image.svg"],
+    description:
+      "Stack+는 언어를 학습하고, 데이터로 성장을 기록하는 학습 플랫폼입니다.",
+    images: ["/og-image.png"],
   },
 };
 
