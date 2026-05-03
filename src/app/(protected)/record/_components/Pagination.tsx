@@ -14,8 +14,6 @@ export function Pagination({
   itemsPerPage,
   onPageChange,
 }: PaginationProps) {
-  console.log(totalItems, itemsPerPage);
-
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const isMobile = useMobileSize();
   const pageBlockSize = isMobile ? 5 : 10;

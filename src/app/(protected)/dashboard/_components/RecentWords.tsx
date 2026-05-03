@@ -3,16 +3,14 @@
 import { List } from "../../_components/list/List";
 import { Title } from "./common/Title";
 import { useWordsQuery } from "@/hooks/queries/words";
-import { useMobileSize } from "@/hooks/useMobileSize";
 import AddWordButton from "../../_components/add-word-button/AddWordButton";
 import EmptyState from "@/components/empty-state/EmptyState";
 import Loading from "../../_components/loading/Loading";
 import ErrorState from "@/components/error-state/ErrorState";
 
 export function RecentWords() {
-  const isMobile = useMobileSize();
   const { data, isLoading, isError } = useWordsQuery({
-    limit: isMobile ? 8 : 6,
+    limit: 6,
   });
 
   const words = data?.words ?? [];

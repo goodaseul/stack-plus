@@ -9,7 +9,7 @@ export function useWordsQuery({
   wordId = null,
   page = 1,
   pageSize = 20,
-  limit = 6,
+  limit,
 }: WordsQueryRequest = {}) {
   return useQuery({
     queryKey: wordsQueryKeys.list({ filter, keyword, wordId, page, pageSize }),
