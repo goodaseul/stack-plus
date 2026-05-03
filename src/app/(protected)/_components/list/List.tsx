@@ -3,8 +3,7 @@
 import ListActions from "./list-actions/ListActions";
 import ListContent from "./ListContent";
 import { Word } from "@/types/word";
-import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export function List({
   words,
@@ -13,15 +12,8 @@ export function List({
   words: Word[];
   className?: string;
 }) {
-  const searchParams = useSearchParams();
   const pathname = usePathname();
   const isRecordPage = pathname === "/record";
-
-  const createWordLink = (expression: string) => {
-    const params = new URLSearchParams(searchParams);
-    params.set("expression", expression);
-    return `/record?keyword=${encodeURIComponent(expression)}`;
-  };
 
   return (
     <ul
@@ -51,11 +43,7 @@ export function List({
             gap-3 px-5 py-7 pb-13
             "
           >
-            {isRecordPage ? (
-              <div>{content}</div>
-            ) : (
-              <Link href={createWordLink(`${word.expression}`)}>{content}</Link>
-            )}
+            {isRecordPage ? <div>{content}</div> : <>{content}</>}
             <ListActions {...word} />
           </li>
         );
