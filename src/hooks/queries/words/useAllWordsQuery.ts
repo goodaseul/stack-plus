@@ -4,7 +4,7 @@ import { getAllWords } from "@/api/words";
 
 export function useAllWordsQuery() {
   return useQuery({
-    queryKey: [...wordsQueryKeys.all, "all"],
+    queryKey: [...wordsQueryKeys.all],
     queryFn: getAllWords,
     staleTime: 1000 * 60 * 5,
   });
