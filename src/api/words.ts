@@ -20,6 +20,7 @@ export async function getWords({
   wordId,
   page = 1,
   pageSize = 20,
+  limit,
 }: WordsQueryRequest): Promise<{ words: WordsRequest[]; totalCount: number }> {
   const user = await getUserOrThrow();
 
@@ -27,7 +28,7 @@ export async function getWords({
     .from("words")
     .select("*", { count: "exact" })
     .eq("user_id", user.id)
-    .order("id", { ascending: false });
+    .order("created_at", { ascending: false });
 
   const filterMap: Record<
     Exclude<FilterValue, null>,
@@ -51,10 +52,13 @@ export async function getWords({
       query = filterMap[filter](query);
     }
   }
+  if (limit) {
+    query = query.limit(limit);
+  } else {
+    const from = (page - 1) * pageSize;
 
-  const from = (page - 1) * pageSize;
-
-  query = query.range(from, from + pageSize - 1);
+    query = query.range(from, from + pageSize - 1);
+  }
 
   const { data, error, count } = await query;
 

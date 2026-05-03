@@ -9,10 +9,11 @@ export function useWordsQuery({
   wordId = null,
   page = 1,
   pageSize = 20,
+  limit = 6,
 }: WordsQueryRequest = {}) {
   return useQuery({
     queryKey: wordsQueryKeys.list({ filter, keyword, wordId, page, pageSize }),
-    queryFn: () => getWords({ filter, keyword, wordId, page, pageSize }),
+    queryFn: () => getWords({ filter, keyword, wordId, page, pageSize, limit }),
     staleTime: 1000 * 60 * 5,
     gcTime: 1000 * 60 * 10,
   });

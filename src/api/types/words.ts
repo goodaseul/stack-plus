@@ -24,4 +24,5 @@ export type WordsQueryRequest = {
   wordId?: string | null;
   page?: number;
   pageSize?: number;
+  limit?: number;
 };
