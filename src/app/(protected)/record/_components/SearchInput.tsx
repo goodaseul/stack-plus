@@ -1,20 +1,7 @@
 import Input from "@/components/input/Input";
+import useDebouncedValue from "@/hooks/useDebouncedValue";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-
-function useDebouncedValue(value: string, delay: number) {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
-
-    return () => clearTimeout(timer);
-  }, [value, delay]);
-
-  return debouncedValue;
-}
 
 export default function SearchInput({ keyword }: { keyword: string }) {
   const searchParams = useSearchParams();
