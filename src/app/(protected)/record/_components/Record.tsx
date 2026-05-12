@@ -29,6 +29,7 @@ export function Record() {
     keyword,
     wordId,
     page: currentPage,
+    pageSize: ITEMS_PER_PAGE,
   });
 
   const words = data?.words ?? [];
