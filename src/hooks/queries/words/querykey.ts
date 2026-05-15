@@ -8,6 +8,7 @@ export const wordsQueryKeys = {
     wordId: string | null;
     page: number;
     pageSize: number;
+    limit: number | undefined;
   }) => [...wordsQueryKeys.all, params] as const,
 };
 

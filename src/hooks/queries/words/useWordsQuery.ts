@@ -12,7 +12,14 @@ export function useWordsQuery({
   limit,
 }: WordsQueryRequest = {}) {
   return useQuery({
-    queryKey: wordsQueryKeys.list({ filter, keyword, wordId, page, pageSize }),
+    queryKey: wordsQueryKeys.list({
+      filter,
+      keyword,
+      wordId,
+      page,
+      pageSize,
+      limit,
+    }), // limit 추가
     queryFn: () => getWords({ filter, keyword, wordId, page, pageSize, limit }),
     staleTime: 1000 * 60 * 5,
     gcTime: 1000 * 60 * 10,
