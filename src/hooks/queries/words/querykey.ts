@@ -5,7 +5,6 @@ export const wordsQueryKeys = {
   list: (params: {
     filter: FilterValue;
     keyword: string;
-    wordId: string | null;
     page: number;
     pageSize: number;
     limit: number | undefined;

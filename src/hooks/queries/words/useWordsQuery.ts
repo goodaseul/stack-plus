@@ -6,7 +6,6 @@ import { FILTERS } from "@/constants/filter";
 export function useWordsQuery({
   filter = FILTERS.ALL,
   keyword = "",
-  wordId = null,
   page = 1,
   pageSize = 20,
   limit,
@@ -15,12 +14,11 @@ export function useWordsQuery({
     queryKey: wordsQueryKeys.list({
       filter,
       keyword,
-      wordId,
       page,
       pageSize,
       limit,
-    }), // limit 추가
-    queryFn: () => getWords({ filter, keyword, wordId, page, pageSize, limit }),
+    }),
+    queryFn: () => getWords({ filter, keyword, page, pageSize, limit }),
     staleTime: 1000 * 60 * 5,
     gcTime: 1000 * 60 * 10,
   });
