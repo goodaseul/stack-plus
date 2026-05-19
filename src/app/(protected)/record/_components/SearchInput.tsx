@@ -1,7 +1,7 @@
 import Input from "@/components/input/Input";
 import useDebouncedValue from "@/hooks/useDebouncedValue";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SearchInput({ keyword }: { keyword: string }) {
   const searchParams = useSearchParams();
@@ -9,8 +9,6 @@ export default function SearchInput({ keyword }: { keyword: string }) {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState(keyword);
   const debouncedSearchValue = useDebouncedValue(searchValue, 300);
-
-  const prevKeywordRef = useRef(searchParams.get("keyword") ?? "");
 
   useEffect(() => {
     setSearchValue(keyword);
@@ -22,7 +20,6 @@ export default function SearchInput({ keyword }: { keyword: string }) {
 
     const searchValue = debouncedSearchValue;
     const currentKeyword = searchParams.get("keyword") ?? "";
-    const currentPage = searchParams.get("page") ?? "1";
 
     const isKeywordChanged = currentKeyword !== searchValue;
 
