@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-export default function Logo() {
+export default function Logo({ href }: { href: string }) {
   return (
     <Link
-      href="/dashboard"
+      href={href}
       className="text-xl font-sekuya text-black dark:text-white transition-colors hover:text-point group"
     >
       STACK

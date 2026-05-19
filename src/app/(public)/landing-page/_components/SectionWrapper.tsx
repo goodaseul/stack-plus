@@ -1,6 +1,6 @@
 type SectionWrapperProps = {
   title: React.ReactNode;
-  desc: React.ReactNode;
+  desc?: React.ReactNode;
   children: React.ReactNode;
 };
 export default function SectionWrapper({

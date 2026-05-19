@@ -14,7 +14,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-20 p-6 bg-background backdrop-blur-md border-b border-gray-200 dark:border-gray-100/10">
       <div className="mx-auto flex max-w-6xl items-center justify-between">
-        <Logo />
+        <Logo href="/dashboard" />
 
         <div className="relative flex items-center gap-">
           <ThemeToggle />
