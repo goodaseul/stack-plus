@@ -5,12 +5,7 @@ type UserState = {
   nickname: string | null;
   isInitialized: boolean;
   setInitialized: () => void;
-  setUser: (
-    user: Omit<
-      UserState,
-      "setUser" | "clearUser" | "setInitialized" | "isInitialized"
-    >,
-  ) => void;
+  setUser: (user: Pick<UserState, "id" | "nickname">) => void;
   clearUser: () => void;
 };
 
