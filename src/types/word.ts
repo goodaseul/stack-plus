@@ -20,6 +20,7 @@ type BaseWord = {
   usage?: string;
   memo?: string;
   bookmarked?: boolean;
+  is_public?: boolean;
 };
 export type WordCreateInput = BaseWord;
 

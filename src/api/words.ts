@@ -14,6 +14,7 @@ async function getUserOrThrow() {
 export function normalizeMemo(memo?: string | null) {
   return memo?.trim() === "" ? null : memo;
 }
+
 export async function getWords({
   filter,
   keyword,
@@ -34,9 +35,9 @@ export async function getWords({
     Exclude<FilterValue, null>,
     (queryBuilder: typeof query) => typeof query
   > = {
-    hasMemo: (queryBuilder) => queryBuilder.not("memo", "is", null),
-    noMemo: (queryBuilder) => queryBuilder.is("memo", null),
-    bookmarked: (queryBuilder) => queryBuilder.eq("bookmarked", true),
+    hasMemo: (q) => q.not("memo", "is", null),
+    noMemo: (q) => q.is("memo", null),
+    bookmarked: (q) => q.eq("bookmarked", true),
   };
 
   if (wordId) {
@@ -52,25 +53,24 @@ export async function getWords({
       query = filterMap[filter](query);
     }
   }
+
   if (limit) {
     query = query.limit(limit);
   } else {
     const from = (page - 1) * pageSize;
-
     query = query.range(from, from + pageSize - 1);
   }
 
   const { data, error, count } = await query;
 
-  if (error) {
-    throw error;
-  }
+  if (error) throw error;
 
   return {
     words: data ?? [],
     totalCount: count ?? 0,
   };
 }
+
 export async function getAllWords(): Promise<WordsRequest[]> {
   const user = await getUserOrThrow();
 
@@ -80,12 +80,11 @@ export async function getAllWords(): Promise<WordsRequest[]> {
     .eq("user_id", user.id)
     .order("created_at", { ascending: false });
 
-  if (error) {
-    throw error;
-  }
+  if (error) throw error;
 
   return data ?? [];
 }
+
 export async function uploadWords(word: WordCreateInput) {
   const user = await getUserOrThrow();
 
@@ -106,15 +105,13 @@ export async function uploadWords(word: WordCreateInput) {
     } as DuplicateWordError;
   }
 
-  const { error } = await supabase
-    .from("words")
-    .insert({
-      ...word,
-      memo: normalizedMemo,
-      user_id: user.id,
-      bookmarked: word.bookmarked ?? false,
-    })
-    .select();
+  const { error } = await supabase.from("words").insert({
+    ...word,
+    memo: normalizedMemo,
+    user_id: user.id,
+    bookmarked: word.bookmarked ?? false,
+    is_public: word.is_public ?? false,
+  });
 
   if (error) {
     throw error;
@@ -132,6 +129,7 @@ export async function modifyWords(word: WordUpdateInput) {
       ...updateData,
       memo: normalizedMemo,
       bookmarked: word.bookmarked ?? false,
+      is_public: word.is_public ?? false,
     })
     .eq("id", id)
     .eq("user_id", user.id)
@@ -154,4 +152,16 @@ export async function toggleBookmark(wordId: number, bookmarked: boolean) {
     .eq("id", wordId);
 
   if (error) throw error;
+}
+
+export async function getPublicWords(): Promise<WordsRequest[]> {
+  const { data, error } = await supabase
+    .from("words")
+    .select("*")
+    .eq("is_public", true)
+    .order("created_at", { ascending: false });
+
+  if (error) throw error;
+
+  return data ?? [];
 }

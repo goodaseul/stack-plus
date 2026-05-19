@@ -11,6 +11,7 @@ export interface WordsRequest {
   bookmarked: boolean;
   created_at: string;
   updated_at: string;
+  is_public?: boolean;
 }
 
 export type WordsResponse = {
