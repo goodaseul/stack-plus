@@ -6,7 +6,10 @@ type UserState = {
   isInitialized: boolean;
   setInitialized: () => void;
   setUser: (
-    user: Partial<Omit<UserState, "setUser" | "clearUser" | "setInitialized">>,
+    user: Omit<
+      UserState,
+      "setUser" | "clearUser" | "setInitialized" | "isInitialized"
+    >,
   ) => void;
   clearUser: () => void;
 };
