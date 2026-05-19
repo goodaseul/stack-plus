@@ -1,6 +1,5 @@
 "use client";
 
-import Title from "../_components/title/Title";
 import Input from "../../../components/input/Input";
 import Button from "@/components/button/Button";
 import { useRouter } from "next/navigation";
@@ -10,6 +9,7 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { signIn } from "@/api/auth";
 import { useUserStore } from "@/store/useUserStore";
+import Title from "@/app/(public)/_components/title/Title";
 
 type LoginInputs = {
   email: string;

@@ -1,6 +1,5 @@
 "use client";
 
-import Title from "../_components/title/Title";
 import Input from "../../../components/input/Input";
 import Button from "@/components/button/Button";
 import { useRouter } from "next/navigation";
@@ -9,6 +8,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { signUp } from "@/api/auth";
+import Title from "@/app/(public)/_components/title/Title";
 
 type JoinInputs = {
   email: string;
