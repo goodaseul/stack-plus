@@ -65,6 +65,8 @@ export default function AddWordButton({
               sentence: "",
               usage: "일상생활",
               memo: "",
+              bookmarked: false,
+              is_public: false,
             }}
             onSubmit={onSubmit}
             closeModal={closeModal}

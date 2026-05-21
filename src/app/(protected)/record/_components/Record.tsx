@@ -1,5 +1,4 @@
 "use client";
-import { List } from "../../_components/list/List";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useWordsQuery } from "@/hooks/queries/words";
@@ -10,6 +9,9 @@ import { Pagination } from "./Pagination";
 import Loading from "../../_components/loading/Loading";
 import ErrorState from "@/components/error-state/ErrorState";
 import RecordTopContent from "./RecordTopContent";
+import ListActions from "@/components/list/list-actions/ListActions";
+import { Word } from "@/types/word";
+import { List } from "@/components/list/List";
 
 const ITEMS_PER_PAGE = 20;
 
@@ -65,7 +67,10 @@ export function Record() {
         <EmptyState>{emptyMessage}</EmptyState>
       ) : (
         <>
-          <List words={words} />
+          <List
+            words={words}
+            renderActions={(word: Word) => <ListActions {...word} />}
+          />
           <Pagination
             currentPage={currentPage}
             totalItems={totalCount}

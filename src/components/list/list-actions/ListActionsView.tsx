@@ -6,11 +6,11 @@ import { BsThreeDots } from "react-icons/bs";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { TfiWrite } from "react-icons/tfi";
 import { useDeleteWordMutation } from "@/hooks/queries/words/useDeleteWordMutation";
-import Modal from "../../modal/Modal";
-import WordModal from "../../modal/word/WordModal";
 import { useToggleBookmarkMutation } from "@/hooks/queries/words/useToggleBookmarkMutation";
-import ConfirmModal from "../../modal/confirm/ConfirmModal";
 import { toast } from "sonner";
+import Modal from "@/app/(protected)/_components/modal/Modal";
+import WordModal from "@/app/(protected)/_components/modal/word/WordModal";
+import ConfirmModal from "@/app/(protected)/_components/modal/confirm/ConfirmModal";
 
 type ListActionsViewProps = {
   word: Word;
@@ -125,6 +125,7 @@ export default function ListActionsView({
               sentence: word.sentence ?? "",
               usage: word.usage,
               memo: word.memo ?? "",
+              is_public: word.is_public,
             }}
             onSubmit={handleModify}
             closeModal={closeModal}

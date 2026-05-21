@@ -13,13 +13,14 @@ type BaseFormProps = {
   closeModal: () => void;
 };
 
-type BaseWord = {
+export type BaseWord = {
+  id: number;
   expression: string;
   meaning: string;
-  sentence?: string;
-  usage?: string;
+  usage: string;
   memo?: string;
-  bookmarked: boolean;
+  sentence?: string;
+  bookmarked?: boolean;
   is_public: boolean;
 };
 export type WordCreateInput = BaseWord;

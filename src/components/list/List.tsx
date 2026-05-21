@@ -1,16 +1,17 @@
 "use client";
 
-import ListActions from "./list-actions/ListActions";
+import { BaseWord } from "@/types/word";
 import ListContent from "./ListContent";
-import { Word } from "@/types/word";
 import { usePathname } from "next/navigation";
 
-export function List({
+export function List<T extends BaseWord>({
   words,
   className,
+  renderActions,
 }: {
-  words: Word[];
+  words: T[];
   className?: string;
+  renderActions?: (word: T) => React.ReactNode;
 }) {
   const pathname = usePathname();
   const isRecordPage = pathname === "/record";
@@ -18,9 +19,8 @@ export function List({
   return (
     <ul
       className={`
-        grid
-        gap-4
-        ${isRecordPage ? " grid-cols-1 sm:grid-cols-2" : "grid-cols-2 md:grid-cols-3"}
+        grid gap-4
+        ${isRecordPage ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-2 md:grid-cols-3"}
         ${className}`}
     >
       {words.map((word) => {
@@ -37,14 +37,11 @@ export function List({
         return (
           <li
             key={word.id}
-            className="
-            border border-gray-200 dark:border-point rounded-lg 
-            group relative
-            gap-3 px-5 py-7 pb-13
-            "
+            className="border border-gray-200 dark:border-point rounded-lg 
+            group relative gap-3 px-5 py-7 pb-13"
           >
             {isRecordPage ? <div>{content}</div> : <>{content}</>}
-            <ListActions {...word} />
+            {renderActions?.(word)}
           </li>
         );
       })}

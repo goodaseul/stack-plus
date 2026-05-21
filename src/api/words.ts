@@ -154,14 +154,14 @@ export async function toggleBookmark(wordId: number, bookmarked: boolean) {
   if (error) throw error;
 }
 
-export async function getPublicWords(): Promise<WordsRequest[]> {
-  const { data, error } = await supabase
-    .from("words")
-    .select("*")
-    .eq("is_public", true)
-    .order("created_at", { ascending: false });
+// export async function getPublicWords(): Promise<WordsRequest[]> {
+//   const { data, error } = await supabase
+//     .from("words")
+//     .select("*")
+//     .eq("is_public", true)
+//     .order("created_at", { ascending: false });
 
-  if (error) throw error;
+//   if (error) throw error;
 
-  return data ?? [];
-}
+//   return data ?? [];
+// }

@@ -11,7 +11,7 @@ export interface WordsRequest {
   bookmarked: boolean;
   created_at: string;
   updated_at: string;
-  is_public?: boolean;
+  is_public: boolean;
 }
 
 export type WordsResponse = {
@@ -27,3 +27,8 @@ export type WordsQueryRequest = {
   pageSize?: number;
   limit?: number;
 };
+
+export interface PublicWordRequest extends Omit<WordsRequest, "user_id"> {
+  author_nickname: string | null;
+  profiles?: { nickname: string };
+}

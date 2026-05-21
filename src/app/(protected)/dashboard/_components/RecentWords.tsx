@@ -1,12 +1,14 @@
 "use client";
 
-import { List } from "../../_components/list/List";
 import { Title } from "./common/Title";
 import { useWordsQuery } from "@/hooks/queries/words";
 import AddWordButton from "../../_components/add-word-button/AddWordButton";
 import EmptyState from "@/components/empty-state/EmptyState";
 import Loading from "../../_components/loading/Loading";
 import ErrorState from "@/components/error-state/ErrorState";
+import ListActions from "@/components/list/list-actions/ListActions";
+import { Word } from "@/types/word";
+import { List } from "@/components/list/List";
 
 export function RecentWords() {
   const { data, isLoading, isError } = useWordsQuery({
@@ -29,7 +31,10 @@ export function RecentWords() {
         {!isLoading && words.length === 0 ? (
           <EmptyState>아직 저장된 표현이 없습니다.</EmptyState>
         ) : (
-          <List words={words} />
+          <List
+            words={words}
+            renderActions={(word: Word) => <ListActions {...word} />}
+          />
         )}
       </div>
     </section>
