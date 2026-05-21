@@ -14,7 +14,6 @@ type BaseFormProps = {
 };
 
 export type BaseWord = {
-  id: number;
   expression: string;
   meaning: string;
   usage: string;
