@@ -14,6 +14,7 @@ type BaseFormProps = {
 };
 
 export type BaseWord = {
+  id: number;
   expression: string;
   meaning: string;
   usage: string;
@@ -22,11 +23,9 @@ export type BaseWord = {
   bookmarked?: boolean;
   is_public: boolean;
 };
-export type WordCreateInput = BaseWord;
+export type WordCreateInput = Omit<BaseWord, "id">;
 
-export type WordUpdateInput = BaseWord & {
-  id: number;
-};
+export type WordUpdateInput = BaseWord;
 
 export type FormType = WordCreateInput | WordUpdateInput;
 
