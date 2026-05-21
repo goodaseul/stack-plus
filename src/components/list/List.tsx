@@ -14,13 +14,13 @@ export function List<T extends BaseWord>({
   renderActions?: (word: T) => React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isRecordPage = pathname === "/record";
+  const isHomePage = pathname === "/home";
 
   return (
     <ul
       className={`
         grid gap-4
-        ${isRecordPage ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-2 md:grid-cols-3"}
+        ${!isHomePage ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-2 md:grid-cols-3"}
         ${className}`}
     >
       {words.map((word) => {
@@ -31,7 +31,7 @@ export function List<T extends BaseWord>({
             usage={word.usage}
             memo={word.memo ?? ""}
             sentence={word.sentence ?? ""}
-            isRecordPage={isRecordPage}
+            isRecordPage={!isHomePage}
           />
         );
         return (
@@ -40,7 +40,7 @@ export function List<T extends BaseWord>({
             className="border border-gray-200 dark:border-point rounded-lg 
             group relative gap-3 px-5 py-7 pb-13"
           >
-            {isRecordPage ? <div>{content}</div> : <>{content}</>}
+            {!isHomePage ? <div>{content}</div> : <>{content}</>}
             {renderActions?.(word)}
           </li>
         );

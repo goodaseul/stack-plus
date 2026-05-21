@@ -7,8 +7,6 @@ export async function getPublicWords(): Promise<PublicWordRequest[]> {
     .select(`*, profiles(nickname)`)
     .eq("is_public", true);
 
-  console.log(JSON.stringify(data, null, 2)); // 👈 추가
-
   if (error) throw error;
 
   return data ?? [];

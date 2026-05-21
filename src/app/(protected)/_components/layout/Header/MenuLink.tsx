@@ -2,8 +2,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const menuLinks = [
-  { url: "/dashboard", link: "Home" },
-  { url: "/record", link: "Record" },
+  { url: "/dashboard", link: "대시보드" },
+  { url: "/record", link: "단어정리장" },
+  { url: "/explore", link: "단어공유장" },
 ];
 
 export default function MenuLink({
