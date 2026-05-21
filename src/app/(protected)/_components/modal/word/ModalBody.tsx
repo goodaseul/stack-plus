@@ -70,6 +70,13 @@ export default function ModalBody({ register, errors }: ModalBodyProps) {
           className={`${InputStyles} min-h-[90px] resize-none`}
         />
       </ModalField>
+
+      <label htmlFor="show-agree" className="flex items-center">
+        <input type="checkbox" id="show-agree" />
+        <span className="text-background text-sm px-2">
+          지금 작성한 표현을 모두와 공유하고 싶다면 체크박스를 눌러주세요 :)
+        </span>
+      </label>
     </>
   );
 }
