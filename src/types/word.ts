@@ -19,8 +19,8 @@ type BaseWord = {
   sentence?: string;
   usage?: string;
   memo?: string;
-  bookmarked?: boolean;
-  is_public?: boolean;
+  bookmarked: boolean;
+  is_public: boolean;
 };
 export type WordCreateInput = BaseWord;
 
