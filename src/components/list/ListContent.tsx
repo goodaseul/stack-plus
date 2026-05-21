@@ -1,5 +1,8 @@
 "use client";
+import useToggleIsPublicMutation from "@/hooks/queries/words/useToggleIsPublicMutation";
+import { BaseWord } from "@/types/word";
 import { useEffect, useRef } from "react";
+import { FiGlobe, FiLock } from "react-icons/fi";
 
 type ListContentProps = {
   expression: string;
@@ -8,6 +11,7 @@ type ListContentProps = {
   usage: string;
   sentence: string;
   isRecordPage: boolean;
+  word: BaseWord;
 };
 
 export default function ListContent({
@@ -17,7 +21,10 @@ export default function ListContent({
   expression,
   meaning,
   isRecordPage,
+  word,
 }: ListContentProps) {
+  const { mutate: toggleIsPublic } = useToggleIsPublicMutation();
+
   const lowerSentence = sentence.toLowerCase();
   const lowerExpression = expression.toLowerCase();
 
@@ -34,6 +41,22 @@ export default function ListContent({
   return (
     <>
       <div className="gap-1 md:gap-6 w-full">
+        <button
+          onClick={() =>
+            toggleIsPublic({ wordId: word.id, is_public: !word.is_public })
+          }
+          className="flex items-center ml-auto justify-end gap-1 text-xs text-gray-400"
+        >
+          {word.is_public ? (
+            <>
+              <FiGlobe className="text-point" /> <span>공개중</span>
+            </>
+          ) : (
+            <>
+              <FiLock /> <span>비공개</span>
+            </>
+          )}
+        </button>
         <p className="text-md md:text-lg lg:text-xl font-bold mb-2 text-black dark:text-white">
           {expression}
           <span> : {meaning}</span>

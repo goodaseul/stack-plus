@@ -1,5 +1,5 @@
 import Input from "@/components/input/Input";
-import { FiChevronDown } from "react-icons/fi";
+import { FiChevronDown, FiGlobe, FiLock } from "react-icons/fi";
 import { ModalField } from "./ModalField";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { FormType } from "@/types/word";
@@ -71,10 +71,26 @@ export default function ModalBody({ register, errors }: ModalBodyProps) {
         />
       </ModalField>
 
-      <label htmlFor="show-agree" className="flex items-center">
-        <input type="checkbox" id="show-agree" {...register("is_public")} />
-        <span className="text-background text-sm px-2">
-          지금 작성한 표현을 모두와 공유하고 싶다면 체크박스를 눌러주세요 :)
+      <label
+        htmlFor="show-agree"
+        className="flex items-center gap-2 cursor-pointer"
+      >
+        <input
+          type="checkbox"
+          id="show-agree"
+          className="sr-only peer"
+          {...register("is_public")}
+          onChange={(e) => {
+            register("is_public").onChange(e);
+          }}
+        />
+        <FiLock className="peer-checked:hidden text-gray-400" size={16} />
+        <FiGlobe className="hidden peer-checked:block text-point" size={16} />
+        <span className="text-background text-sm peer-checked:hidden">
+          비공개
+        </span>
+        <span className="hidden text-background text-sm peer-checked:block">
+          공개 중
         </span>
       </label>
     </>

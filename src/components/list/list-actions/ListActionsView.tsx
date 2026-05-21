@@ -33,6 +33,7 @@ export default function ListActionsView({
   closeModal,
 }: ListActionsViewProps) {
   const { mutate: toggleBookmark } = useToggleBookmarkMutation();
+
   const modifyWord = useModifyWordMutation();
   const { mutate: deleteWord } = useDeleteWordMutation();
   const handleModify = async (form: WordUpdateInput) => {
@@ -45,103 +46,106 @@ export default function ListActionsView({
     flex items-center justify-center w-6 h-6 p-0
   `;
   return (
-    <div
-      className="flex items-center gap-1
+    <>
+      <div
+        className="flex items-center gap-1
       justify-end absolute right-5 bottom-7
       "
-    >
-      {word.memo && (
-        <Button
-          type="button"
-          variant="text"
-          className={`${buttonStyles} pointer-events-none`}
-          disabled
-        >
-          <TfiWrite className=" text-gray-600  dark:text-white" />
-        </Button>
-      )}
-      <Button
-        type="button"
-        variant="text"
-        className={`${buttonStyles}`}
-        onClick={() =>
-          toggleBookmark({
-            wordId: word.id,
-            bookmarked: !word.bookmarked,
-          })
-        }
       >
-        {word.bookmarked ? (
-          <FaBookmark className="text-gray-700 dark:text-white" />
-        ) : (
-          <FaRegBookmark className="text-gray-600  dark:text-white" />
+        {word.memo && (
+          <Button
+            type="button"
+            variant="text"
+            className={`${buttonStyles} pointer-events-none`}
+            disabled
+          >
+            <TfiWrite className=" text-gray-600  dark:text-white" />
+          </Button>
         )}
-      </Button>
-      <div ref={dropdownWrapperRef}>
+
         <Button
           type="button"
           variant="text"
           className={`${buttonStyles}`}
-          onClick={toggleDropdown}
+          onClick={() =>
+            toggleBookmark({
+              wordId: word.id,
+              bookmarked: !word.bookmarked,
+            })
+          }
         >
-          <BsThreeDots className="text-gray-600 dark:text-white" />
+          {word.bookmarked ? (
+            <FaBookmark className="text-gray-700 dark:text-white" />
+          ) : (
+            <FaRegBookmark className="text-gray-600  dark:text-white" />
+          )}
         </Button>
-        {isDropdownOpen && (
-          <ul
-            className="absolute z-10 right-0 -bottom-23 w-max rounded-xl
-         bg-white px-5 py-3 border border-gray-200 shadow-sm  "
+        <div ref={dropdownWrapperRef}>
+          <Button
+            type="button"
+            variant="text"
+            className={`${buttonStyles}`}
+            onClick={toggleDropdown}
           >
-            <li>
-              <Button
-                onClick={openEditModal}
-                variant="text"
-                className="dark:text-black"
-              >
-                수정하기
-              </Button>
-            </li>
-            <li>
-              <Button
-                onClick={openDeleteModal}
-                variant="text"
-                className="dark:text-black"
-              >
-                삭제하기
-              </Button>
-            </li>
-          </ul>
+            <BsThreeDots className="text-gray-600 dark:text-white" />
+          </Button>
+          {isDropdownOpen && (
+            <ul
+              className="absolute z-10 right-0 -bottom-23 w-max rounded-xl
+         bg-white px-5 py-3 border border-gray-200 shadow-sm  "
+            >
+              <li>
+                <Button
+                  onClick={openEditModal}
+                  variant="text"
+                  className="dark:text-black"
+                >
+                  수정하기
+                </Button>
+              </li>
+              <li>
+                <Button
+                  onClick={openDeleteModal}
+                  variant="text"
+                  className="dark:text-black"
+                >
+                  삭제하기
+                </Button>
+              </li>
+            </ul>
+          )}
+        </div>
+        {openModal === "edit" && (
+          <Modal closeModal={closeModal}>
+            <WordModal
+              mode="update"
+              title="표현 수정"
+              description="필요한 부분만 고쳐도 돼요"
+              initialValues={{
+                id: word.id,
+                expression: word.expression,
+                meaning: word.meaning,
+                sentence: word.sentence ?? "",
+                usage: word.usage,
+                memo: word.memo ?? "",
+                is_public: word.is_public,
+              }}
+              onSubmit={handleModify}
+              closeModal={closeModal}
+            />
+          </Modal>
+        )}
+        {openModal === "delete" && (
+          <Modal closeModal={closeModal}>
+            <ConfirmModal
+              closeModal={closeModal}
+              deleteWord={() => deleteWord(word.id)}
+              title="정말로 삭제하시겠어요?"
+              description="삭제한 후에는 복구가 되지 않아요."
+            />
+          </Modal>
         )}
       </div>
-      {openModal === "edit" && (
-        <Modal closeModal={closeModal}>
-          <WordModal
-            mode="update"
-            title="표현 수정"
-            description="필요한 부분만 고쳐도 돼요"
-            initialValues={{
-              id: word.id,
-              expression: word.expression,
-              meaning: word.meaning,
-              sentence: word.sentence ?? "",
-              usage: word.usage,
-              memo: word.memo ?? "",
-              is_public: word.is_public,
-            }}
-            onSubmit={handleModify}
-            closeModal={closeModal}
-          />
-        </Modal>
-      )}
-      {openModal === "delete" && (
-        <Modal closeModal={closeModal}>
-          <ConfirmModal
-            closeModal={closeModal}
-            deleteWord={() => deleteWord(word.id)}
-            title="정말로 삭제하시겠어요?"
-            description="삭제한 후에는 복구가 되지 않아요."
-          />
-        </Modal>
-      )}
-    </div>
+    </>
   );
 }

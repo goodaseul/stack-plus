@@ -13,7 +13,7 @@ export default function PublicHeader() {
             단어공유장
           </Button>
           <Button type="button" variant="text_underline" href="/dashboard">
-            시작하기
+            대시보드
           </Button>
         </nav>
       </div>

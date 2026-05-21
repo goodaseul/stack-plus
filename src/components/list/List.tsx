@@ -32,6 +32,7 @@ export function List<T extends BaseWord>({
             memo={word.memo ?? ""}
             sentence={word.sentence ?? ""}
             isRecordPage={!isHomePage}
+            word={word}
           />
         );
         return (
