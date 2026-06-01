@@ -1,6 +1,7 @@
 "use client";
 import useToggleIsPublicMutation from "@/hooks/queries/words/useToggleIsPublicMutation";
 import { BaseWord } from "@/types/word";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { FiGlobe, FiLock } from "react-icons/fi";
 
@@ -31,6 +32,8 @@ export default function ListContent({
   const idx = lowerSentence.indexOf(lowerExpression);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+  const isPublicPage = usePathname();
+
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
@@ -41,22 +44,25 @@ export default function ListContent({
   return (
     <>
       <div className="gap-1 md:gap-6 w-full">
-        <button
-          onClick={() =>
-            toggleIsPublic({ wordId: word.id, is_public: !word.is_public })
-          }
-          className="flex items-center ml-auto justify-end gap-1 text-xs text-gray-400"
-        >
-          {word.is_public ? (
-            <>
-              <FiGlobe className="text-point" /> <span>공개중</span>
-            </>
-          ) : (
-            <>
-              <FiLock /> <span>비공개</span>
-            </>
-          )}
-        </button>
+        {isPublicPage !== "/explore" && (
+          <button
+            onClick={() =>
+              toggleIsPublic({ wordId: word.id, is_public: !word.is_public })
+            }
+            className="flex items-center ml-auto justify-end gap-1 text-xs text-gray-400"
+          >
+            {word.is_public ? (
+              <>
+                <FiGlobe className="text-point" /> <span>공개중</span>
+              </>
+            ) : (
+              <>
+                <FiLock /> <span>비공개</span>
+              </>
+            )}
+          </button>
+        )}
+
         <p className="text-md md:text-lg lg:text-xl font-bold mb-2 text-black dark:text-white">
           {expression}
           <span> : {meaning}</span>
