@@ -73,7 +73,7 @@ export default function ModalBody({ register, errors }: ModalBodyProps) {
 
       <label
         htmlFor="show-agree"
-        className="flex items-center gap-2 cursor-pointer"
+        className="flex items-center gap-2 cursor-pointer select-none"
       >
         <input
           type="checkbox"
@@ -84,13 +84,27 @@ export default function ModalBody({ register, errors }: ModalBodyProps) {
             register("is_public").onChange(e);
           }}
         />
-        <FiLock className="peer-checked:hidden text-gray-400" size={16} />
-        <FiGlobe className="hidden peer-checked:block text-point" size={16} />
-        <span className="text-background text-sm peer-checked:hidden">
-          비공개
+
+        <div
+          className="
+    relative w-9 h-5 rounded-full shrink-0
+    transition-colors duration-200
+    bg-gray-300 dark:bg-gray-600 peer-checked:bg-point
+    after:content-[''] after:absolute after:top-0.5 after:left-0.5
+    after:w-4 after:h-4 after:bg-white after:rounded-full after:shadow-sm
+    after:transition-all after:duration-200
+    peer-checked:after:translate-x-4
+  "
+        />
+
+        <span className="flex items-center gap-1 text-xs text-gray-400 peer-checked:hidden">
+          <FiLock size={13} />
+          <span>비공개</span>
         </span>
-        <span className="hidden text-background text-sm peer-checked:block">
-          공개 중
+
+        <span className="hidden peer-checked:flex items-center gap-1 text-xs text-point">
+          <FiGlobe size={13} />
+          <span>공개중</span>
         </span>
       </label>
     </>
