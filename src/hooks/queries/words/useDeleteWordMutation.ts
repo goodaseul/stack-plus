@@ -1,6 +1,7 @@
 import { deleteWords } from "@/api/words";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import wordsQueryKeys from "./querykey";
+import publicWordsQueryKeys from "../explore/querykey";
 
 export function useDeleteWordMutation() {
   const queryClient = useQueryClient();

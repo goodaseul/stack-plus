@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import wordsQueryKeys from "./querykey";
 import { toggleIsPublic } from "@/api/words";
+import publicWordsQueryKeys from "../explore/querykey";
 
 type Variables = {
   wordId: number;
@@ -18,7 +19,7 @@ export default function useToggleIsPublicMutation() {
       queryClient.invalidateQueries({
         queryKey: wordsQueryKeys.all,
       });
-      queryClient.invalidateQueries({ queryKey: ["publicWords"] });
+      queryClient.invalidateQueries({ queryKey: publicWordsQueryKeys.all });
     },
   });
 }
