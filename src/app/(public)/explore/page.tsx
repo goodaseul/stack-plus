@@ -1,8 +1,9 @@
-import { getPublicWords } from "@/api/public";
+"use client";
 import { PublicWordList } from "./_components/PublicWordList";
+import { usePublicWordsQuery } from "@/hooks/queries/explore/usePubliceWordsQuery";
 
-export default async function ExplorePage() {
-  const words = await getPublicWords();
+export default function ExplorePage() {
+  const { data: words = [] } = usePublicWordsQuery();
   return (
     <section className="pt-24">
       <div

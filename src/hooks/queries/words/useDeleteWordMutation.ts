@@ -9,6 +9,7 @@ export function useDeleteWordMutation() {
     mutationFn: (wordId: number) => deleteWords(wordId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: wordsQueryKeys.all });
+      queryClient.invalidateQueries({ queryKey: publicWordsQueryKeys.all });
     },
   });
 }

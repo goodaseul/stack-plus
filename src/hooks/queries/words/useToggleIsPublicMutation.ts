@@ -18,6 +18,7 @@ export default function useToggleIsPublicMutation() {
       queryClient.invalidateQueries({
         queryKey: wordsQueryKeys.all,
       });
+      queryClient.invalidateQueries({ queryKey: ["publicWords"] });
     },
   });
 }
