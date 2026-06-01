@@ -49,17 +49,33 @@ export default function ListContent({
             onClick={() =>
               toggleIsPublic({ wordId: word.id, is_public: !word.is_public })
             }
-            className="flex items-center ml-auto justify-end gap-1 text-xs text-gray-400"
+            className="flex items-center ml-auto gap-2 cursor-pointer select-none group"
+            aria-label={word.is_public ? "공개 해제" : "공개하기"}
           >
-            {word.is_public ? (
-              <>
-                <FiGlobe className="text-point" /> <span>공개중</span>
-              </>
-            ) : (
-              <>
-                <FiLock /> <span>비공개</span>
-              </>
-            )}
+            <div
+              className={`relative w-9 h-5 rounded-full transition-colors duration-200
+    ${word.is_public ? "bg-point" : "bg-gray-300 dark:bg-gray-600"}`}
+            >
+              <div
+                className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow-sm transition-all duration-200
+      ${word.is_public ? "left-[18px]" : "left-0.5"}`}
+              />
+            </div>
+
+            <span
+              className={`flex items-center gap-1 text-xs transition-colors duration-200
+    ${word.is_public ? "text-point" : "text-gray-400"}`}
+            >
+              {word.is_public ? (
+                <>
+                  <FiGlobe className="text-[13px]" /> <span>공개중</span>
+                </>
+              ) : (
+                <>
+                  <FiLock className="text-[13px]" /> <span>비공개</span>
+                </>
+              )}
+            </span>
           </button>
         )}
 
