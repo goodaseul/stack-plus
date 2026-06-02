@@ -1,9 +1,31 @@
 "use client";
+import { useEffect, useRef } from "react";
 import { PublicWordList } from "./_components/PublicWordList";
 import { usePublicWordsQuery } from "@/hooks/queries/explore/usePubliceWordsQuery";
 
 export default function ExplorePage() {
-  const { data: words = [] } = usePublicWordsQuery();
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    usePublicWordsQuery();
+  const observerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = observerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) {
+          fetchNextPage();
+        }
+      },
+      {
+        threshold: 0.5,
+      },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  const words = data?.pages.flatMap((page) => page.data) ?? [];
   return (
     <section className="pt-24">
       <div
@@ -14,13 +36,21 @@ export default function ExplorePage() {
           다른 사람들은 어떤 표현을 쌓았을까요? 🤔
         </h2>
 
-        {words.length === 0 ? (
+        {words.length === 0 && !isFetchingNextPage ? (
           <div className="text-center py-12 text-slate-400">
             아직 공개된 단어가 없습니다.
           </div>
         ) : (
           <>
             <PublicWordList words={words} />
+            <div ref={observerRef} className="py-8 flex justify-center">
+              {isFetchingNextPage && (
+                <span className="text-sm text-point">불러오는 중...</span>
+              )}
+              {!hasNextPage && words.length > 0 && (
+                <span className="text-sm text-point">모두 불러왔습니다.</span>
+              )}
+            </div>
           </>
         )}
       </div>
