@@ -7,6 +7,7 @@ import { ThemeToggle } from "@/components/layout/header/ThemeButton";
 import MyMenu from "./Header/MyMenu";
 import NavBtn from "./Header/NavBtn";
 import Logo from "@/components/layout/header/Logo";
+import Link from "next/link";
 
 export default function Header() {
   const { logout } = useLogout();
@@ -20,7 +21,6 @@ export default function Header() {
           <ThemeToggle />
 
           <MyMenu />
-
           <Button type="button" variant="text" className="p-1" onClick={logout}>
             <RiLogoutBoxRLine className="text-lg" />
           </Button>

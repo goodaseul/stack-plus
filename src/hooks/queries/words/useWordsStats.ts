@@ -1,3 +1,4 @@
+import { usePublicWordsQuery } from "../explore/usePubliceWordsQuery";
 import { useWordsQuery } from "./useWordsQuery";
 import { FILTERS } from "@/constants/filter";
 
@@ -20,9 +21,11 @@ export function useWordStats() {
     pageSize: 1,
   });
 
+  const { data: publicWords } = usePublicWordsQuery();
   return {
     total: all?.totalCount ?? 0,
     memo: memo?.totalCount ?? 0,
     bookmark: bookmark?.totalCount ?? 0,
+    publicWords: publicWords?.pages[0]?.totalCount ?? 0,
   };
 }
