@@ -22,8 +22,8 @@
 
 ![단어공유](./public/readme/explore.png)
 
-- 로그인 없이 다른 사용자들이 공개한 표현을 자유롭게 탐색
-- 회원가입 없이도 서비스를 먼저 체험할 수 있도록 공개 페이지로 제공
+- 로그인 없이 단어공유장에서 다른 사용자의 공개 표현 탐색 가능
+- TanStack Query의 prefetchInfiniteQuery를 활용한 SSR 구현으로 초기 로딩 시간(TTV) 단축 및 깜빡임 없는 무한 스크롤 제공
 
 ### 학습 대시보드
 
@@ -54,7 +54,7 @@
 ### Frontend
 
 - **Next.js 14 (App Router)** · **TypeScript** · **Tailwind CSS**
-- **TanStack Query** - 서버 상태 캐싱 및 관리, mutation 후 `invalidateQueries`로 상태 재동기화
+- **TanStack Query** - 서버 상태 캐싱 및 관리, `mutation` 후 `invalidateQueries`로 상태 재동기화, `HydrationBoundary`를 활용한 무한 스크롤 데이터 SSR 프리페치 구현
 - **Zustand** - 로그인 사용자 정보 및 인증 초기화 상태 전역 관리
 - **React Hook Form** - 비제어 컴포넌트 방식으로 불필요한 리렌더링 최소화
 - **Next Themes** · **Recharts** · **Sonner**
