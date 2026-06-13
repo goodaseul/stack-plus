@@ -7,7 +7,7 @@ export const DATE_SLICE = {
 } as const;
 
 export function defaultChart(words: WordsRequest[] | undefined, num: number) {
-  if (!words) return [];
+  if (!words || !Array.isArray(words)) return [];
   const map = new Map<string, number>();
 
   words.forEach((item) => {
