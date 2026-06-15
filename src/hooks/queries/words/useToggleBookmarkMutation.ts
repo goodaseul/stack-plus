@@ -17,9 +17,11 @@ export function useToggleBookmarkMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ wordId, bookmarked }: BookmarkVariables) =>
-      toggleBookmark(wordId, bookmarked),
+    mutationFn: ({ wordId, bookmarked }: BookmarkVariables) => {
+      console.log("API 호출:", wordId, bookmarked);
 
+      return toggleBookmark(wordId, bookmarked);
+    },
     onMutate: async ({ wordId, bookmarked }) => {
       await queryClient.cancelQueries({ queryKey: wordsQueryKeys.all });
 
@@ -30,7 +32,7 @@ export function useToggleBookmarkMutation() {
       queryClient.setQueriesData<WordsListResponse>(
         { queryKey: wordsQueryKeys.all },
         (old) => {
-          if (!old) return old;
+          if (!old?.words) return old;
           return {
             ...old,
             words: old.words.map((word) =>
@@ -44,6 +46,7 @@ export function useToggleBookmarkMutation() {
     },
 
     onError: (err, variables, context) => {
+      console.error("에러:", err);
       if (context?.previousQueries) {
         context.previousQueries.forEach(([queryKey, previousData]) => {
           queryClient.setQueryData(queryKey, previousData);
