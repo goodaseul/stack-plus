@@ -18,21 +18,19 @@ export function useToggleBookmarkMutation() {
 
   return useMutation({
     mutationFn: ({ wordId, bookmarked }: BookmarkVariables) => {
-      console.log("API 호출:", wordId, bookmarked);
-
       return toggleBookmark(wordId, bookmarked);
     },
     onMutate: async ({ wordId, bookmarked }) => {
-      await queryClient.cancelQueries({ queryKey: wordsQueryKeys.all });
+      await queryClient.cancelQueries({ queryKey: wordsQueryKeys.lists() });
 
       const previousQueries = queryClient.getQueriesData<WordsListResponse>({
-        queryKey: wordsQueryKeys.all,
+        queryKey: wordsQueryKeys.lists(),
       });
 
       queryClient.setQueriesData<WordsListResponse>(
-        { queryKey: wordsQueryKeys.all },
+        { queryKey: wordsQueryKeys.lists() },
         (old) => {
-          if (!old?.words) return old;
+          if (!old) return old;
           return {
             ...old,
             words: old.words.map((word) =>
@@ -45,8 +43,7 @@ export function useToggleBookmarkMutation() {
       return { previousQueries };
     },
 
-    onError: (err, variables, context) => {
-      console.error("에러:", err);
+    onError: (err, _, context) => {
       if (context?.previousQueries) {
         context.previousQueries.forEach(([queryKey, previousData]) => {
           queryClient.setQueryData(queryKey, previousData);
@@ -55,7 +52,7 @@ export function useToggleBookmarkMutation() {
     },
 
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: wordsQueryKeys.all });
+      queryClient.invalidateQueries({ queryKey: wordsQueryKeys.lists() });
     },
   });
 }
