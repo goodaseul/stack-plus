@@ -20,31 +20,17 @@ export default function AuthProvider({
       setInitialized();
       return;
     }
-
-    try {
-      const nickname = session.user.user_metadata?.nickname;
-      if (nickname) {
-        setUser({
-          id: session.user.id,
-          nickname,
-        });
-        return;
-      }
-      const profile = await getMyProfile();
-      setUser({
-        id: session.user.id,
-        nickname: profile?.nickname ?? null,
-      });
-    } catch (error) {
-      console.error("프로필 불러오기 실패", JSON.stringify(error));
-      setUser({ id: session.user.id, nickname: null });
-    } finally {
-      setInitialized();
-    }
+    const nickname = session.user.user_metadata?.nickname ?? null;
+    setUser({ id: session.user.id, nickname });
+    setInitialized();
   };
 
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "TOKEN_REFRESHED" && !session) {
+        clearUser();
+        return;
+      }
       handleSession(session);
     });
     return () => {
