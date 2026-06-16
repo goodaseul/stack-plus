@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { useUserStore } from "@/store/useUserStore";
-import { getMyProfile } from "@/api/profile";
 
 import { Session } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
