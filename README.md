@@ -23,7 +23,7 @@
 ![단어공유](./public/readme/explore.png)
 
 - 로그인 없이 단어공유장에서 다른 사용자의 공개 표현 탐색 가능
-- TanStack Query의 prefetchInfiniteQuery를 활용한 SSR 구현으로 초기 로딩 시간(TTV) 단축 및 깜빡임 없는 무한 스크롤 제공
+- TanStack Query의 prefetchInfiniteQuery를 활용한 SSR 구현으로 초기 로딩 시간 단축 및 깜빡임 없는 무한 스크롤 제공
 
 ### 학습 대시보드
 
@@ -100,22 +100,17 @@
 로그인 후 대시보드로 이동했을 때, 헤더 닉네임이 바로 표시되지 않고 잠깐 빈 상태로 보이다가 나타나는 플리커링이 발생했습니다.
 
 **원인**
-로그인 시 `setUser`로 닉네임을 Zustand에 저장했지만, 대시보드로 이동하면서 `AuthProvider`가 새롭게 마운트되고 `onAuthStateChange`가 등록됩니다.
-Supabase는 `onAuthStateChange`가 등록되는 순간 현재 세션 상태를 즉시 콜백으로 실행하는데, 이때 `getMyProfile()` API를 호출하는 동안 닉네임이 잠깐 없는 상태가 되면서 플리커링이 발생했습니다.
+로그인 시 `setUser`로 닉네임을 Zustand에 저장했지만,
+대시보드로 이동하면서 `AuthProvider`가 새롭게 마운트되고
+`onAuthStateChange`가 등록됩니다.
+Supabase는 `onAuthStateChange`가 등록되는 순간 현재 세션 상태를
+즉시 콜백으로 실행하는 특성이 있습니다.
+이로 인해 `handleSession`이 즉시 실행되고 `getMyProfile()` API를
+호출하는 동안 Zustand의 닉네임이 초기화되어 잠깐 빈 상태가
+되면서 플리커링이 발생했습니다.
 
 **해결**
-`handleSession`에서 세션의 `user_metadata`에 닉네임이 이미 있으면 API 호출 없이 바로 `setUser`하고 return하도록 분기를 추가했습니다.
-
-```ts
-const nickname = session.user.user_metadata?.nickname;
-if (nickname) {
-  setUser({ id: session.user.id, nickname });
-  return;
-}
-```
-
-현재는 이메일 회원가입 시 닉네임을 필수로 입력받기 때문에 `user_metadata`에 항상 닉네임이 있어 `getMyProfile()`이 호출되지 않습니다.
-추후 소셜 로그인 확장이나 예외 케이스를 대비해 fallback으로 남겨뒀습니다.
+`handleSession`에서 세션의 `user_metadata`에있는 닉네임으로 API 호출 없이 바로 `setUser`넣었습니다.
 
 **결과**
 로그인 직후 API 호출 없이 즉시 닉네임이 채워져 플리커링이 사라졌습니다.
