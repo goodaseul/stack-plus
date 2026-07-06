@@ -6,6 +6,7 @@ import { useUserStore } from "@/store/useUserStore";
 import { Session } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
+import { getMyProfile } from "@/api/profile";
 
 export default function AuthProvider({
   children,
@@ -15,12 +16,25 @@ export default function AuthProvider({
   const { setUser, clearUser, setInitialized } = useUserStore();
   const router = useRouter();
   const handleSession = async (session: Session | null) => {
+    console.log("현재 이벤트의 세션 정보:", session);
+    console.log("세션 안의 메타데이터:", session?.user?.user_metadata);
     if (!session) {
       clearUser();
       setInitialized();
       return;
     }
-    const nickname = session.user.user_metadata?.nickname ?? null;
+    let nickname = session.user.user_metadata?.nickname ?? null;
+
+    if (!nickname) {
+      try {
+        const profileData = await getMyProfile();
+        nickname = profileData?.nickname ?? null;
+      } catch (error) {
+        console.error("nickname 구버전 계정 프로필 조회 실패", error);
+        nickname = null;
+      }
+    }
+
     setUser({ id: session.user.id, nickname });
     setInitialized();
   };

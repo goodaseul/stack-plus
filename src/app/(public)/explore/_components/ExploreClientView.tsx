@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { PublicWordList } from "./PublicWordList";
-import { usePublicWordsQuery } from "@/hooks/queries/explore/usePubliceWordsQuery";
+import { usePublicInfiniteQuery } from "@/hooks/queries/explore/usePublicInfiniteQuery";
 
 export default function ExploreClientView() {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    usePublicWordsQuery();
+    usePublicInfiniteQuery();
   const observerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

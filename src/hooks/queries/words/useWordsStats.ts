@@ -1,4 +1,4 @@
-import { usePublicWordsQuery } from "../explore/usePubliceWordsQuery";
+import { usePublicInfiniteQuery } from "../explore/usePublicInfiniteQuery";
 import { useWordsQuery } from "./useWordsQuery";
 import { FILTERS } from "@/constants/filter";
 
@@ -21,7 +21,7 @@ export function useWordStats() {
     pageSize: 1,
   });
 
-  const { data: publicWords } = usePublicWordsQuery();
+  const { data: publicWords } = usePublicInfiniteQuery();
   return {
     total: all?.totalCount ?? 0,
     memo: memo?.totalCount ?? 0,
