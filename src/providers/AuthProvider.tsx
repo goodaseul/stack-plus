@@ -5,7 +5,7 @@ import { useUserStore } from "@/store/useUserStore";
 
 import { Session } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function AuthProvider({
   children,
