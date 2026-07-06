@@ -15,10 +15,10 @@ export default function Mypage() {
   const initial = nickname?.slice(0, 2) ?? "?";
 
   const stats = [
-    { label: "등록한 표현", value: total, icon: "📚" },
-    { label: "북마크한 표현", value: bookmark, icon: "🔖" },
-    { label: "메모한 표현", value: memo, icon: "💬" },
-    { label: "공유한 표현", value: publicWords, icon: "🌐" },
+    { label: "등록한 표현", value: total },
+    { label: "북마크한 표현", value: bookmark },
+    { label: "메모한 표현", value: memo },
+    { label: "공유한 표현", value: publicWords },
   ];
 
   return (
@@ -49,15 +49,14 @@ export default function Mypage() {
       </div>
 
       <div className="grid grid-cols-2 gap-3">
-        {stats.map(({ label, value, icon }) => (
+        {stats.map(({ label, value }) => (
           <div
             key={label}
-            className="bg-foreground/5 rounded-lg p-4 flex flex-col gap-2 border border-foreground/10"
+            className="bg-background rounded-lg p-4 flex flex-col gap-2 border border-foreground/10"
           >
-            <p className="text-xs text-foreground/40 flex items-center gap-1.5">
-              <span>{icon}</span>
+            <h2 className="text-xs text-foreground flex items-center gap-1.5">
               {label}
-            </p>
+            </h2>
             <p className="text-2xl font-medium text-foreground leading-none">
               {value}
               <span className="text-sm font-normal text-foreground/40 ml-1">
