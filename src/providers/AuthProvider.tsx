@@ -16,8 +16,6 @@ export default function AuthProvider({
   const { setUser, clearUser, setInitialized } = useUserStore();
   const router = useRouter();
   const handleSession = async (session: Session | null) => {
-    console.log("현재 이벤트의 세션 정보:", session);
-    console.log("세션 안의 메타데이터:", session?.user?.user_metadata);
     if (!session) {
       clearUser();
       setInitialized();
