@@ -27,6 +27,13 @@ export default function AuthProvider({
       try {
         const profileData = await getMyProfile();
         nickname = profileData?.nickname ?? null;
+
+        if (nickname) {
+          await supabase.auth.updateUser({
+            data: { nickname: nickname },
+          });
+          console.log("nickname 업데이트 성공:", nickname);
+        }
       } catch (error) {
         console.error("nickname 구버전 계정 프로필 조회 실패", error);
         nickname = null;
