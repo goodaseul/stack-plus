@@ -9,6 +9,7 @@ export const wordsQueryKeys = {
     page: number;
     pageSize: number;
     limit: number | undefined;
+    isPublic: boolean | undefined;
   }) => [...wordsQueryKeys.lists(), params] as const,
 };
 

@@ -22,6 +22,7 @@ export async function getWords({
   page = 1,
   pageSize = 20,
   limit,
+  isPublic,
 }: WordsQueryRequest): Promise<{ words: WordsRequest[]; totalCount: number }> {
   const user = await getUserOrThrow();
 
@@ -30,6 +31,10 @@ export async function getWords({
     .select("*", { count: "exact" })
     .eq("user_id", user.id)
     .order("created_at", { ascending: false });
+
+  if (isPublic) {
+    query = query.eq("is_public", true);
+  }
 
   const filterMap: Record<
     Exclude<FilterValue, null>,

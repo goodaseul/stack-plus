@@ -9,6 +9,7 @@ export function useWordsQuery({
   page = 1,
   pageSize = 20,
   limit,
+  isPublic,
 }: WordsQueryRequest = {}) {
   return useQuery({
     queryKey: wordsQueryKeys.list({
@@ -17,8 +18,10 @@ export function useWordsQuery({
       page,
       pageSize,
       limit,
+      isPublic,
     }),
-    queryFn: () => getWords({ filter, keyword, page, pageSize, limit }),
+    queryFn: () =>
+      getWords({ filter, keyword, page, pageSize, limit, isPublic }),
     staleTime: 1000 * 60 * 5,
     gcTime: 1000 * 60 * 10,
   });

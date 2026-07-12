@@ -26,6 +26,7 @@ export type WordsQueryRequest = {
   page?: number;
   pageSize?: number;
   limit?: number;
+  isPublic?: boolean;
 };
 
 export interface PublicWordRequest extends Omit<WordsRequest, "user_id"> {
